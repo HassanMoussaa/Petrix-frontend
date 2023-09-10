@@ -15,15 +15,15 @@ const Signin = () => {
     }
 
     try {
-      const result = await axios.post("http://127.0.0.1:8000/api/login", {
+      const result = await axios.post("http://127.0.0.1:8000/users/login/", {
         email,
         password,
       });
 
-      localStorage.setItem("jwt_token", result.data.authorization.token);
+      localStorage.setItem("jwt_token", result.data.token);
       navigate("/Homepage");
     } catch (error) {
-      setError(error.response.data.message);
+    //   setError(error.response.data.message);
       console.error("An error occurred during login:", error);
     }
   };
@@ -34,7 +34,7 @@ const Signin = () => {
 
   return (
     <div className="signin_container">
-      <img className="sidenav__logo" src={logo} alt=" Logo" />
+      {/* <img className="sidenav__logo" src={} alt=" Logo" /> */}
       <div>
         <h2>Sign In</h2>
         <input
@@ -62,7 +62,7 @@ const Signin = () => {
           <button onClick={submit}>Sign In</button>
         </div>
         <div>
-          <button onClick={signUp}>Sign Up</button>
+          {/* <button onClick={signUp}>Sign Up</button> */}
         </div>
       </div>
     </div>
