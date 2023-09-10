@@ -21,16 +21,16 @@ const Signin = () => {
       });
 
       localStorage.setItem("jwt_token", result.data.token);
-      navigate("/Homepage");
+      console.log(result)
     } catch (error) {
     //   setError(error.response.data.message);
       console.error("An error occurred during login:", error);
     }
   };
 
-  const signUp = () => {
-    navigate("/signup");
-  };
+//   const signUp = () => {
+//     navigate("/signup");
+//   };
 
   return (
     <div className="signin_container">
