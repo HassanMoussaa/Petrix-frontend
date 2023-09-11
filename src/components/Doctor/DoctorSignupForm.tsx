@@ -28,7 +28,7 @@ interface SignupFormProps {
   passwordMatch:boolean;
 }
 
-function SignupForm(props:SignupFormProps) {
+function DoctorSignupForm(props:SignupFormProps) {
   const {
     signUpError,
     setSignUpError,
@@ -255,4 +255,4 @@ const handleChangeSpeciality = (event: SelectChangeEvent<string>) => {
   );
 }
 
-export default SignupForm;
+export default DoctorSignupForm;
