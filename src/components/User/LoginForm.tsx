@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 
 interface LoginFormProps {
-//   loginError: boolean;
+  loginError: boolean;
   handleSubmit: React.FormEventHandler<HTMLFormElement>;
 }
 
@@ -12,6 +12,7 @@ interface LoginFormProps {
 function LoginForm(props:LoginFormProps) {
   const {
     handleSubmit,
+    loginError,
   } = props;
 
 
@@ -31,11 +32,11 @@ function LoginForm(props:LoginFormProps) {
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
-          {/* {loginError && (
+          {loginError && (
             <Alert severity="error" sx={{ mb: 2 }}>
               Wrong Credentials! Try again.
             </Alert>
-          )} */}
+          )}
 
 
           <TextField
