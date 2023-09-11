@@ -22,8 +22,9 @@ const Signin = () => {
 
       localStorage.setItem("jwt_token", result.data.token);
       console.log(result)
-    } catch (error) {
-    //   setError(error.response.data.message);
+    } catch (error:any)
+     {
+      setError(error.response.data.message);
       console.error("An error occurred during login:", error);
     }
   };
