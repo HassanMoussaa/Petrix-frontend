@@ -1,27 +1,30 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import LoginForm from "../components/User/LoginForm";
+import getAPIBaseURL from "../APIBaseURL";
 
 const Signin = () => {
+
+  const [error,setError]=useState("")
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
-  const submit = async () => {
-    if (!email || !password) {
-      setError("Please provide both email and password.");
-      return;
-    }
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-    try {
-      const result = await axios.post("http://127.0.0.1:8000/users/login/", {
+    const login_data = new FormData(event.currentTarget);
+    const email = login_data.get("email");
+    const password = login_data.get("password");
+   
+
+      try {
+      const response = await axios.post(getAPIBaseURL() + "/users/login", {
         email,
         password,
       });
 
-      localStorage.setItem("jwt_token", result.data.token);
-      console.log(result)
+      localStorage.setItem("jwt_token", response.data.token);
+      console.log(response)
     } catch (error:any)
      {
       setError(error.response.data.message);
@@ -34,39 +37,7 @@ const Signin = () => {
 //   };
 
   return (
-    <div className="signin_container">
-      {/* <img className="sidenav__logo" src={} alt=" Logo" /> */}
-      <div>
-        <h2>Sign In</h2>
-        <input
-          type="text"
-          value={email}
-          placeholder="Email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-      </div>
-      <div>
-        <input
-          type="password"
-          value={password}
-          placeholder="Password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-      </div>
-      {error && <p className="error_message">{error}</p>}
-      <div className="signin_signup">
-        <div>
-          <button onClick={submit}>Sign In</button>
-        </div>
-        <div>
-          {/* <button onClick={signUp}>Sign Up</button> */}
-        </div>
-      </div>
-    </div>
+    <LoginForm handleSubmit={handleSubmit}/>
   );
 };
 
