@@ -47,10 +47,10 @@ function LoginForm(props:LoginFormProps) {
             label="Email"
             name="email"
             autoComplete="email"
-            // inputProps={{
-            //   type: "email",
-            //   maxLength: 100,
-            // }}
+            inputProps={{
+              type: "email",
+              maxLength: 100,
+            }}
           />
 
           <TextField
