@@ -1,0 +1,21 @@
+export const petSpecialties = [
+  "Dog",
+  "Cat",
+  "Bird",
+  "Fish",
+  "Reptile",
+  "Small Mammals",
+  "Horse",
+  "Rabbit",
+  "Guinea Pig",
+  "Hamster",
+  "Ferret",
+  "Turtle",
+  "Snake",
+  "Lizard",
+  "Amphibian",
+  "Spider",
+  "Insect",
+  "Exotic Pets",
+  "Other"
+];
