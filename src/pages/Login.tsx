@@ -63,9 +63,6 @@ const Signin = () => {
   };
 
 
-//   const signUp = () => {
-//     navigate("/signup");
-//   };
 
   return (
     <LoginForm handleSubmit={handleSubmit} loginError={error}/>
