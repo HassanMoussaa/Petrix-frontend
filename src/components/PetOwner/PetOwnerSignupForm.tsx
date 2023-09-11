@@ -27,7 +27,7 @@ interface SignupFormProps {
   passwordMatch:boolean;
 }
 
-function SignupForm(props:SignupFormProps) {
+function PetSignupForm(props:SignupFormProps) {
   const {
     signUpError,
     setSignUpError,
@@ -230,4 +230,4 @@ const handleChange = (event: SelectChangeEvent<string>) => {
   );
 }
 
-export default SignupForm;
+export default PetSignupForm;
