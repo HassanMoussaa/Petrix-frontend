@@ -8,27 +8,28 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 532px;
-  height: 603px;
+  width: 50%;
+  height: 70%;
 }
 
 .formBox_fields {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #f3f5f8;
 }
 .input_login_field {
-  width: 354px;
+  width: 70% !important;
   background-color: white;
 }
 
 .button_login_field {
-  width: 354px;
+  width: 70% !important;
   background-color: #16a4c3;
 }
 
 .create_account_but {
-  padding-left: 17%;
+  text-align: center;
 }
 
 .signin_logo {
