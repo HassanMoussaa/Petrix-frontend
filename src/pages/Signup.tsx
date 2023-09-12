@@ -1,32 +1,24 @@
 import { useState } from "react";
 import getAPIBaseURL from "../APIBaseURL";
 import axios from "axios";
-import SignupForm from "../components/PetOwner/PetOwnerSignupForm";
+import PetSignupForm from "../components/PetOwner/PetOwnerSignupForm";
+import DoctorSignupForm from "../components/Doctor/DoctorSignupForm";
 
 function Signup() {
- 
-
-//   //check if user already logged in
-//   let login_status = JSON.parse(localStorage.getItem("login"));
-//   if (login_status && login_status.login) {
-//     if (login_status.is_admin) {
-//       history.push("/admin/home");
-//     } else {
-//       history.push("/");
-//     }
-//   }
-
-
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [signUpError, setSignUpError] = useState(false);
   const [emailUsedError, setEmailUsedError] = useState(false);
- 
+  const [userType, setUserType] = useState("petOwner");
+  let speciality: FormDataEntryValue;
 
-
-   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleUserTypeChange = (newUserType: string) => {
+    setUserType(newUserType);
+  };
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     setPasswordMatch(true);
     setEmailUsedError(false);
-   
 
     event.preventDefault();
     const signup_data = new FormData(event.currentTarget);
@@ -35,29 +27,52 @@ function Signup() {
     const email = signup_data.get("email");
     const password = signup_data.get("password");
     const confirm_password = signup_data.get("confirm_password");
+    const city = signup_data.get("city");
+    const country = signup_data.get("country");
+
+    if (userType === "doctor") {
+      const speciality = signup_data.get("speciality");
+    }
 
     if (password !== confirm_password) {
       setPasswordMatch(false);
     } else {
-      const data = {
-        firstName,
-        lastName,
-        email,
-        password,
-        confirm_password,
-      };
+      const data =
+        userType === "petOwner"
+          ? {
+              firstName,
+              lastName,
+              email,
+              password,
+              city,
+              country,
+            }
+          : {
+              firstName,
+              lastName,
+              email,
+              password,
+              city,
+              country,
+              speciality,
+            };
 
       try {
-        let response = await axios.post(getAPIBaseURL() + "/user/signup", data);
+        let response = await axios.post(
+          getAPIBaseURL() +
+            (userType == "petOwner"
+              ? "/petOwners/register/"
+              : "/doctors/register/"),
+          data
+        );
 
         if (response.status === 201) {
           setSignUpError(false);
-        
         } else {
           console.log("Something went wrong!");
           setSignUpError(true);
         }
-      } catch (error:any) {
+      } catch (error: any) {
         if (error.response.status === 401) {
           console.log("Something went wrong!");
           setSignUpError(true);
@@ -65,7 +80,7 @@ function Signup() {
           let conflict_type = error.response.data.conflict;
           if (conflict_type === "Email") {
             setEmailUsedError(true);
-          } 
+          }
         }
         console.log(error);
       }
@@ -73,16 +88,48 @@ function Signup() {
   };
 
   return (
-    
-      <SignupForm
-        signUpError={signUpError}
-        setSignUpError={setSignUpError}
-        emailUsedError={emailUsedError}
-        setEmailUsedError={setEmailUsedError}
-        passwordMatch={passwordMatch}
-        handleSubmit={handleSubmit}
-      />
-    
+    <div>
+      <div>
+        <label>
+          <input
+            type="radio"
+            value="petOwner"
+            checked={userType === "petOwner"}
+            onChange={() => handleUserTypeChange("petOwner")}
+          />
+          Pet Owner
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="doctor"
+            checked={userType === "doctor"}
+            onChange={() => handleUserTypeChange("doctor")}
+          />
+          Doctor
+        </label>
+      </div>
+
+      {userType === "petOwner" ? (
+        <PetSignupForm
+          signUpError={signUpError}
+          setSignUpError={setSignUpError}
+          emailUsedError={emailUsedError}
+          setEmailUsedError={setEmailUsedError}
+          passwordMatch={passwordMatch}
+          handleSubmit={handleSubmit}
+        />
+      ) : (
+        <DoctorSignupForm
+          signUpError={signUpError}
+          setSignUpError={setSignUpError}
+          emailUsedError={emailUsedError}
+          setEmailUsedError={setEmailUsedError}
+          passwordMatch={passwordMatch}
+          handleSubmit={handleSubmit}
+        />
+      )}
+    </div>
   );
 }
 
