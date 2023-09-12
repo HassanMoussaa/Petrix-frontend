@@ -173,29 +173,6 @@ function DoctorSignupForm(props: SignupFormProps) {
             ))}
           </Select>
 
-          {/* <FormLabel component="legend">Gender</FormLabel> */}
-          {/* <RadioGroup row aria-label="gender" name="gender" defaultValue="0">
-            <FormControlLabel
-              value="0"
-              control={<Radio />}
-              label={<Typography style={{ color: "#212529" }}>Male</Typography>}
-            />
-            <FormControlLabel
-              value="1"
-              control={<Radio />}
-              label={
-                <Typography style={{ color: "#212529" }}>Female</Typography>
-              }
-            />
-            <FormControlLabel
-              value="2"
-              control={<Radio />}
-              label={
-                <Typography style={{ color: "#212529" }}>Other</Typography>
-              }
-            />
-          </RadioGroup> */}
-
           <TextField
             required
             fullWidth
