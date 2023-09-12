@@ -1,9 +1,12 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Grid, Box, Button, Typography, TextField, Alert } from "@mui/material";
 import "./overlay.css";
-function Overlay(props: any) {
-  const { children } = props;
 
+interface OverlayProps {
+  children: ReactElement;
+}
+
+const Overlay: React.FC<OverlayProps> = ({ children }) => {
   return (
     <div
       style={{
@@ -17,6 +20,6 @@ function Overlay(props: any) {
       <Box className="overlayContainer">{children}</Box>
     </div>
   );
-}
+};
 
 export default Overlay;
