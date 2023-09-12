@@ -1,0 +1,36 @@
+.formBox_signup {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 35%;
+  background-color: #f3f5f8 !important;
+}
+
+.formBox_fields_signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input_signup_field {
+  width: 70% !important;
+  background-color: white;
+  margin-bottom: 13px !important;
+}
+
+.button_signup_field {
+  width: 70% !important;
+  background-color: #16a4c3;
+}
+
+.signin_logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.already_have_account_btn {
+  text-align: center;
+}
