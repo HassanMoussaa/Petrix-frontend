@@ -1,5 +1,6 @@
 import { Grid, Box, Button, Typography, TextField, Alert } from "@mui/material";
 import { Link } from "react-router-dom";
+import "./loginForm.css";
 
 interface LoginFormProps {
   loginError: boolean;
@@ -10,13 +11,30 @@ function LoginForm(props: LoginFormProps) {
   const { handleSubmit, loginError } = props;
 
   return (
-    <Grid container direction="row" justifyContent="center" alignItems="center">
-      <Box style={{ backgroundColor: "#F3F5F8" }}>
+    <Grid
+      container
+      className="main-container"
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Box style={{ backgroundColor: "#F3F5F8" }} className="formBox">
+        <div className="signin_logo">
+          <img
+            src={process.env.PUBLIC_URL + "/images/petrix-logo.png"}
+            alt="logo"
+          ></img>
+        </div>
         <Typography sx={{ mb: 5 }} style={{ textAlign: "center" }}>
-          Log In
+          <b>SIGN IN</b>
         </Typography>
 
-        <Box component="form" onSubmit={handleSubmit} sx={{ mb: 5 }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{ mb: 5 }}
+          className="formBox_fields"
+        >
           {loginError && (
             <Alert severity="error" sx={{ mb: 2 }}>
               Wrong Credentials! Try again.
@@ -30,6 +48,7 @@ function LoginForm(props: LoginFormProps) {
             id="email"
             label="Email"
             name="email"
+            className="input_login_field"
             autoComplete="email"
             inputProps={{
               type: "email",
@@ -42,6 +61,7 @@ function LoginForm(props: LoginFormProps) {
             required
             fullWidth
             name="password"
+            className="input_login_field"
             label="Password"
             type="password"
             id="password"
@@ -54,18 +74,20 @@ function LoginForm(props: LoginFormProps) {
           <Button
             type="submit"
             fullWidth
+            className="button_login_field"
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Log In
+            SIGN IN
           </Button>
         </Box>
-
-        <Grid container justifyContent="space-between">
-          <Link to={"/signup"} style={{ color: "#1976d2" }}>
-            Create Account
-          </Link>
-        </Grid>
+        <Link
+          to={"/signup"}
+          style={{ color: "#1976d2" }}
+          className="create_account_but"
+        >
+          Create Account
+        </Link>
       </Box>
     </Grid>
   );
