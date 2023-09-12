@@ -3,6 +3,8 @@ import getAPIBaseURL from "../APIBaseURL";
 import axios from "axios";
 import PetSignupForm from "../components/PetOwner/PetOwnerSignupForm";
 import DoctorSignupForm from "../components/Doctor/DoctorSignupForm";
+import Overlay from "../components/NavBar/Overlay";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 function Signup() {
   const [passwordMatch, setPasswordMatch] = useState(true);
@@ -88,48 +90,43 @@ function Signup() {
   };
 
   return (
-    <div>
+    <Overlay>
       <div>
-        <label>
-          <input
-            type="radio"
-            value="petOwner"
-            checked={userType === "petOwner"}
-            onChange={() => handleUserTypeChange("petOwner")}
-          />
-          Pet Owner
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="doctor"
-            checked={userType === "doctor"}
-            onChange={() => handleUserTypeChange("doctor")}
-          />
-          Doctor
-        </label>
-      </div>
+        <ToggleButtonGroup
+          value={userType}
+          exclusive
+          onChange={(event, newValue) => handleUserTypeChange(newValue)}
+          aria-label="User Type"
+        >
+          <ToggleButton value="petOwner" aria-label="Pet Owner">
+            Pet Owner
+          </ToggleButton>
+          <ToggleButton value="doctor" aria-label="Doctor">
+            Doctor
+          </ToggleButton>
+        </ToggleButtonGroup>
 
-      {userType === "petOwner" ? (
-        <PetSignupForm
-          signUpError={signUpError}
-          setSignUpError={setSignUpError}
-          emailUsedError={emailUsedError}
-          setEmailUsedError={setEmailUsedError}
-          passwordMatch={passwordMatch}
-          handleSubmit={handleSubmit}
-        />
-      ) : (
-        <DoctorSignupForm
-          signUpError={signUpError}
-          setSignUpError={setSignUpError}
-          emailUsedError={emailUsedError}
-          setEmailUsedError={setEmailUsedError}
-          passwordMatch={passwordMatch}
-          handleSubmit={handleSubmit}
-        />
-      )}
-    </div>
+        {userType === "petOwner" ? (
+          <PetSignupForm
+            signUpError={signUpError}
+            setSignUpError={setSignUpError}
+            emailUsedError={emailUsedError}
+            setEmailUsedError={setEmailUsedError}
+            passwordMatch={passwordMatch}
+            handleSubmit={handleSubmit}
+          />
+        ) : (
+          <DoctorSignupForm
+            signUpError={signUpError}
+            setSignUpError={setSignUpError}
+            emailUsedError={emailUsedError}
+            setEmailUsedError={setEmailUsedError}
+            passwordMatch={passwordMatch}
+            handleSubmit={handleSubmit}
+          />
+        )}
+      </div>
+    </Overlay>
   );
 }
 
