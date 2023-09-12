@@ -1,33 +1,18 @@
 import { Grid, Box, Button, Typography, TextField, Alert } from "@mui/material";
 import { Link } from "react-router-dom";
 
-
-
 interface LoginFormProps {
   loginError: boolean;
   handleSubmit: React.FormEventHandler<HTMLFormElement>;
 }
 
-
-function LoginForm(props:LoginFormProps) {
-  const {
-    handleSubmit,
-    loginError,
-  } = props;
-
+function LoginForm(props: LoginFormProps) {
+  const { handleSubmit, loginError } = props;
 
   return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Box style={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}>
-        <Typography
-          sx={{ mb: 5 }}
-          style={{ textAlign: "center" }}
-        >
+    <Grid container direction="row" justifyContent="center" alignItems="center">
+      <Box style={{ backgroundColor: "#F3F5F8" }}>
+        <Typography sx={{ mb: 5 }} style={{ textAlign: "center" }}>
           Log In
         </Typography>
 
@@ -37,7 +22,6 @@ function LoginForm(props:LoginFormProps) {
               Wrong Credentials! Try again.
             </Alert>
           )}
-
 
           <TextField
             sx={{ mb: 3 }}
