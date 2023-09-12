@@ -1,5 +1,6 @@
 import React from "react";
-
+import { Grid, Box, Button, Typography, TextField, Alert } from "@mui/material";
+import "./overlay.css";
 function Overlay(props: any) {
   const { children } = props;
 
@@ -13,7 +14,7 @@ function Overlay(props: any) {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {children}
+      <Box className="overlayContainer">{children}</Box>
     </div>
   );
 }
