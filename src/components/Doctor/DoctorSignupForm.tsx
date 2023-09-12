@@ -156,9 +156,10 @@ function DoctorSignupForm(props: SignupFormProps) {
             <Typography sx={{ mb: 2 }}>Passwords didn't match!</Typography>
           )}
 
-          <InputLabel id="country-label">Country</InputLabel>
+          <InputLabel id="country">Country</InputLabel>
           <Select
-            labelId="country-label"
+            name="country"
+            labelId="country"
             id="country"
             value={selectedCountry}
             onChange={handleChange}
