@@ -1,0 +1,10 @@
+.overlayContainer {
+  max-width: "1140px !important";
+  width: "100% !important";
+  /* paddingRight: "15px !important"; */
+  /* paddingLeft: "15px !important"; */
+  /* marginRight: "auto !important"; */
+  /* marginLeft: "auto !important"; */
+  display: "block !important";
+  box-sizing: "border-box !important";
+}
