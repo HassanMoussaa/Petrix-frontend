@@ -30,7 +30,7 @@ function welcome() {
         <Grid md={3} sx={{ display: { xs: "none", md: "flex" } }}>
           <div className="photo">
             <img
-              src={process.env.PUBLIC_URL + "/images/Heropage_photo.png"}
+              src={process.env.PUBLIC_URL + "/images/HeropageMainphoto.svg"}
               alt="logo"
             ></img>
           </div>
