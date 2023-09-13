@@ -34,3 +34,15 @@
 .already_have_account_btn {
   text-align: center;
 }
+
+.country_city_group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.input_signup_field_updated {
+  width: 50% !important;
+  background-color: white;
+  margin-bottom: 13px !important;
+}
