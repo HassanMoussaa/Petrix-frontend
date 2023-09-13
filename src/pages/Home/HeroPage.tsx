@@ -11,7 +11,49 @@ function HeroPage() {
     <div className="heropage_body">
       <MainNavBar />
       <Welcome />
-
+      <Grid xs={12}>
+        <Typography align="center" mt={5} mb={3} fontSize={32}>
+          <b>What Can We Do</b>
+        </Typography>
+      </Grid>
+      <Grid container justifyContent={"center"} gap={1}>
+        <Grid xs={3}>
+          <Typography
+            align="center"
+            fontSize={22}
+            mt={5}
+            mb={3}
+            sx={{
+              display: {
+                xs: "none",
+                md: "flex",
+                justifyContent: "center",
+                color: "#FA6900",
+              },
+            }}
+          >
+            <b>PET OWNER</b>
+          </Typography>
+        </Grid>
+        <Grid xs={3}>
+          <Typography
+            align="center"
+            fontSize={22}
+            mt={5}
+            mb={3}
+            sx={{
+              display: {
+                xs: "none",
+                md: "flex",
+                justifyContent: "center",
+                color: "#16A4C3",
+              },
+            }}
+          >
+            <b>DOCTORS</b>
+          </Typography>
+        </Grid>
+      </Grid>
       <Grid
         container
         sx={{
