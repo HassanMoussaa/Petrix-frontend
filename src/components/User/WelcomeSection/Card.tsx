@@ -22,6 +22,7 @@ export default function BasicCard(props: BasicCardProps) {
         borderRadius: 2,
         display: "flex",
         flexDirection: "column",
+        mb: 10,
       }}
     >
       <CardContent>
