@@ -16,7 +16,7 @@ export default function BasicCard(props: BasicCardProps) {
   const { imageUrl, body, title } = props;
 
   return (
-    <Card sx={{ maxWidth: 200, maxHeight: 250 }}>
+    <Card sx={{ maxWidth: 200, maxHeight: 250, borderRadius: 2 }}>
       <CardContent>
         <Box
           component="img"
