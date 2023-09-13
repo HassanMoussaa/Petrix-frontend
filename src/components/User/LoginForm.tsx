@@ -21,7 +21,7 @@ function LoginForm(props: LoginFormProps) {
       <Box style={{ backgroundColor: "#F3F5F8" }} className="formBox">
         <div className="signin_logo">
           <img
-            src={process.env.PUBLIC_URL + "/images/petrix-logo.png"}
+            src={process.env.PUBLIC_URL + "/images/PetrixMainLogo.svg"}
             alt="logo"
           ></img>
         </div>
