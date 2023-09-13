@@ -105,7 +105,7 @@ function Signup() {
           >
             <div className="signin_logo">
               <img
-                src={process.env.PUBLIC_URL + "/images/petrix-logo.png"}
+                src={process.env.PUBLIC_URL + "/images/PetrixMainLogo.svg"}
                 alt="logo"
               ></img>
             </div>
