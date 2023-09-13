@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { Link } from "react-router-dom";
 
 const pages = ["HOME", "SERVICE", "AI ASSISTENT"];
 const settings = ["Profile", "Dashboard", "Logout"];
@@ -119,18 +120,15 @@ function ResponsiveAppBar() {
           <div>
             <Tooltip title="Meyawwwoo">
               <IconButton sx={{ p: 0 }}>
-                {/* Conditionally render either the Sign-In button or the Avatar
-                {anchorElUser ? (
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                ) : ( */}
-                <Button
-                  variant="contained"
-                  style={{ background: "#FA6900" }}
-                  sx={{ borderRadius: "20px" }}
-                >
-                  SIGN IN
-                </Button>
-                {/* )} */}
+                <Link to={"/login"}>
+                  <Button
+                    variant="contained"
+                    style={{ background: "#FA6900" }}
+                    sx={{ borderRadius: "20px" }}
+                  >
+                    SIGN IN
+                  </Button>
+                </Link>
               </IconButton>
             </Tooltip>
             <Menu
