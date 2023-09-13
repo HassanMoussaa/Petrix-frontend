@@ -116,10 +116,21 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          <div>
+            <Tooltip title="Meyawwwoo">
+              <IconButton sx={{ p: 0 }}>
+                {/* Conditionally render either the Sign-In button or the Avatar
+                {anchorElUser ? (
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                ) : ( */}
+                <Button
+                  variant="contained"
+                  style={{ background: "#FA6900" }}
+                  sx={{ borderRadius: "20px" }}
+                >
+                  SIGN IN
+                </Button>
+                {/* )} */}
               </IconButton>
             </Tooltip>
             <Menu
@@ -144,7 +155,7 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </div>
         </Toolbar>
       </Container>
     </AppBar>
