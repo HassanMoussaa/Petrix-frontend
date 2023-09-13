@@ -16,7 +16,14 @@ export default function BasicCard(props: BasicCardProps) {
   const { imageUrl, body, title } = props;
 
   return (
-    <Card sx={{ maxWidth: 200, maxHeight: 250, borderRadius: 2 }}>
+    <Card
+      sx={{
+        width: 200,
+        borderRadius: 2,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <CardContent>
         <Box
           component="img"
@@ -28,10 +35,12 @@ export default function BasicCard(props: BasicCardProps) {
             },
             margin: "0 auto",
             width: "40%",
+            maxHeight: 45,
+            borderRadius: 100,
           }}
         />
 
-        <Typography sx={{ mb: 1.5 }} align="center">
+        <Typography sx={{ mb: 1.5, mt: 1.5 }} align="center">
           <b>{title}</b>
         </Typography>
         <Typography align="center">{body}</Typography>
