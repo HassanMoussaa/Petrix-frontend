@@ -43,10 +43,14 @@ function ResponsiveAppBar() {
     <AppBar position="static" style={{ background: "#F3F5F8" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img
+          <Box
+            component="img"
             src={process.env.PUBLIC_URL + "/images/Petrix-nav-logo.png"}
             alt="logo"
-          ></img>
+            sx={{
+              display: { xs: "none", md: "flex" },
+            }}
+          />
 
           <Box
             sx={{
@@ -61,8 +65,8 @@ function ResponsiveAppBar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
-              sx={{ display: { xs: "block", sm: "none" } }}
+              // color="primary"
+              sx={{ display: { xs: "block", md: "none" } }}
             >
               <MenuIcon />
             </IconButton>
@@ -93,25 +97,12 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
+          <Box
+            component="img"
+            src={process.env.PUBLIC_URL + "/images/Petrix-nav-logo.png"}
+            alt="logo"
+            sx={{ display: { xs: "flex", md: "none" }, mr: 40 }}
+          />
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
