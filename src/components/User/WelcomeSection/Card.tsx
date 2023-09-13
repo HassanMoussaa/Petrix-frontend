@@ -5,16 +5,27 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
 interface BasicCardProps {
   imageUrl: string;
   body: string;
   title: string;
+  onClick?: () => void;
 }
 
 export default function BasicCard(props: BasicCardProps) {
-  const { imageUrl, body, title } = props;
+  const { imageUrl, body, title, onClick } = props;
 
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    if (onClick) {
+      onClick();
+    }
+
+    navigate("/");
+  };
   return (
     <Card
       sx={{
@@ -24,6 +35,7 @@ export default function BasicCard(props: BasicCardProps) {
         flexDirection: "column",
         mb: 10,
       }}
+      onClick={handleCardClick}
     >
       <CardContent>
         <Box

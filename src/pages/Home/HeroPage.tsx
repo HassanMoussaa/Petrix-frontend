@@ -4,9 +4,12 @@ import Welcome from "../../components/User/WelcomeSection/Welcome";
 import Card from "../../components/User/WelcomeSection/Card";
 
 import "./heropage.css";
-import { Grid, Box, Button, Typography, TextField, Alert } from "@mui/material";
+import { Grid, Box, Typography, Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function HeroPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="heropage_body">
       <MainNavBar />
@@ -65,22 +68,26 @@ function HeroPage() {
         <Card
           imageUrl={"ImageClassification.svg"}
           title={"AI Image Classification"}
-          body={"Upload photo of animal to check it's type"}
+          body={"Upload photo of an animal to check its type"}
+          onClick={() => navigate("/page1")}
         />
         <Card
           imageUrl={"ChatBot.svg"}
           title={"AI Chat Bot"}
-          body={"Chat of Ai"}
+          body={"Chat of AI"}
+          onClick={() => navigate("/page2")}
         />
         <Card
           imageUrl={"Customized_pages .svg"}
           title={"Customized Pages"}
-          body={"Customize your prifile"}
+          body={"Customize your profile"}
+          onClick={() => navigate("/page3")}
         />
         <Card
           imageUrl={"HandleBookings.svg"}
           title={"Handle Bookings"}
           body={"Manage your appointments"}
+          onClick={() => navigate("/page4")}
         />
       </Grid>
     </div>
