@@ -23,14 +23,18 @@ export default function BasicCard(props: BasicCardProps) {
           src={process.env.PUBLIC_URL + `/images/${imageUrl}`}
           alt="logo"
           sx={{
-            display: { xs: "none", md: "flex" },
+            display: {
+              xs: "flex",
+            },
+            margin: "0 auto",
+            width: "40%",
           }}
         />
 
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {title}
+        <Typography sx={{ mb: 1.5 }} align="center">
+          <b>{title}</b>
         </Typography>
-        <Typography>{body}</Typography>
+        <Typography align="center">{body}</Typography>
       </CardContent>
     </Card>
   );
