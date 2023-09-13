@@ -46,7 +46,7 @@ function ResponsiveAppBar() {
         <Toolbar disableGutters>
           <Box
             component="img"
-            src={process.env.PUBLIC_URL + "/images/Petrix-nav-logo.png"}
+            src={process.env.PUBLIC_URL + "/images/Petrix-nav-logo.svg"}
             alt="logo"
             sx={{
               display: { xs: "none", md: "flex" },
