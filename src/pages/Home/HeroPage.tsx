@@ -6,6 +6,7 @@ import Card from "../../components/User/WelcomeSection/Card";
 import "./heropage.css";
 import { Grid, Box, Typography, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import TopDoctors from "../../components/User/WelcomeSection/TopDoctors";
 
 function HeroPage() {
   const navigate = useNavigate();
@@ -90,6 +91,8 @@ function HeroPage() {
           onClick={() => navigate("/page4")}
         />
       </Grid>
+
+      <TopDoctors />
     </div>
   );
 }
