@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import LoginForm from "../../components/User/LoginForm";
 import getAPIBaseURL from "../../APIBaseURL";
@@ -43,6 +44,7 @@ const Signin = () => {
             user_bio,
           })
         );
+        navigate("/");
       }
     } catch (error: any) {
       if (error) {
