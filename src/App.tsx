@@ -5,6 +5,7 @@ import "./App.css";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import HeroPage from "./pages/Home/HeroPage";
+import DoctorProfile from "./pages/DoctorProfile_Dr/DoctorProfile";
 
 function App() {
   return (
@@ -15,9 +16,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<HeroPage />} />
 
-          {/* <Route path="/homepage" >
-          <Route index element={<Homepage/>} />
-        </Route> */}
+          {/* doctor routes */}
+          <Route path="/profile" element={<DoctorProfile />} />
         </Routes>
       </BrowserRouter>
     </div>
