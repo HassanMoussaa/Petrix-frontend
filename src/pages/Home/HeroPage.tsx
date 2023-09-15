@@ -76,7 +76,6 @@ function HeroPage() {
 
   return (
     <div className="heropage_body">
-      {/* imageUrl, firstName, lastName */}
       <MainNavBar
         imageUrl={loginData?.user_profile_picture}
         firstName={loginData?.firstName}
