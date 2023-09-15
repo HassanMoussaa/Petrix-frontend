@@ -76,7 +76,12 @@ function HeroPage() {
 
   return (
     <div className="heropage_body">
-      <MainNavBar />
+      {/* imageUrl, firstName, lastName */}
+      <MainNavBar
+        imageUrl={loginData?.user_profile_picture}
+        firstName={loginData?.firstName}
+        lastName={loginData?.lastName}
+      />
       <Welcome />
       <Grid xs={12}>
         <Typography align="center" mt={5} mb={3} fontSize={32}>
