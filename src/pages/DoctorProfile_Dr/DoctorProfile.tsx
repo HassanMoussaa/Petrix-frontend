@@ -66,9 +66,10 @@ function DoctorProfile() {
     <div>
       {doctorInfo && (
         <NavBar
-          imageUrl={doctorInfo.photoUrl}
-          DoctorFirstName={doctorInfo.firstName}
-          DoctorLastName={doctorInfo.lastName}
+          imageUrl={doctorInfo.photoUrl || ""}
+          firstName={doctorInfo.firstName}
+          lastName={doctorInfo.lastName}
+          pageTitle={"Profile"}
         />
       )}
     </div>
