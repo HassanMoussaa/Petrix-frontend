@@ -13,19 +13,19 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
-import { Grid } from "@mui/material";
 
 interface ResponsiveAppBarProps {
-  imageUrl: string | null;
-  DoctorFirstName: string;
-  DoctorLastName: string;
+  firstName: string;
+  lastName: string;
+  imageUrl: string;
+  pageTitle: string;
 }
 
-const pages = ["Profile"];
-const settings = ["Profile", "Dashboard", "Logout"];
-
 function ResponsiveAppBar(props: ResponsiveAppBarProps) {
-  const { imageUrl, DoctorFirstName, DoctorLastName } = props;
+  const { imageUrl, firstName, lastName, pageTitle } = props;
+
+  const login_status = localStorage.getItem("login");
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -48,6 +48,8 @@ function ResponsiveAppBar(props: ResponsiveAppBarProps) {
     setAnchorElUser(null);
   };
 
+  const pages = [pageTitle];
+  const settings = ["Profile", "Dashboard", "Logout"];
   return (
     <AppBar position="static" elevation={0} style={{ background: "#F3F5F8" }}>
       <Container maxWidth="xl">
@@ -126,47 +128,62 @@ function ResponsiveAppBar(props: ResponsiveAppBarProps) {
           </Box>
 
           <div>
-            <Tooltip title="Meyawwwoo">
-              <Grid>
-                <Typography>{DoctorFirstName + DoctorLastName}</Typography>
-                <Box
-                  component="img"
-                  src={process.env.PUBLIC_URL + `/images/${imageUrl}`}
-                  alt="logo"
+            {login_status ? (
+              <Box sx={{ flexGrow: 0, display: { xs: "flex" } }}>
+                <Typography
+                  style={{ color: "#000", alignItems: "center" }}
+                  fontSize={16}
                   sx={{
-                    display: {
-                      xs: "flex",
-                    },
-                    margin: "0 auto",
-                    width: "40%",
-
-                    borderRadius: 100,
+                    display: { xs: "flex" },
+                    fontWeight: "bold",
+                    mr: 1,
                   }}
-                />
-              </Grid>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+                >
+                  {firstName + lastName}
+                </Typography>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src={imageUrl} />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+            ) : (
+              <Tooltip title="Meyawwwoo">
+                <IconButton sx={{ p: 0 }}>
+                  <Link to={"/login"}>
+                    <Button
+                      variant="contained"
+                      style={{ background: "#FA6900" }}
+                      sx={{ borderRadius: "20px" }}
+                    >
+                      SIGN IN
+                    </Button>
+                  </Link>
+                </IconButton>
+              </Tooltip>
+            )}
           </div>
         </Toolbar>
       </Container>
