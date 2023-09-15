@@ -17,7 +17,15 @@ import { Link } from "react-router-dom";
 const pages = ["HOME", "SERVICE", "AI ASSISTENT"];
 const settings = ["Profile", "Dashboard", "Logout"];
 
-function ResponsiveAppBar() {
+interface ResponsiveAppBarProps {
+  firstName: string;
+  lastName: string;
+  imageUrl: string;
+}
+
+function ResponsiveAppBar(props: ResponsiveAppBarProps) {
+  const { imageUrl, firstName, lastName } = props;
+
   const login_status = localStorage.getItem("login");
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -121,13 +129,21 @@ function ResponsiveAppBar() {
 
           <div>
             {login_status ? (
-              <Box sx={{ flexGrow: 0 }}>
+              <Box sx={{ flexGrow: 0, display: { xs: "flex" } }}>
+                <Typography
+                  style={{ color: "#000", alignItems: "center" }}
+                  fontSize={16}
+                  sx={{
+                    display: { xs: "flex" },
+                    fontWeight: "bold",
+                    mr: 1,
+                  }}
+                >
+                  {firstName + lastName}
+                </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
+                    <Avatar alt="Remy Sharp" src={imageUrl} />
                   </IconButton>
                 </Tooltip>
                 <Menu
