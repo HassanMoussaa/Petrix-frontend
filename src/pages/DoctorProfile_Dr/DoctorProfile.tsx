@@ -4,6 +4,7 @@ import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
 import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
 import DoctorInfoSection2 from "../../components/Doctor/DoctorInfoSection2";
+import "./doctorProfile.css";
 
 interface Specialty {
   id: number;
