@@ -18,6 +18,8 @@ const pages = ["HOME", "SERVICE", "AI ASSISTENT"];
 const settings = ["Profile", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
+  const login_status = localStorage.getItem("login");
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -118,41 +120,54 @@ function ResponsiveAppBar() {
           </Box>
 
           <div>
-            <Tooltip title="Meyawwwoo">
-              <IconButton sx={{ p: 0 }}>
-                <Link to={"/login"}>
-                  <Button
-                    variant="contained"
-                    style={{ background: "#FA6900" }}
-                    sx={{ borderRadius: "20px" }}
-                  >
-                    SIGN IN
-                  </Button>
-                </Link>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            {login_status ? (
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="/static/images/avatar/2.jpg"
+                    />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+            ) : (
+              <Tooltip title="Meyawwwoo">
+                <IconButton sx={{ p: 0 }}>
+                  <Link to={"/login"}>
+                    <Button
+                      variant="contained"
+                      style={{ background: "#FA6900" }}
+                      sx={{ borderRadius: "20px" }}
+                    >
+                      SIGN IN
+                    </Button>
+                  </Link>
+                </IconButton>
+              </Tooltip>
+            )}
           </div>
         </Toolbar>
       </Container>
