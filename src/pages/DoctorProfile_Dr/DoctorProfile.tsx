@@ -36,6 +36,7 @@ interface DoctorInfo {
   profile: string;
   phone: string;
   photoUrl: string | null;
+  email: string;
   specialities: Specialty[];
   userType: UserType;
   post: Post[];
@@ -84,9 +85,9 @@ function DoctorProfile() {
       )}
       {doctorInfo && (
         <DoctorInfoSection2
-          imageUrl={doctorInfo.photoUrl || ""}
-          firstName={doctorInfo.firstName}
-          lastName={doctorInfo.lastName}
+          phoneNum={doctorInfo.phone || ""}
+          profileBio={doctorInfo.profile}
+          drEmail={doctorInfo.email}
         />
       )}
     </div>

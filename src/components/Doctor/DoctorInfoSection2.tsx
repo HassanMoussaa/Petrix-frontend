@@ -21,14 +21,15 @@ import {
 import { styled } from "@mui/material/styles";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+
 interface DoctorInfoSection2 {
-  firstName: string;
-  lastName: string;
-  imageUrl: string;
+  phoneNum: string;
+  profileBio: string;
+  drEmail: string;
 }
 
 function DoctorInfoSection2(props: DoctorInfoSection2) {
-  const { imageUrl, firstName, lastName } = props;
+  const { phoneNum, profileBio, drEmail } = props;
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -141,7 +142,7 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
                   fontSize: 20,
                 }}
               >
-                <LocalPhoneOutlinedIcon />
+                <LocalPhoneOutlinedIcon />:{phoneNum}
               </Typography>
               <Typography
                 sx={{
@@ -150,7 +151,7 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
                   fontSize: 20,
                 }}
               >
-                <EmailOutlinedIcon />
+                <EmailOutlinedIcon />:{drEmail}
               </Typography>
             </Grid>
           </Grid>
@@ -171,7 +172,7 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
             >
               Profile Bio
             </Typography>
-            <Typography>NIce bio</Typography>
+            <Typography>{profileBio}</Typography>
           </Grid>
         </Grid>
       </Grid>
