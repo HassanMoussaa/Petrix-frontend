@@ -29,7 +29,7 @@ function DoctorInfoSection(props: DoctorInfoSection) {
   const value = 2;
 
   return (
-    <Grid container sx={{ display: { xs: "flex" }, ml: 5, mt: 10 }}>
+    <Grid container sx={{ display: { xs: "flex" }, ml: 10, mt: 10 }}>
       <Grid md={4} sx={{ display: { md: "flex" } }}>
         <div className="photo">
           <img
