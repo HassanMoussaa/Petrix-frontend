@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
+import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
 
 interface Specialty {
   id: number;
@@ -70,6 +71,13 @@ function DoctorProfile() {
           firstName={doctorInfo.firstName}
           lastName={doctorInfo.lastName}
           pageTitle={"Profile"}
+        />
+      )}
+      {doctorInfo && (
+        <DoctorInfoSection
+          imageUrl={doctorInfo.photoUrl || ""}
+          firstName={doctorInfo.firstName}
+          lastName={doctorInfo.lastName}
         />
       )}
     </div>
