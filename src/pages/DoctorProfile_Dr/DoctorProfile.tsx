@@ -3,6 +3,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
 import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
+import DoctorInfoSection2 from "../../components/Doctor/DoctorInfoSection2";
 
 interface Specialty {
   id: number;
@@ -75,6 +76,13 @@ function DoctorProfile() {
       )}
       {doctorInfo && (
         <DoctorInfoSection
+          imageUrl={doctorInfo.photoUrl || ""}
+          firstName={doctorInfo.firstName}
+          lastName={doctorInfo.lastName}
+        />
+      )}
+      {doctorInfo && (
+        <DoctorInfoSection2
           imageUrl={doctorInfo.photoUrl || ""}
           firstName={doctorInfo.firstName}
           lastName={doctorInfo.lastName}
