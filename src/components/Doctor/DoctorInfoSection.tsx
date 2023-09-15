@@ -81,6 +81,9 @@ function DoctorInfoSection(props: DoctorInfoSection) {
               borderRadius: 3,
               maxWidth: 100,
               height: 50,
+              "&:hover": {
+                backgroundColor: "#000",
+              },
             }}
             size="large"
           >
@@ -88,7 +91,15 @@ function DoctorInfoSection(props: DoctorInfoSection) {
           </Button>
           <Button
             variant="contained"
-            sx={{ bgcolor: "#000", borderRadius: 3, maxWidth: 150, height: 50 }}
+            sx={{
+              bgcolor: "#000",
+              borderRadius: 3,
+              maxWidth: 150,
+              height: 50,
+              "&:hover": {
+                backgroundColor: "#16A4C3",
+              },
+            }}
             size="large"
           >
             Appointments
