@@ -31,7 +31,7 @@ function DoctorInfoSection(props: DoctorInfoSection) {
   return (
     <Grid container sx={{ display: { xs: "flex" }, ml: 10, mt: 10 }}>
       <Grid md={4} sx={{ display: { md: "flex" } }}>
-        <div className="photo">
+        <div className="drPhoto">
           <img
             src={process.env.PUBLIC_URL + "/images/Doctor profile pic.svg"}
             alt="logo"
