@@ -27,7 +27,7 @@ const Signin = () => {
 
       if (response.status === 200) {
         const JWT_token = response.data.token;
-        const isPetOwner = response.data.isPetOwner;
+        const userType = response.data.user_type;
         const { user_id, firstName, lastName, user_profile_picture, user_bio } =
           response.data.user;
 
@@ -36,7 +36,7 @@ const Signin = () => {
           JSON.stringify({
             login: true,
             token: JWT_token,
-            isPetOwner,
+            user_type: userType,
             user_id,
             firstName,
             lastName,
