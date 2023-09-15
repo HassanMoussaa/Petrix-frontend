@@ -62,7 +62,7 @@ function DoctorInfoSection(props: DoctorInfoSection) {
               fontSize: 28,
             }}
           >
-            Dr. Hassan Moussa
+            Dr {firstName} {lastName}
           </Typography>
 
           <Rating name="read-only" value={value} readOnly />
