@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
-import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
-import DoctorInfoSection2 from "../../components/Doctor/DoctorInfoSection2";
 import { Grid } from "@mui/material";
-import DoctorToggleSection from "../../components/Doctor/DoctorToggleSection";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import "./appointments.css";
+import PendingAppointments from "../../components/Doctor/PendingAppointments";
 
 interface Specialty {
   id: number;
@@ -55,7 +53,7 @@ function Appointments() {
   config = { headers: { Authorization: `Bearer ${token}` } };
 
   // For toggle section
-  const [alignment, setAlignment] = React.useState("Blog");
+  const [alignment, setAlignment] = React.useState("Pending");
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -90,6 +88,29 @@ function Appointments() {
           pageTitle={"Appointments"}
         />
       )}
+      <Grid
+        container
+        ml={23}
+        sx={{
+          display: { xs: "flex" },
+          flexDirection: { xs: "column" },
+          mt: 5,
+        }}
+      >
+        <ToggleButtonGroup
+          color="primary"
+          value={alignment}
+          exclusive
+          onChange={handleChange}
+          aria-label="Platform"
+        >
+          <ToggleButton value="Blog">Pending</ToggleButton>
+          <ToggleButton value="Review">Accepetd</ToggleButton>
+          <ToggleButton value="Location">Declined</ToggleButton>
+        </ToggleButtonGroup>
+
+        <PendingAppointments />
+      </Grid>
     </div>
   );
 }
