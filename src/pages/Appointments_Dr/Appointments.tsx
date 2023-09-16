@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
-import { Grid } from "@mui/material";
+import { Grid, Box, Tabs, Tab } from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import "./appointments.css";
@@ -55,6 +55,29 @@ interface Appointment {
   };
 }
 
+function a11yProps(index: number) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
+function CustomTabPanel(props: any) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  );
+}
+
 function Appointments() {
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo | null>(null);
   let config = {};
@@ -63,14 +86,10 @@ function Appointments() {
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
 
-  // For toggle section
-  const [alignment, setAlignment] = React.useState("Pending");
+  const [value, setValue] = React.useState(0);
 
-  const handleChange = (
-    event: React.MouseEvent<HTMLElement>,
-    newAlignment: string
-  ) => {
-    setAlignment(newAlignment);
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
   };
 
   const [pendingAppointments, setPendingAppointments] = useState<Appointment[]>(
@@ -144,22 +163,31 @@ function Appointments() {
           mt: 5,
         }}
       >
-        <ToggleButtonGroup
-          color="primary"
-          value={alignment}
-          exclusive
-          onChange={handleChange}
-          aria-label="Platform"
-        >
-          <ToggleButton value="Blog">Pending</ToggleButton>
-          <ToggleButton value="Review">Accepetd</ToggleButton>
-          <ToggleButton value="Location">Declined</ToggleButton>
-        </ToggleButtonGroup>
-
-        <PendingAppointments
-          pendingAppointments={pendingAppointments}
-          acceptedAppointments={acceptedAppointments}
-        />
+        <Box sx={{ width: "100%" }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+            >
+              <Tab label="Pending" {...a11yProps(0)} />
+              <Tab label="Accepetd" {...a11yProps(1)} />
+              <Tab label="Declined" {...a11yProps(2)} />
+            </Tabs>
+          </Box>
+          <CustomTabPanel value={value} index={0}>
+            <PendingAppointments
+              pendingAppointments={pendingAppointments}
+              acceptedAppointments={acceptedAppointments}
+            />
+          </CustomTabPanel>
+          <CustomTabPanel value={value} index={1}>
+            Item Two
+          </CustomTabPanel>
+          <CustomTabPanel value={value} index={2}>
+            Item Three
+          </CustomTabPanel>
+        </Box>
       </Grid>
     </div>
   );
