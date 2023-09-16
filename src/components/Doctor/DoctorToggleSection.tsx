@@ -1,26 +1,18 @@
 import React from "react";
 import {
   Grid,
-  Rating,
-  Box,
   Paper,
-  Button,
   Typography,
-  TextField,
-  Radio,
-  RadioGroup,
-  FormLabel,
-  FormControlLabel,
-  InputLabel,
-  Select,
-  MenuItem,
-  Alert,
-  OutlinedInput,
-  FormControl,
   List,
+  IconButton, // Import IconButton
 } from "@mui/material";
+import {
+  FavoriteBorderOutlined,
+  ChatBubbleOutlineOutlined,
+} from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
+
 interface Post {
   id: number;
   title: string;
@@ -31,8 +23,10 @@ interface Post {
 interface DoctorToggleSection {
   postList: Post[];
 }
+
 function DoctorToggleSection(props: DoctorToggleSection) {
   const { postList } = props;
+
   return (
     <Grid
       container
@@ -64,10 +58,27 @@ function DoctorToggleSection(props: DoctorToggleSection) {
           >
             {postList.map((post) => (
               <Grid item key={post.id} xs={12}>
-                <Paper elevation={3} sx={{ p: 2 }}>
+                <Paper
+                  elevation={3}
+                  sx={{ p: 2, display: "flex", flexDirection: "column" }}
+                >
                   <Typography variant="h6">{post.title}</Typography>
                   <Typography>{post.body}</Typography>
                   <Typography variant="caption">{post.createdAt}</Typography>
+                  <div
+                    style={{
+                      marginTop: "auto",
+                      display: "flex",
+                      gap: 1,
+                    }}
+                  >
+                    <IconButton>
+                      <FavoriteBorderOutlined />
+                    </IconButton>
+                    <IconButton>
+                      <ChatBubbleOutlineOutlined />
+                    </IconButton>
+                  </div>
                 </Paper>
               </Grid>
             ))}
