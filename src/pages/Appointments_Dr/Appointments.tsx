@@ -6,7 +6,7 @@ import { Grid, Box, Tabs, Tab } from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import "./appointments.css";
-import PendingAppointments from "../../components/Doctor/PendingAppointments";
+import AppointmentsCards from "../../components/Doctor/PendingAppointments";
 
 interface Specialty {
   id: number;
@@ -176,13 +176,16 @@ function Appointments() {
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
-            <PendingAppointments
-              pendingAppointments={pendingAppointments}
-              acceptedAppointments={acceptedAppointments}
+            <AppointmentsCards
+              appointments={pendingAppointments}
+              appointmentType="pending"
             />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
-            Item Two
+            <AppointmentsCards
+              appointments={acceptedAppointments}
+              appointmentType="accepted"
+            />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
             Item Three
