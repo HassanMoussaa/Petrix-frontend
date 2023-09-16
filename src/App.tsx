@@ -7,6 +7,7 @@ import Signup from "./pages/Signup/Signup";
 import HeroPage from "./pages/Home/HeroPage";
 import DoctorProfile from "./pages/DoctorProfile_Dr/DoctorProfile";
 import Appointments from "./pages/Appointments_Dr/Appointments";
+import DoctorPost from "./pages/DoctorProfile_Dr/DoctorPost";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           {/* doctor routes */}
           <Route path="/profile" element={<DoctorProfile />} />
           <Route path="/appointments" element={<Appointments />} />
+          <Route path="/post/:id" element={<DoctorPost />} />
         </Routes>
       </BrowserRouter>
     </div>
