@@ -1,51 +1,103 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import React, { useState } from "react";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  Modal,
+} from "@mui/material";
+import axios from "axios";
+import getAPIBaseURL from "../../APIBaseURL";
 
 interface BasicModalProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function BasicModal(props: BasicModalProps) {
+function BasicModal(props: BasicModalProps) {
   const { open, setOpen } = props;
-  const handleClose = () => setOpen(false);
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
 
-  const handleCreatePost = (postData: any) => {
-    console.log("Created Post:", postData);
+  let config = {};
+  let login_status = JSON.parse(localStorage.getItem("login") || "");
+
+  const token = login_status.token;
+  config = { headers: { Authorization: `Bearer ${token}` } };
+
+  const handleClose = () => {
     setOpen(false);
   };
+
+  const handleCreatePost = async () => {
+    const postData = { title, body };
+
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/doctors/post/",
+        postData,
+        config
+      );
+
+      console.log("Created Post:", response.data);
+      setOpen(false);
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
+  };
+
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
+
+  const handleBodyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBody(event.target.value);
+  };
+
   return (
-    <div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
-    </div>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Create a New Post</DialogTitle>
+        <DialogContent>
+          <form className="postForm">
+            <TextField
+              label="Title"
+              variant="outlined"
+              fullWidth
+              value={title}
+              onChange={handleTitleChange}
+              required
+            />
+            <TextField
+              label="Body"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={4}
+              value={body}
+              onChange={handleBodyChange}
+              required
+            />
+          </form>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleCreatePost} color="primary">
+            Create
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Modal>
   );
 }
+
+export default BasicModal;
