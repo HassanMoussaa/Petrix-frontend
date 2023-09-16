@@ -1,6 +1,7 @@
 import React from "react";
-import Appointments from "../../pages/Appointments_Dr/Appointments";
 import { Grid, Paper, Typography, Button, Box } from "@mui/material";
+import axios from "axios";
+import getAPIBaseURL from "../../APIBaseURL";
 
 interface Appointment {
   date: number;
@@ -20,6 +21,43 @@ interface AppointmentsCardsProps {
 
 function AppointmentsCards(props: AppointmentsCardsProps) {
   const { appointments, appointmentType } = props;
+
+  let config = {};
+  let login_status = JSON.parse(localStorage.getItem("login") || "");
+
+  const token = login_status.token;
+  config = { headers: { Authorization: `Bearer ${token}` } };
+
+  const acceptAppointment = async (appointmentId: number) => {
+    try {
+      const response = await axios.put(
+        getAPIBaseURL() + "/doctors/acceptAppointment",
+        {
+          appointmentId,
+          config,
+        }
+      );
+      console.log(response.data.message);
+    } catch (error) {
+      console.error("Error accepting appointment:", error);
+    }
+  };
+
+  const rejectAppointment = async (appointmentId: number) => {
+    try {
+      const response = await axios.put(
+        getAPIBaseURL() + "/doctors/rejectAppointment",
+        {
+          appointmentId,
+          config,
+        }
+      );
+      console.log(response.data.message);
+    } catch (error) {
+      console.error("Error rejecting appointment:", error);
+    }
+  };
+
   return (
     <Grid container spacing={2}>
       {appointments.map((appointment) => (
@@ -31,22 +69,22 @@ function AppointmentsCards(props: AppointmentsCardsProps) {
             <Typography variant="subtitle1">Notification-Type</Typography>
             <Typography variant="body2">
               You have an upcoming appointment with{" "}
-              {`${appointment.petOwner.firstName} ${appointment.petOwner.lastName}`}{" "}
+              {`${appointment.petOwner.firstName} ${appointment.petOwner.lastName}`}
               on {appointment.date} at {appointment.start_time}.
             </Typography>
-            {appointmentType == "pending" && (
+            {appointmentType === "pending" && (
               <Box sx={{ mt: 2 }}>
                 <Button
                   variant="contained"
                   color="primary"
-                  // onClick={() => onAccept(appointment.id)}
+                  onClick={() => acceptAppointment(appointment.id)}
                 >
                   Accept
                 </Button>
                 <Button
                   variant="contained"
                   color="secondary"
-                  // onClick={() => onReject(appointment.id)}
+                  onClick={() => rejectAppointment(appointment.id)}
                 >
                   Reject
                 </Button>
