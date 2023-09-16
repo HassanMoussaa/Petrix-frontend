@@ -88,6 +88,7 @@ function DoctorProfile() {
           phoneNum={doctorInfo.phone || ""}
           profileBio={doctorInfo.profile}
           drEmail={doctorInfo.email}
+          specialityList={doctorInfo.specialities}
         />
       )}
     </div>
