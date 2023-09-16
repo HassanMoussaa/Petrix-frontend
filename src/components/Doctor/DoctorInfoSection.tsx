@@ -17,7 +17,7 @@ import {
   OutlinedInput,
   FormControl,
 } from "@mui/material";
-
+import { Link } from "react-router-dom";
 interface DoctorInfoSection {
   firstName: string;
   lastName: string;
@@ -91,6 +91,7 @@ function DoctorInfoSection(props: DoctorInfoSection) {
           </Button>
           <Button
             variant="contained"
+            href="/appointments"
             sx={{
               bgcolor: "#000",
               borderRadius: 3,
