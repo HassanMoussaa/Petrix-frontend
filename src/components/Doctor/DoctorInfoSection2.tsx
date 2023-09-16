@@ -22,14 +22,25 @@ import { styled } from "@mui/material/styles";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 
+interface Specialty {
+  id: number;
+  speciality: string;
+  User_Specialties: {
+    createdAt: string;
+    updatedAt: string;
+    SpecialtyId: number;
+    UserId: number;
+  };
+}
 interface DoctorInfoSection2 {
   phoneNum: string;
   profileBio: string;
   drEmail: string;
+  specialityList: Specialty[];
 }
 
 function DoctorInfoSection2(props: DoctorInfoSection2) {
-  const { phoneNum, profileBio, drEmail } = props;
+  const { phoneNum, profileBio, drEmail, specialityList } = props;
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -78,16 +89,28 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
           <Box sx={{ flexGrow: 1, mt: 1 }}>
             <Grid container spacing={2}>
               <Grid item xs={8}>
-                <Item>xs=8</Item>
+                {/* {specialityList[0] && (
+                  <Item>{specialityList[0].speciality}</Item>
+                )} */}
+                lol
               </Grid>
               <Grid item xs={4}>
-                <Item>xs=4</Item>
+                {/* {specialityList[1] && (
+                  <Item>{specialityList[1].speciality}</Item>
+                )} */}
+                lol
               </Grid>
               <Grid item xs={4}>
-                <Item>xs=4</Item>
+                {/* {specialityList[2] && (
+                  <Item>{specialityList[2].speciality}</Item>
+                )} */}
+                lol
               </Grid>
               <Grid item xs={8}>
-                <Item>xs=8</Item>
+                {/* {specialityList[3] && (
+                  <Item>{specialityList[3].speciality}</Item>
+                )} */}
+                lol
               </Grid>
             </Grid>
           </Box>
