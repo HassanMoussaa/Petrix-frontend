@@ -5,6 +5,10 @@ import getAPIBaseURL from "../../APIBaseURL";
 import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
 import DoctorInfoSection2 from "../../components/Doctor/DoctorInfoSection2";
 import "./doctorProfile.css";
+import { Grid } from "@mui/material";
+import DoctorToggleSection from "../../components/Doctor/DoctorToggleSection";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 interface Specialty {
   id: number;
@@ -50,6 +54,16 @@ function DoctorProfile() {
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
 
+  // For toggle section
+  const [alignment, setAlignment] = React.useState("Blog");
+
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string
+  ) => {
+    setAlignment(newAlignment);
+  };
+
   async function fetchDoctorProfile() {
     try {
       const response = await axios.get(
@@ -67,7 +81,7 @@ function DoctorProfile() {
   }, []);
 
   return (
-    <div>
+    <div className="drBody">
       {doctorInfo && (
         <NavBar
           imageUrl={doctorInfo.photoUrl || ""}
@@ -83,14 +97,43 @@ function DoctorProfile() {
           lastName={doctorInfo.lastName}
         />
       )}
-      {doctorInfo && (
-        <DoctorInfoSection2
-          phoneNum={doctorInfo.phone || ""}
-          profileBio={doctorInfo.profile}
-          drEmail={doctorInfo.email}
-          specialityList={doctorInfo.specialities}
-        />
-      )}
+      <Grid
+        container
+        sx={{
+          display: { xs: "flex" },
+          flexWrap: { xs: "inherit" },
+        }}
+      >
+        {doctorInfo && (
+          <DoctorInfoSection2
+            phoneNum={doctorInfo.phone || ""}
+            profileBio={doctorInfo.profile}
+            drEmail={doctorInfo.email}
+            specialityList={doctorInfo.specialities}
+          />
+        )}
+        <Grid
+          container
+          ml={23}
+          sx={{
+            display: { xs: "flex" },
+            flexDirection: { xs: "column" },
+          }}
+        >
+          <ToggleButtonGroup
+            color="primary"
+            value={alignment}
+            exclusive
+            onChange={handleChange}
+            aria-label="Platform"
+          >
+            <ToggleButton value="Blog">Blog</ToggleButton>
+            <ToggleButton value="Review">Review</ToggleButton>
+            <ToggleButton value="Location">Location</ToggleButton>
+          </ToggleButtonGroup>
+          {doctorInfo && <DoctorToggleSection postList={doctorInfo.post} />}
+        </Grid>
+      </Grid>
     </div>
   );
 }
