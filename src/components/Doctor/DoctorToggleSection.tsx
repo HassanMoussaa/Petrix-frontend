@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  Paper,
-  Typography,
-  List,
-  IconButton, // Import IconButton
-} from "@mui/material";
+import { Grid, Paper, Typography, List, IconButton } from "@mui/material";
 import {
   FavoriteBorderOutlined,
   ChatBubbleOutlineOutlined,
