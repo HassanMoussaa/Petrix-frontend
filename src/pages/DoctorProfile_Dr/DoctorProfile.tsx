@@ -12,6 +12,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Fab from "@mui/material/Fab";
 import { SxProps } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
+import CreatePostModal from "../../components/Doctor/CreatePostModal";
 
 interface Specialty {
   id: number;
@@ -100,6 +101,15 @@ function DoctorProfile() {
       console.error("Error fetching doctor profile:", error);
     }
   }
+
+  //create post section
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
   useEffect(() => {
     fetchDoctorProfile();
   }, []);
@@ -167,26 +177,17 @@ function DoctorProfile() {
             <CustomTabPanel value={value} index={2}>
               Item Three
             </CustomTabPanel>
-
-            <Zoom
-              key="primary"
-              in={value === 0}
-              // timeout={transitionDuration}
-              // style={{
-              //   transitionDelay: `${
-              //     value === 0 ? transitionDuration.exit : 0
-              //   }ms`,
-              // }}
-              unmountOnExit
-            >
+            <Zoom key="primary" in={value === 0} unmountOnExit>
               <Fab
                 sx={{ position: "absolute", bottom: 16, right: 16 } as SxProps}
                 aria-label="Create post"
                 color="primary"
+                onClick={handleOpenModal}
               >
                 <AddIcon />
               </Fab>
             </Zoom>
+            <CreatePostModal open={isModalOpen} setOpen={setIsModalOpen} />
           </Box>
         </Grid>
       </Grid>
