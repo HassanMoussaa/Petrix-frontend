@@ -6,7 +6,7 @@ import { Grid, Box, Tabs, Tab } from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import "./appointments.css";
-import AppointmentsCards from "../../components/Doctor/PendingAppointments";
+import AppointmentsCards from "../../components/Doctor/AppointmentsCards";
 
 interface Specialty {
   id: number;
