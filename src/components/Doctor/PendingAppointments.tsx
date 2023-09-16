@@ -13,40 +13,45 @@ interface Appointment {
   };
 }
 
-interface PendingAppointmentsProps {
-  pendingAppointments: Appointment[];
-  acceptedAppointments: Appointment[];
+interface AppointmentsCardsProps {
+  appointments: Appointment[];
+  appointmentType: "accepted" | "rejected" | "pending";
 }
 
-function PendingAppointments(props: PendingAppointmentsProps) {
-  const { pendingAppointments, acceptedAppointments } = props;
+function AppointmentsCards(props: AppointmentsCardsProps) {
+  const { appointments, appointmentType } = props;
   return (
     <Grid container spacing={2}>
-      {acceptedAppointments.map((appointment) => (
+      {appointments.map((appointment) => (
         <Grid item key={appointment.id} xs={12}>
-          <Paper elevation={3} sx={{ p: 2, backgroundColor: "white" }}>
+          <Paper
+            elevation={3}
+            sx={{ p: 2, backgroundColor: "white", width: "80%" }}
+          >
             <Typography variant="subtitle1">Notification-Type</Typography>
             <Typography variant="body2">
               You have an upcoming appointment with{" "}
               {`${appointment.petOwner.firstName} ${appointment.petOwner.lastName}`}{" "}
               on {appointment.date} at {appointment.start_time}.
             </Typography>
-            <Box sx={{ mt: 2 }}>
-              <Button
-                variant="contained"
-                color="primary"
-                // onClick={() => onAccept(appointment.id)}
-              >
-                Accept
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                // onClick={() => onReject(appointment.id)}
-              >
-                Reject
-              </Button>
-            </Box>
+            {appointmentType == "pending" && (
+              <Box sx={{ mt: 2 }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  // onClick={() => onAccept(appointment.id)}
+                >
+                  Accept
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  // onClick={() => onReject(appointment.id)}
+                >
+                  Reject
+                </Button>
+              </Box>
+            )}
           </Paper>
         </Grid>
       ))}
@@ -54,4 +59,4 @@ function PendingAppointments(props: PendingAppointmentsProps) {
   );
 }
 
-export default PendingAppointments;
+export default AppointmentsCards;
