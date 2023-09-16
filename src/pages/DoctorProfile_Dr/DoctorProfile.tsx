@@ -5,10 +5,13 @@ import getAPIBaseURL from "../../APIBaseURL";
 import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
 import DoctorInfoSection2 from "../../components/Doctor/DoctorInfoSection2";
 import "./doctorProfile.css";
-import { Grid, Box, Tabs, Tab } from "@mui/material";
+import { Grid, Box, Tabs, Tab, Zoom } from "@mui/material";
 import DoctorToggleSection from "../../components/Doctor/DoctorToggleSection";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import Fab from "@mui/material/Fab";
+import { SxProps } from "@mui/system";
+import AddIcon from "@mui/icons-material/Add";
 
 interface Specialty {
   id: number;
@@ -164,6 +167,26 @@ function DoctorProfile() {
             <CustomTabPanel value={value} index={2}>
               Item Three
             </CustomTabPanel>
+
+            <Zoom
+              key="primary"
+              in={value === 0}
+              // timeout={transitionDuration}
+              // style={{
+              //   transitionDelay: `${
+              //     value === 0 ? transitionDuration.exit : 0
+              //   }ms`,
+              // }}
+              unmountOnExit
+            >
+              <Fab
+                sx={{ position: "absolute", bottom: 16, right: 16 } as SxProps}
+                aria-label="Create post"
+                color="primary"
+              >
+                <AddIcon />
+              </Fab>
+            </Zoom>
           </Box>
         </Grid>
       </Grid>
