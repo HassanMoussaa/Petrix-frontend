@@ -36,7 +36,7 @@ function BasicModal(props: BasicModalProps) {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/doctors/post/",
+        getAPIBaseURL() + "/doctors/post/",
         postData,
         config
       );
