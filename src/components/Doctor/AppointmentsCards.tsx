@@ -64,16 +64,24 @@ function AppointmentsCards(props: AppointmentsCardsProps) {
         <Grid item key={appointment.id} xs={12}>
           <Paper
             elevation={3}
-            sx={{ p: 2, backgroundColor: "white", width: "80%" }}
+            sx={{
+              p: 2,
+              backgroundColor: "white",
+              width: "80%",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
           >
-            <Typography variant="subtitle1">Notification-Type</Typography>
-            <Typography variant="body2">
-              You have an upcoming appointment with{" "}
-              {`${appointment.petOwner.firstName} ${appointment.petOwner.lastName}`}
-              on {appointment.date} at {appointment.start_time}.
-            </Typography>
+            <Grid>
+              <Typography variant="subtitle1">Notification-Type</Typography>
+              <Typography variant="body2">
+                You have an upcoming appointment with{" "}
+                {`${appointment.petOwner.firstName} ${appointment.petOwner.lastName}`}
+                on {appointment.date} at {appointment.start_time}.
+              </Typography>
+            </Grid>
             {appointmentType === "pending" && (
-              <Box sx={{ mt: 2 }}>
+              <Box sx={{ mt: 2, display: "flex", gap: 1 }}>
                 <Button
                   variant="contained"
                   color="primary"
