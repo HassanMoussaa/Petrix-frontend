@@ -44,6 +44,17 @@ interface DoctorInfo {
   post: Post[];
 }
 
+interface Appointment {
+  date: number;
+  id: number;
+  petOwnerId: number;
+  start_time: number;
+  petOwner: {
+    firstName: string;
+    lastName: string;
+  };
+}
+
 function Appointments() {
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo | null>(null);
   let config = {};
@@ -62,6 +73,13 @@ function Appointments() {
     setAlignment(newAlignment);
   };
 
+  const [pendingAppointments, setPendingAppointments] = useState<Appointment[]>(
+    []
+  );
+  const [acceptedAppointments, setAcceptedAppointments] = useState<
+    Appointment[]
+  >([]);
+
   async function fetchDoctorProfile() {
     try {
       const response = await axios.get(
@@ -74,8 +92,37 @@ function Appointments() {
       console.error("Error fetching doctor profile:", error);
     }
   }
+
+  async function fetchPendingAppointments() {
+    try {
+      const response = await axios.get(
+        getAPIBaseURL() + "/doctors/appointments",
+        config
+      );
+
+      setPendingAppointments(response.data);
+    } catch (error) {
+      console.error("Error fetching pending appointments:", error);
+    }
+  }
+
+  async function fetchAcceptedAppointments() {
+    try {
+      const response = await axios.get(
+        getAPIBaseURL() + "/doctors/acceptedAppointments",
+        config
+      );
+
+      setAcceptedAppointments(response.data);
+    } catch (error) {
+      console.error("Error fetching accepted appointments:", error);
+    }
+  }
+
   useEffect(() => {
     fetchDoctorProfile();
+    fetchPendingAppointments();
+    fetchAcceptedAppointments();
   }, []);
 
   return (
@@ -109,7 +156,10 @@ function Appointments() {
           <ToggleButton value="Location">Declined</ToggleButton>
         </ToggleButtonGroup>
 
-        <PendingAppointments />
+        <PendingAppointments
+          pendingAppointments={pendingAppointments}
+          acceptedAppointments={acceptedAppointments}
+        />
       </Grid>
     </div>
   );
