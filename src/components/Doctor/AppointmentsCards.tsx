@@ -90,8 +90,8 @@ function AppointmentsCards(props: AppointmentsCardsProps) {
                   Accept
                 </Button>
                 <Button
-                  variant="contained"
-                  color="secondary"
+                  variant="outlined"
+                  color="primary"
                   onClick={() => rejectAppointment(appointment.id)}
                 >
                   Reject
