@@ -41,9 +41,9 @@ interface DoctorInfo {
   phone: string;
   photoUrl: string | null;
   email: string;
-  specialities: Specialty[];
+  specialties: Specialty[];
   userType: UserType;
-  post: Post[];
+  posts: Post[];
 }
 
 function DoctorProfile() {
@@ -109,7 +109,7 @@ function DoctorProfile() {
             phoneNum={doctorInfo.phone || ""}
             profileBio={doctorInfo.profile}
             drEmail={doctorInfo.email}
-            specialityList={doctorInfo.specialities}
+            specialityList={doctorInfo.specialties}
           />
         )}
         <Grid
@@ -131,7 +131,7 @@ function DoctorProfile() {
             <ToggleButton value="Review">Review</ToggleButton>
             <ToggleButton value="Location">Location</ToggleButton>
           </ToggleButtonGroup>
-          {doctorInfo && <DoctorToggleSection postList={doctorInfo.post} />}
+          {doctorInfo && <DoctorToggleSection postList={doctorInfo.posts} />}
         </Grid>
       </Grid>
     </div>
