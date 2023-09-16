@@ -5,7 +5,7 @@ import getAPIBaseURL from "../../APIBaseURL";
 import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
 import DoctorInfoSection2 from "../../components/Doctor/DoctorInfoSection2";
 import "./doctorProfile.css";
-import { Grid } from "@mui/material";
+import { Grid, Box, Tabs, Tab } from "@mui/material";
 import DoctorToggleSection from "../../components/Doctor/DoctorToggleSection";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -55,14 +55,35 @@ function DoctorProfile() {
   config = { headers: { Authorization: `Bearer ${token}` } };
 
   // For toggle section
-  const [alignment, setAlignment] = React.useState("Blog");
 
-  const handleChange = (
-    event: React.MouseEvent<HTMLElement>,
-    newAlignment: string
-  ) => {
-    setAlignment(newAlignment);
+  function a11yProps(index: number) {
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
+    };
+  }
+
+  function CustomTabPanel(props: any) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      </div>
+    );
+  }
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
   };
+
+  // fetch section
 
   async function fetchDoctorProfile() {
     try {
@@ -120,18 +141,30 @@ function DoctorProfile() {
             flexDirection: { xs: "column" },
           }}
         >
-          <ToggleButtonGroup
-            color="primary"
-            value={alignment}
-            exclusive
-            onChange={handleChange}
-            aria-label="Platform"
-          >
-            <ToggleButton value="Blog">Blog</ToggleButton>
-            <ToggleButton value="Review">Review</ToggleButton>
-            <ToggleButton value="Location">Location</ToggleButton>
-          </ToggleButtonGroup>
-          {doctorInfo && <DoctorToggleSection postList={doctorInfo.posts} />}
+          <Box sx={{ width: "100%" }}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+              >
+                <Tab label="Blog" {...a11yProps(0)} />
+                <Tab label="Reviews" {...a11yProps(1)} />
+                <Tab label="Location" {...a11yProps(2)} />
+              </Tabs>
+            </Box>
+            <CustomTabPanel value={value} index={0}>
+              {doctorInfo && (
+                <DoctorToggleSection postList={doctorInfo.posts} />
+              )}
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={1}>
+              item2
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={2}>
+              Item Three
+            </CustomTabPanel>
+          </Box>
         </Grid>
       </Grid>
     </div>
