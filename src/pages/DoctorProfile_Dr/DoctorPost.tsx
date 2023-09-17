@@ -98,8 +98,8 @@ function DoctorPost() {
     if (selectedPost && newComment) {
       try {
         const response = await axios.post(
-          getAPIBaseURL() + `/posts/${selectedPost.id}/comments`,
-          { text: newComment },
+          getAPIBaseURL() + `/users/comment`,
+          { body: newComment, postId: selectedPost.id },
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
