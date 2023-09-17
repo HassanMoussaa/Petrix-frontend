@@ -9,6 +9,7 @@ import DoctorProfile from "./pages/DoctorProfile_Dr/DoctorProfile";
 import Appointments from "./pages/Appointments_Dr/Appointments";
 import DoctorPost from "./pages/DoctorProfile_Dr/DoctorPost";
 import Ai_imageClassification_Main from "./pages/Ai_petOwner_ImgClass/Ai_imageClassification_Main";
+import Ai_results from "./pages/Ai_petOwner_ImgClass/Ai_results";
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
             path="/ai_imageClassification"
             element={<Ai_imageClassification_Main />}
           />
+          <Route
+            path="/ai_imageClassification"
+            element={<Ai_imageClassification_Main />}
+          />
+          <Route path="/ai_results" element={<Ai_results />} />
         </Routes>
       </BrowserRouter>
     </div>
