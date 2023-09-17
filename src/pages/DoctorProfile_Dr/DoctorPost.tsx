@@ -139,18 +139,25 @@ function DoctorPost() {
         <Grid container justifyContent="center" mt={3}>
           <Grid item xs={12} md={8}>
             <Typography variant="h5">Comments</Typography>
-            {postComments.map((comment) => (
-              <Paper
-                key={comment.id}
-                sx={{ p: 2, mt: 2, backgroundColor: "white" }}
-              >
-                <Typography variant="body1">{comment.body}</Typography>
-                <Typography variant="caption">
-                  {comment.user.firstName} {comment.user.lastName} -{" "}
-                  {comment.createdAt}
-                </Typography>
-              </Paper>
-            ))}
+            <div
+              style={{
+                maxHeight: "300px",
+                overflowY: "auto",
+              }}
+            >
+              {postComments.map((comment) => (
+                <Paper
+                  key={comment.id}
+                  sx={{ p: 2, mt: 2, backgroundColor: "white" }}
+                >
+                  <Typography variant="caption">
+                    {comment.user.firstName} {comment.user.lastName} -{" "}
+                    {comment.createdAt}
+                  </Typography>
+                  <Typography variant="body1">{comment.body}</Typography>
+                </Paper>
+              ))}
+            </div>
             <TextField
               fullWidth
               variant="outlined"
@@ -158,7 +165,7 @@ function DoctorPost() {
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               multiline
-              rows={3}
+              rows={1}
               sx={{ mt: 2 }}
             />
             <Button
