@@ -96,7 +96,7 @@ function DoctorPost() {
     fetchDoctorProfile();
     fetchPost();
     fetchPostComments();
-  }, [postId, token]);
+  }, [postId]);
 
   const handleAddComment = async () => {
     if (selectedPost && newComment) {
