@@ -51,7 +51,7 @@ function Ai_results() {
           imageUrl={petOwnerInfo.photoUrl || ""}
           firstName={petOwnerInfo.firstName}
           lastName={petOwnerInfo.lastName}
-          pageTitle={"AI CLASSIFICATION"}
+          pageTitle={"RESULTS"}
         />
       )}
     </div>
