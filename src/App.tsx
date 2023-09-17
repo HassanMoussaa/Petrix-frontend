@@ -21,7 +21,7 @@ function App() {
           {/* doctor routes */}
           <Route path="/profile" element={<DoctorProfile />} />
           <Route path="/appointments" element={<Appointments />} />
-          <Route path="/post/:id" element={<DoctorPost />} />
+          <Route path="/post" element={<DoctorPost />} />
         </Routes>
       </BrowserRouter>
     </div>
