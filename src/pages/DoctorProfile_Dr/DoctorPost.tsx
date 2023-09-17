@@ -21,8 +21,12 @@ interface Post {
 
 interface Comment {
   id: number;
-  text: string;
+  body: string;
   createdAt: string;
+  user: {
+    firstName: string;
+    lastName: string;
+  };
 }
 
 interface DoctorInfo {
@@ -140,8 +144,11 @@ function DoctorPost() {
                 key={comment.id}
                 sx={{ p: 2, mt: 2, backgroundColor: "white" }}
               >
-                <Typography variant="body1">{comment.text}</Typography>
-                <Typography variant="caption">{comment.createdAt}</Typography>
+                <Typography variant="body1">{comment.body}</Typography>
+                <Typography variant="caption">
+                  {comment.user.firstName} {comment.user.lastName} -{" "}
+                  {comment.createdAt}
+                </Typography>
               </Paper>
             ))}
             <TextField
