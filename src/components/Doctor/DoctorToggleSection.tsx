@@ -6,7 +6,7 @@ import {
 } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
-
+import { useNavigate } from "react-router-dom";
 interface Post {
   id: number;
   title: string;
@@ -20,7 +20,10 @@ interface DoctorToggleSection {
 
 function DoctorToggleSection(props: DoctorToggleSection) {
   const { postList } = props;
-
+  const navigate = useNavigate();
+  const handleButtonClick = (postId: number) => {
+    navigate(`/post`, { state: { postId } });
+  };
   return (
     <Grid
       container
@@ -69,7 +72,8 @@ function DoctorToggleSection(props: DoctorToggleSection) {
                     <IconButton>
                       <FavoriteBorderOutlined />
                     </IconButton>
-                    <IconButton>
+
+                    <IconButton onClick={() => handleButtonClick(post.id)}>
                       <ChatBubbleOutlineOutlined />
                     </IconButton>
                   </div>
