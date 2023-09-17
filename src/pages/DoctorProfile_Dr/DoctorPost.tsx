@@ -43,9 +43,8 @@ function DoctorPost() {
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo | null>(null);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [newComment, setNewComment] = useState("");
-
+  const [postComments, setPostComments] = useState<Comment[]>([]);
   const token = JSON.parse(localStorage.getItem("login") || "").token;
-
   const location = useLocation();
   const postId = location.state?.postId;
 
@@ -56,7 +55,6 @@ function DoctorPost() {
           getAPIBaseURL() + "/doctors/myProfile",
           { headers: { Authorization: `Bearer ${token}` } }
         );
-
         setDoctorInfo(response.data);
       } catch (error) {
         console.error("Error fetching doctor profile:", error);
@@ -66,31 +64,46 @@ function DoctorPost() {
     async function fetchPost() {
       try {
         const response = await axios.get(
-          getAPIBaseURL() + `/doctors/post/${postId}`,
+          getAPIBaseURL() + `/users/post/${postId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-
         setSelectedPost(response.data);
       } catch (error) {
         console.error("Error fetching post:", error);
       }
     }
 
+    async function fetchPostComments() {
+      try {
+        const response = await axios.get(
+          getAPIBaseURL() + `/users/comments/${postId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setPostComments(response.data);
+      } catch (error) {
+        console.error("Error fetching post comments:", error);
+      }
+    }
+
     fetchDoctorProfile();
     fetchPost();
-  }, [postId]);
+    fetchPostComments();
+  }, [postId, token]);
 
   const handleAddComment = async () => {
     if (selectedPost && newComment) {
       try {
-        await axios.post(
+        const response = await axios.post(
           getAPIBaseURL() + `/posts/${selectedPost.id}/comments`,
           { text: newComment },
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
+        setPostComments([...postComments, response.data.comment]);
         setNewComment("");
       } catch (error) {
         console.error("Error adding comment:", error);
@@ -118,11 +131,11 @@ function DoctorPost() {
           </Grid>
         </Grid>
       )}
-      {/* {selectedPost && (
+      {selectedPost && (
         <Grid container justifyContent="center" mt={3}>
           <Grid item xs={12} md={8}>
             <Typography variant="h5">Comments</Typography>
-            {selectedPost.comments.map((comment) => (
+            {postComments.map((comment) => (
               <Paper
                 key={comment.id}
                 sx={{ p: 2, mt: 2, backgroundColor: "white" }}
@@ -151,7 +164,7 @@ function DoctorPost() {
             </Button>
           </Grid>
         </Grid>
-      )} */}
+      )}
     </div>
   );
 }
