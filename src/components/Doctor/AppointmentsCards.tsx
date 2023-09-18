@@ -32,10 +32,8 @@ function AppointmentsCards(props: AppointmentsCardsProps) {
     try {
       const response = await axios.put(
         getAPIBaseURL() + "/doctors/acceptAppointment",
-        {
-          appointmentId,
-          config,
-        }
+        { appointmentId },
+        config
       );
       console.log(response.data.message);
     } catch (error) {
@@ -47,10 +45,9 @@ function AppointmentsCards(props: AppointmentsCardsProps) {
     try {
       const response = await axios.put(
         getAPIBaseURL() + "/doctors/rejectAppointment",
-        {
-          appointmentId,
-          config,
-        }
+
+        { appointmentId },
+        config
       );
       console.log(response.data.message);
     } catch (error) {
