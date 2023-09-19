@@ -130,37 +130,83 @@ function DoctorInfoSection(props: DoctorInfoSection) {
             gap: 2,
           }}
         >
-          <Button
-            variant="contained"
-            sx={{
-              bgcolor: "#16A4C3",
-              borderRadius: 3,
-              maxWidth: 100,
-              height: 50,
-              "&:hover": {
-                backgroundColor: "#000",
-              },
-            }}
-            size="large"
-          >
-            Edit
-          </Button>
-          <Button
-            variant="contained"
-            href="/appointments"
-            sx={{
-              bgcolor: "#000",
-              borderRadius: 3,
-              maxWidth: 150,
-              height: 50,
-              "&:hover": {
-                backgroundColor: "#16A4C3",
-              },
-            }}
-            size="large"
-          >
-            Appointments
-          </Button>
+          {isOwnProfile ? (
+            <>
+              <Button
+                variant="contained"
+                sx={{
+                  bgcolor: "#16A4C3",
+                  borderRadius: 3,
+                  maxWidth: 100,
+                  fontWeight: "bold",
+                  height: 50,
+                  "&:hover": {
+                    backgroundColor: "#000",
+                  },
+                }}
+                size="large"
+              >
+                Edit
+              </Button>
+              <Button
+                variant="contained"
+                href="/appointments"
+                sx={{
+                  bgcolor: "#000",
+                  borderRadius: 3,
+                  fontWeight: "bold",
+                  maxWidth: 150,
+                  height: 50,
+                  "&:hover": {
+                    backgroundColor: "#16A4C3",
+                  },
+                }}
+                size="large"
+              >
+                Appointments
+              </Button>
+            </>
+          ) : (
+            <>
+              {/* Rendering different buttons for non-own profiles */}
+
+              <Button
+                variant="contained"
+                sx={{
+                  bgcolor: "#16A4C3",
+                  borderRadius: 3,
+                  fontWeight: "bold",
+                  maxWidth: 100,
+                  height: 50,
+                  fontSize: 12,
+                  "&:hover": {
+                    backgroundColor: "#000",
+                  },
+                }}
+                size="large"
+              >
+                Follow
+              </Button>
+              <Button
+                variant="contained"
+                href="/appointments"
+                sx={{
+                  bgcolor: "#000",
+                  fontSize: 12,
+                  fontWeight: "bold",
+                  borderRadius: 3,
+                  maxWidth: 200,
+                  height: 50,
+                  "&:hover": {
+                    backgroundColor: "#16A4C3",
+                  },
+                }}
+                size="large"
+              >
+                Book Appointment
+              </Button>
+            </>
+          )}
         </Grid>
       </Grid>
     </Grid>
