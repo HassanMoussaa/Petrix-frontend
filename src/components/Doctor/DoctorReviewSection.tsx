@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Paper, Typography, Box } from "@mui/material";
+import { Grid, Paper, Typography, Box, Rating } from "@mui/material";
 
 interface Review {
   id: number;
@@ -45,10 +45,15 @@ function DoctorReviewSection(props: DoctorReviewSectionProps) {
                   }}
                 />
                 <Typography variant="h6">{`${review.petOwner.firstName} ${review.petOwner.lastName}`}</Typography>
-                <Typography
-                  variant="h6"
-                  style={{ marginLeft: "auto" }}
-                >{`Rating: ${review.rate}`}</Typography>
+                <Typography variant="h6" style={{ marginLeft: "auto" }}>
+                  {" "}
+                  <Rating
+                    name="read-only"
+                    value={review.rate}
+                    precision={0.5}
+                    readOnly
+                  />
+                </Typography>
               </Box>
               <Typography>{review.body}</Typography>
             </Paper>
