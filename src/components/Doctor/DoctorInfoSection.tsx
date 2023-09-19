@@ -31,11 +31,12 @@ interface DoctorInfoSection {
   firstName: string;
   lastName: string;
   imageUrl: string;
+  averageRate: number;
 }
 
 function DoctorInfoSection(props: DoctorInfoSection) {
-  const { imageUrl, firstName, lastName } = props;
-  const value = 2;
+  const { imageUrl, firstName, lastName, averageRate } = props;
+  // const value = 4.5;
 
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
@@ -96,7 +97,12 @@ function DoctorInfoSection(props: DoctorInfoSection) {
             Dr {firstName} {lastName}
           </Typography>
 
-          <Rating name="read-only" value={value} readOnly />
+          <Rating
+            name="read-only"
+            value={averageRate}
+            precision={0.5}
+            readOnly
+          />
         </Grid>
         <Grid
           container
