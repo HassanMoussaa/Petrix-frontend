@@ -12,3 +12,7 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.selectedImage_profile {
+  padding-top: 5%;
+}
