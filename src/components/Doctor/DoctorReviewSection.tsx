@@ -32,7 +32,10 @@ function DoctorReviewSection(props: DoctorReviewSectionProps) {
             >
               <Box display="flex" alignItems="center">
                 <img
-                  src={review.petOwner.photoUrl || "/default-user-image.jpg"}
+                  src={
+                    review.petOwner.photoUrl ||
+                    "http://127.0.0.1:8000/images/default_profile_picture.jpg"
+                  }
                   alt={`${review.petOwner.firstName} ${review.petOwner.lastName}`}
                   style={{
                     width: 40,
