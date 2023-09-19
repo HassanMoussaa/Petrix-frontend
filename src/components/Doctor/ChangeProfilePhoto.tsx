@@ -97,16 +97,12 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
             p: 4,
           }}
         >
-          <Typography id="transition-modal-title" sx={{ mb: 5 }}>
-            Change Profile Picture
-          </Typography>
-
           <Box component="form" onSubmit={handleUploadImage} sx={{ mb: 5 }}>
             <Typography
               style={{ color: "#000", fontWeight: 700 }}
-              sx={{ mb: 1 }}
+              sx={{ mb: 1, textAlign: "center" }}
             >
-              Upload Image
+              Change Profile Picture
             </Typography>
             <input
               type="file"
@@ -120,6 +116,7 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
                 src={URL.createObjectURL(selectedImage)}
                 alt="Selected"
                 style={{ maxWidth: "100%" }}
+                className="selectedImage_profile"
               />
             )}
             <Button
