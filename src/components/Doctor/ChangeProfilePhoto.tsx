@@ -100,7 +100,14 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
           }}
         >
           <Box component="form" onSubmit={handleUploadImage} sx={{ mb: 5 }}>
-            <Typography sx={{ textAlign: "end" }}>
+            <Typography
+              sx={{
+                textAlign: "end",
+                "&:hover": {
+                  cursor: "pointer",
+                },
+              }}
+            >
               <CloseIcon onClick={handleClose} />
             </Typography>
 
