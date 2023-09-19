@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Typography,
+  Fab,
   TextField,
   Radio,
   RadioGroup,
@@ -18,6 +19,7 @@ import {
   FormControl,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
 interface DoctorInfoSection {
   firstName: string;
   lastName: string;
@@ -31,8 +33,21 @@ function DoctorInfoSection(props: DoctorInfoSection) {
   return (
     <Grid container sx={{ display: { xs: "flex" }, ml: 10, mt: 10, gap: 5 }}>
       <Grid md={3} sx={{ display: { md: "flex" } }}>
-        <div className="drPhoto">
+        <div className="drPhoto" style={{ position: "relative" }}>
           <img src={imageUrl} alt="logo"></img>
+          {/* Add the Edit icon button */}
+          <Fab
+            color="primary"
+            size="small"
+            style={{
+              position: "absolute",
+              bottom: "10px",
+              right: "10px",
+            }}
+            aria-label="edit"
+          >
+            <EditIcon />
+          </Fab>
         </div>
       </Grid>
 
