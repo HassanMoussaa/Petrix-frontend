@@ -13,6 +13,7 @@ import Fab from "@mui/material/Fab";
 import { SxProps } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
 import CreatePostModal from "../../components/Doctor/CreatePostModal";
+import DoctorReviewSection from "../../components/Doctor/DoctorReviewSection";
 
 interface Specialty {
   id: number;
@@ -34,6 +35,18 @@ interface Post {
   body: string;
   createdAt: string;
 }
+interface Review {
+  id: number;
+  rate: number;
+  body: string;
+  createdAt: string;
+  petOwner: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    photoUrl: string | null;
+  };
+}
 
 interface DoctorInfo {
   id: number;
@@ -48,6 +61,7 @@ interface DoctorInfo {
   specialties: Specialty[];
   userType: UserType;
   posts: Post[];
+  doctorReviews: Review[];
 }
 
 function DoctorProfile() {
@@ -172,7 +186,9 @@ function DoctorProfile() {
               )}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-              item2
+              {doctorInfo && (
+                <DoctorReviewSection reviewList={doctorInfo.doctorReviews} />
+              )}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
               Item Three
