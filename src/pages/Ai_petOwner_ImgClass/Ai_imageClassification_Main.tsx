@@ -18,13 +18,15 @@ interface DoctorInfo {
   country: string;
   profile: string;
   phone: string;
-  photoUrl: string | null;
+  photoUrl: string;
   email: string;
   userType: UserType;
 }
 
 function Ai_imageClassification_Main() {
   const [petOwnerInfo, setPetOwnerInfo] = useState<DoctorInfo | null>(null);
+  const [newImageUrl, setNewImageUrl] = useState(petOwnerInfo?.photoUrl);
+
   const token = JSON.parse(localStorage.getItem("login") || "").token;
   const location = useLocation();
   const postId = location.state?.postId;
@@ -48,7 +50,8 @@ function Ai_imageClassification_Main() {
     <div>
       {petOwnerInfo && (
         <NavBar
-          imageUrl={petOwnerInfo.photoUrl || ""}
+          imageUrl={newImageUrl}
+          setNewImageUrl={setNewImageUrl}
           firstName={petOwnerInfo.firstName}
           lastName={petOwnerInfo.lastName}
           pageTitle={"AI CLASSIFICATION"}
