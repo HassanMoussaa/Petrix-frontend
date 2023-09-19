@@ -17,7 +17,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 
 interface ChangeProfilePhotoProps {
-  setNewImageUrl: React.Dispatch<React.SetStateAction<string>>;
+  setNewImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
