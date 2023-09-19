@@ -39,36 +39,12 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
     setOpen(false);
   };
 
-  // const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const files = event.target.files;
-  //   if (files && files.length > 0) {
-  //     setSelectedImage(files[0]);
-  //   }
-  // };
-
-  // const handleUploadImage = async () => {
-  //   if (selectedImage) {
-  //     const formData = new FormData();
-  //     formData.append("profilePicture", selectedImage);
-
-  //     try {
-  //       const response = await axios.post(
-  //         getAPIBaseURL() + "/api/changeProfilePicture", // Adjust the API endpoint
-  //         formData,
-  //         {
-  //           headers: {
-  //             "Content-Type": "multipart/form-data",
-  //           },
-  //         }
-  //       );
-
-  //       console.log("Profile picture changed:", response.data);
-  //       setOpen(false);
-  //     } catch (error) {
-  //       console.error("Error changing profile picture:", error);
-  //     }
-  //   }
-  // };
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      setSelectedImage(files[0]);
+    }
+  };
 
   // @ts-ignore
 
@@ -132,8 +108,20 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
             >
               Upload Image
             </Typography>
-            <input type="file" required name="profile_picture" />
+            <input
+              type="file"
+              required
+              name="profile_picture"
+              onChange={handleImageChange}
+            />
 
+            {selectedImage && (
+              <img
+                src={URL.createObjectURL(selectedImage)}
+                alt="Selected"
+                style={{ maxWidth: "100%" }}
+              />
+            )}
             <Button
               type="submit"
               fullWidth
