@@ -101,7 +101,7 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
         >
           <Box component="form" onSubmit={handleUploadImage} sx={{ mb: 5 }}>
             <Typography sx={{ textAlign: "end" }}>
-              <CloseIcon />
+              <CloseIcon onClick={handleClose} />
             </Typography>
 
             <Typography
