@@ -11,6 +11,7 @@ import DoctorPost from "./pages/DoctorProfile_Dr/DoctorPost";
 import Ai_imageClassification_Main from "./pages/Ai_petOwner_ImgClass/Ai_imageClassification_Main";
 import Ai_results from "./pages/Ai_petOwner_ImgClass/Ai_results";
 import PetOwnerProfile from "./pages/PetOwner_Profile_petOwner/PetOwnerProfile";
+import DoctorProfile_user from "./pages/DoctorProfile_User/DoctorProfile_user";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Route path="/" element={<HeroPage />} />
 
           {/* doctor routes */}
-          <Route path="/profile" element={<DoctorProfile />} />
+          <Route path="/myProfile_doctor" element={<DoctorProfile />} />
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/post" element={<DoctorPost />} />
 
@@ -38,6 +39,9 @@ function App() {
             element={<Ai_imageClassification_Main />}
           />
           <Route path="/ai_results" element={<Ai_results />} />
+
+          {/* Route for doctor profile from petOwner */}
+          <Route path="/profile" element={<DoctorProfile_user />} />
         </Routes>
       </BrowserRouter>
     </div>
