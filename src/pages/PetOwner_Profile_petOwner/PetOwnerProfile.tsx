@@ -14,6 +14,7 @@ import { SxProps } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
 import CreatePostModal from "../../components/Doctor/CreatePostModal";
 import DoctorReviewSection from "../../components/Doctor/DoctorReviewSection";
+import PetOwnerInfoSection from "../../components/PetOwner/PetOwnerInfoSection";
 
 interface Specialty {
   id: number;
@@ -48,7 +49,7 @@ interface Review {
   };
 }
 
-interface DoctorInfo {
+interface petOwnerInfo {
   id: number;
   firstName: string;
   lastName: string;
@@ -58,10 +59,7 @@ interface DoctorInfo {
   phone: string;
   photoUrl: string;
   email: string;
-  specialties: Specialty[];
   userType: UserType;
-  posts: Post[];
-  doctorReviews: Review[];
   averageRate: number;
 }
 
@@ -71,7 +69,7 @@ interface TabPanelProps {
   value: number;
 }
 function PetOwnerProfile() {
-  const [petOwnerInfo, setPetOwnerInfo] = useState<DoctorInfo>();
+  const [petOwnerInfo, setPetOwnerInfo] = useState<petOwnerInfo>();
   const [newImageUrl, setNewImageUrl] = useState(petOwnerInfo?.photoUrl);
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
@@ -145,15 +143,16 @@ function PetOwnerProfile() {
           pageTitle={"Profile"}
         />
       )}
-      {/* {petOwnerInfo && (
-        <DoctorInfoSection
+      {petOwnerInfo && (
+        <PetOwnerInfoSection
           imageUrl={newImageUrl}
           setNewImageUrl={setNewImageUrl}
           firstName={petOwnerInfo.firstName}
           lastName={petOwnerInfo.lastName}
-          averageRate={petOwnerInfo.averageRate}
+          city={petOwnerInfo.city}
+          country={petOwnerInfo.country}
         />
-      )} */}
+      )}
       <Grid
         container
         sx={{
