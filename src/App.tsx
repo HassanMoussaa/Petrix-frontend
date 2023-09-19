@@ -10,6 +10,7 @@ import Appointments from "./pages/Appointments_Dr/Appointments";
 import DoctorPost from "./pages/DoctorProfile_Dr/DoctorPost";
 import Ai_imageClassification_Main from "./pages/Ai_petOwner_ImgClass/Ai_imageClassification_Main";
 import Ai_results from "./pages/Ai_petOwner_ImgClass/Ai_results";
+import PetOwnerProfile from "./pages/PetOwner_Profile_petOwner/PetOwnerProfile";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
           <Route path="/post" element={<DoctorPost />} />
 
           {/* petOwner routes */}
+          <Route path="/myProfile_petOwner" element={<PetOwnerProfile />} />
+
           <Route
             path="/ai_imageClassification"
             element={<Ai_imageClassification_Main />}
