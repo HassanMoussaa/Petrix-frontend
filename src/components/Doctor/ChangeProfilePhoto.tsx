@@ -47,30 +47,26 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
       setSelectedImage(files[0]);
     }
   };
-
-  const handleUploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUploadImage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
 
-    const new_profile_picture = new FormData(e.currentTarget);
-    const image = new_profile_picture.get("profile_picture");
+    if (selectedImage) {
+      const formData = new FormData();
+      formData.append("image", selectedImage);
 
-    const formData = new FormData();
-    // @ts-ignore
-    formData.append("image", image);
+      try {
+        const response = await axios.post(
+          getAPIBaseURL() + "/users/profilePicture",
+          formData,
+          config
+        );
+        console.log("r", response);
 
-    try {
-      const response = await axios.post(
-        getAPIBaseURL() + "/users/profilePicture",
-        formData,
-        config
-      );
-      console.log("r", response);
-
-      setNewImageUrl(response.data);
-      handleClose();
-    } catch (error) {
-      console.error("Error uploading profile picture:", error);
+        setNewImageUrl(response.data);
+        handleClose();
+      } catch (error) {
+        console.error("Error uploading profile picture:", error);
+      }
     }
   };
 
