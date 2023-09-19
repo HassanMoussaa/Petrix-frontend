@@ -17,12 +17,13 @@ import { Link } from "react-router-dom";
 interface ResponsiveAppBarProps {
   firstName: string;
   lastName: string;
-  imageUrl: string;
+  imageUrl: string | undefined;
   pageTitle: string;
+  setNewImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 function ResponsiveAppBar(props: ResponsiveAppBarProps) {
-  const { imageUrl, firstName, lastName, pageTitle } = props;
+  const { imageUrl, firstName, lastName, pageTitle, setNewImageUrl } = props;
 
   const login_status = localStorage.getItem("login");
 
