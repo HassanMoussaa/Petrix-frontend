@@ -65,6 +65,11 @@ interface DoctorInfo {
   averageRate: number;
 }
 
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
 function DoctorProfile() {
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
   const [newImageUrl, setNewImageUrl] = useState(doctorInfo?.photoUrl);
@@ -83,7 +88,7 @@ function DoctorProfile() {
     };
   }
 
-  function CustomTabPanel(props: any) {
+  function CustomTabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
 
     return (
