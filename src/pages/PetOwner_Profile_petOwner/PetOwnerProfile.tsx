@@ -160,14 +160,13 @@ function PetOwnerProfile() {
           flexWrap: { xs: "inherit" },
         }}
       >
-        {/* {petOwnerInfo && (
+        {petOwnerInfo && (
           <PetOwnerInfoSection2
             phoneNum={petOwnerInfo.phone || ""}
             profileBio={petOwnerInfo.profile}
             drEmail={petOwnerInfo.email}
-            specialityList={petOwnerInfo.specialties}
           />
-        )} */}
+        )}
         <Grid
           container
           ml={23}
