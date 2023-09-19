@@ -62,6 +62,7 @@ interface DoctorInfo {
   userType: UserType;
   posts: Post[];
   doctorReviews: Review[];
+  averageRate: number;
 }
 
 function DoctorProfile() {
@@ -143,6 +144,7 @@ function DoctorProfile() {
           imageUrl={doctorInfo.photoUrl || ""}
           firstName={doctorInfo.firstName}
           lastName={doctorInfo.lastName}
+          averageRate={doctorInfo.averageRate}
         />
       )}
       <Grid
