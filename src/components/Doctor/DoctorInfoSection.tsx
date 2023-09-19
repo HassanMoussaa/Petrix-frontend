@@ -30,20 +30,19 @@ import ChangeProfilePhoto from "./ChangeProfilePhoto";
 interface DoctorInfoSection {
   firstName: string;
   lastName: string;
-  imageUrl: string;
+  imageUrl: string | undefined;
   averageRate: number;
+  setNewImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 function DoctorInfoSection(props: DoctorInfoSection) {
-  const { imageUrl, firstName, lastName, averageRate } = props;
+  const { imageUrl, firstName, lastName, averageRate, setNewImageUrl } = props;
   // const value = 4.5;
 
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
-
-  const [newImageUrl, setNewImageUrl] = useState(imageUrl);
 
   return (
     <Grid container sx={{ display: { xs: "flex" }, ml: 10, mt: 10, gap: 5 }}>
@@ -61,7 +60,7 @@ function DoctorInfoSection(props: DoctorInfoSection) {
           >
             <Avatar
               alt="user_profile_picture"
-              src={newImageUrl}
+              src={imageUrl}
               sx={{
                 height: "300px !important",
                 width: "300px !important",
