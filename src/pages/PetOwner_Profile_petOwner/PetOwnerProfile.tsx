@@ -124,8 +124,6 @@ function PetOwnerProfile() {
     }
   }
 
-  //create post section
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -186,7 +184,7 @@ function PetOwnerProfile() {
                 onChange={handleChange}
                 aria-label="basic tabs example"
               >
-                <Tab label="Blog" {...a11yProps(0)} />
+                <Tab label="My Animals" {...a11yProps(0)} />
                 <Tab label="Reviews" {...a11yProps(1)} />
                 <Tab label="Location" {...a11yProps(2)} />
               </Tabs>
@@ -197,9 +195,7 @@ function PetOwnerProfile() {
               )}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-              {doctorInfo && (
-                <DoctorReviewSection reviewList={doctorInfo.doctorReviews} />
-              )}
+              item2
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
               Item Three
