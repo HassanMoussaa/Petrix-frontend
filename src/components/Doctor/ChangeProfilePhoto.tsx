@@ -78,7 +78,15 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
 
   return (
     <div>
-      <EditIcon onClick={handleOpen} sx={{ fontSize: "15px !important" }} />
+      <EditIcon
+        onClick={handleOpen}
+        sx={{
+          fontSize: "15px !important",
+          "&:hover": {
+            cursor: "pointer",
+          },
+        }}
+      />
 
       <Modal
         open={open}
