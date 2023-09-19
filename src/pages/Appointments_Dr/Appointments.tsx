@@ -37,7 +37,7 @@ interface DoctorInfo {
   country: string;
   profile: string;
   phone: string;
-  photoUrl: string | null;
+  photoUrl: string;
   email: string;
   specialities: Specialty[];
   userType: UserType;
@@ -80,6 +80,8 @@ function CustomTabPanel(props: any) {
 
 function Appointments() {
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo | null>(null);
+  const [newImageUrl, setNewImageUrl] = useState(doctorInfo?.photoUrl);
+
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
 
@@ -148,7 +150,8 @@ function Appointments() {
     <div className="drBody">
       {doctorInfo && (
         <NavBar
-          imageUrl={doctorInfo.photoUrl || ""}
+          imageUrl={newImageUrl}
+          setNewImageUrl={setNewImageUrl}
           firstName={doctorInfo.firstName}
           lastName={doctorInfo.lastName}
           pageTitle={"Appointments"}
