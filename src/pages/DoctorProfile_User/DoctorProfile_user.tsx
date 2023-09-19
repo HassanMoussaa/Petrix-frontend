@@ -7,8 +7,6 @@ import DoctorInfoSection2 from "../../components/Doctor/DoctorInfoSection2";
 import "./doctorProfile.css";
 import { Grid, Box, Tabs, Tab, Zoom } from "@mui/material";
 import DoctorToggleSection from "../../components/Doctor/DoctorToggleSection";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Fab from "@mui/material/Fab";
 import { SxProps } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
@@ -85,8 +83,7 @@ function DoctorProfile_user() {
   const location = useLocation();
   const docId = location.state?.docId;
 
-  let login_user_type = JSON.parse(localStorage.getItem("login") || "");
-  const userType = login_user_type.user_type;
+  const userType = login_status.user_type;
   // For toggle section
 
   function a11yProps(index: number) {
@@ -232,7 +229,7 @@ function DoctorProfile_user() {
             <CustomTabPanel value={value} index={2}>
               Item Three
             </CustomTabPanel>
-            <Zoom key="primary" in={value === 0} unmountOnExit>
+            <Zoom key="primary" in={value === 1} unmountOnExit>
               <Fab
                 sx={{ position: "absolute", bottom: 16, right: 16 } as SxProps}
                 aria-label="Create post"
