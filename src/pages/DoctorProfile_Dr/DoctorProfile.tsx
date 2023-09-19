@@ -56,7 +56,7 @@ interface DoctorInfo {
   country: string;
   profile: string;
   phone: string;
-  photoUrl: string | null;
+  photoUrl: string;
   email: string;
   specialties: Specialty[];
   userType: UserType;
@@ -66,7 +66,8 @@ interface DoctorInfo {
 }
 
 function DoctorProfile() {
-  const [doctorInfo, setDoctorInfo] = useState<DoctorInfo | null>(null);
+  const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
+  const [newImageUrl, setNewImageUrl] = useState(doctorInfo?.photoUrl);
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
 
@@ -112,6 +113,7 @@ function DoctorProfile() {
       );
 
       setDoctorInfo(response.data);
+      setNewImageUrl(response.data.photoUrl);
     } catch (error) {
       console.error("Error fetching doctor profile:", error);
     }
@@ -141,7 +143,8 @@ function DoctorProfile() {
       )}
       {doctorInfo && (
         <DoctorInfoSection
-          imageUrl={doctorInfo.photoUrl || ""}
+          imageUrl={newImageUrl}
+          setNewImageUrl={setNewImageUrl}
           firstName={doctorInfo.firstName}
           lastName={doctorInfo.lastName}
           averageRate={doctorInfo.averageRate}
