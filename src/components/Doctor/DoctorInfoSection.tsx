@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import getAPIBaseURL from "../../APIBaseURL";
+
 import {
   Grid,
   Rating,
@@ -17,9 +20,13 @@ import {
   Alert,
   OutlinedInput,
   FormControl,
+  Badge,
+  Avatar,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import ChangeProfilePhoto from "./ChangeProfilePhoto";
+
 interface DoctorInfoSection {
   firstName: string;
   lastName: string;
@@ -30,27 +37,39 @@ function DoctorInfoSection(props: DoctorInfoSection) {
   const { imageUrl, firstName, lastName } = props;
   const value = 2;
 
+  let config = {};
+  let login_status = JSON.parse(localStorage.getItem("login") || "");
+  const token = login_status.token;
+  config = { headers: { Authorization: `Bearer ${token}` } };
+
+  const [newImageUrl, setNewImageUrl] = useState(imageUrl);
+
   return (
     <Grid container sx={{ display: { xs: "flex" }, ml: 10, mt: 10, gap: 5 }}>
       <Grid md={3} sx={{ display: { md: "flex" } }}>
-        <div className="drPhoto" style={{ position: "relative" }}>
-          <img src={imageUrl} alt="logo"></img>
-          {/* Add the Edit icon button */}
-          <Fab
+        <div>
+          <Badge
+            badgeContent={
+              <ChangeProfilePhoto setNewImageUrl={setNewImageUrl} />
+            }
             color="primary"
-            size="small"
-            style={{
-              position: "absolute",
-              bottom: "10px",
-              right: "10px",
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
             }}
-            aria-label="edit"
           >
-            <EditIcon />
-          </Fab>
+            <Avatar
+              alt="user_profile_picture"
+              src={newImageUrl}
+              sx={{
+                height: "300px !important",
+                width: "300px !important",
+              }}
+              variant="square"
+            />
+          </Badge>
         </div>
       </Grid>
-
       <Grid
         container
         md={4}
