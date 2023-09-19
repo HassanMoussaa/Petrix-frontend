@@ -140,7 +140,8 @@ function DoctorProfile() {
     <div className="drBody">
       {doctorInfo && (
         <NavBar
-          imageUrl={doctorInfo.photoUrl || ""}
+          imageUrl={newImageUrl}
+          setNewImageUrl={setNewImageUrl}
           firstName={doctorInfo.firstName}
           lastName={doctorInfo.lastName}
           pageTitle={"Profile"}
