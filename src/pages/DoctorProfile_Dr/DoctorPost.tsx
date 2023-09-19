@@ -37,7 +37,7 @@ interface DoctorInfo {
   country: string;
   profile: string;
   phone: string;
-  photoUrl: string | null;
+  photoUrl: string;
   email: string;
   userType: UserType;
   posts: Post[];
@@ -45,6 +45,8 @@ interface DoctorInfo {
 
 function DoctorPost() {
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo | null>(null);
+  const [newImageUrl, setNewImageUrl] = useState(doctorInfo?.photoUrl);
+
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [newComment, setNewComment] = useState("");
   const [postComments, setPostComments] = useState<Comment[]>([]);
@@ -119,7 +121,8 @@ function DoctorPost() {
     <div className="drBody">
       {doctorInfo && (
         <NavBar
-          imageUrl={doctorInfo.photoUrl || ""}
+          imageUrl={newImageUrl}
+          setNewImageUrl={setNewImageUrl}
           firstName={doctorInfo.firstName}
           lastName={doctorInfo.lastName}
           pageTitle={"Blog Page"}
