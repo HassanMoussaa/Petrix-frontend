@@ -26,17 +26,20 @@ import {
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import ChangeProfilePhoto from "../Doctor/ChangeProfilePhoto";
-
+import { countries } from "../../utils/countries";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 interface PetOwnerInfoSectionProps {
   firstName: string;
   lastName: string;
   imageUrl: string | undefined;
-
+  city: string;
+  country: string;
   setNewImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 function PetOwnerInfoSection(props: PetOwnerInfoSectionProps) {
-  const { imageUrl, firstName, lastName, setNewImageUrl } = props;
+  const { imageUrl, firstName, lastName, setNewImageUrl, city, country } =
+    props;
   // const value = 4.5;
 
   let config = {};
@@ -95,6 +98,15 @@ function PetOwnerInfoSection(props: PetOwnerInfoSectionProps) {
           >
             Dr {firstName} {lastName}
           </Typography>
+          <Grid
+            sx={{
+              display: { xs: "flex" },
+              alignItems: { xs: "center" },
+            }}
+          >
+            <LocationOnOutlinedIcon />
+            {city}-{country}
+          </Grid>
         </Grid>
         <Grid
           container
