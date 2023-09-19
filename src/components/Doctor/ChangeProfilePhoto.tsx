@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
 import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface ChangeProfilePhotoProps {
   setNewImageUrl: React.Dispatch<React.SetStateAction<string>>;
@@ -99,6 +100,10 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
           }}
         >
           <Box component="form" onSubmit={handleUploadImage} sx={{ mb: 5 }}>
+            <Typography sx={{ textAlign: "end" }}>
+              <CloseIcon />
+            </Typography>
+
             <Typography
               style={{ color: "#000", fontWeight: 700 }}
               sx={{ mb: 1, textAlign: "center" }}
@@ -111,7 +116,6 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
               name="profile_picture"
               onChange={handleImageChange}
             />
-
             {selectedImage && (
               <img
                 src={URL.createObjectURL(selectedImage)}
