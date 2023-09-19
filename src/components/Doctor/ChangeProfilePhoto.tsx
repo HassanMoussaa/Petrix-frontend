@@ -37,6 +37,7 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
 
   const handleClose = () => {
     setOpen(false);
+    setSelectedImage(null);
   };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
