@@ -6,7 +6,7 @@ import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
 import PetOwnerInfoSection2 from "../../components/PetOwner/PetOwnerInfoSection2";
 import "./petOwnerProfile.css";
 import { Grid, Box, Tabs, Tab, Zoom } from "@mui/material";
-import DoctorToggleSection from "../../components/Doctor/DoctorToggleSection";
+import PetOwnerPets from "../../components/PetOwner/PetOwnerPets";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Fab from "@mui/material/Fab";
@@ -16,37 +16,16 @@ import CreatePostModal from "../../components/Doctor/CreatePostModal";
 import DoctorReviewSection from "../../components/Doctor/DoctorReviewSection";
 import PetOwnerInfoSection from "../../components/PetOwner/PetOwnerInfoSection";
 
-interface Specialty {
-  id: number;
-  speciality: string;
-  User_Specialties: {
-    createdAt: string;
-    updatedAt: string;
-    SpecialtyId: number;
-    UserId: number;
-  };
-}
 interface UserType {
   id: number;
   type: string;
 }
-interface Post {
+interface Pet {
   id: number;
-  title: string;
-  body: string;
+  name: string;
+  breed: string;
+  photo_url: string | null;
   createdAt: string;
-}
-interface Review {
-  id: number;
-  rate: number;
-  body: string;
-  createdAt: string;
-  petOwner: {
-    id: number;
-    firstName: string;
-    lastName: string;
-    photoUrl: string | null;
-  };
 }
 
 interface petOwnerInfo {
@@ -60,7 +39,7 @@ interface petOwnerInfo {
   photoUrl: string;
   email: string;
   userType: UserType;
-  averageRate: number;
+  pets: Pet[];
 }
 
 interface TabPanelProps {
@@ -188,9 +167,7 @@ function PetOwnerProfile() {
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-              {/* {petOwnerInfo && (
-                <DoctorToggleSection postList={petOwnerInfo.posts} />
-              )} */}
+              {petOwnerInfo && <PetOwnerPets petList={petOwnerInfo.pets} />}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
               item2
