@@ -31,12 +31,12 @@ interface PetOwnerInfoSectionProps {
   firstName: string;
   lastName: string;
   imageUrl: string | undefined;
-  averageRate: number;
+
   setNewImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 function PetOwnerInfoSection(props: PetOwnerInfoSectionProps) {
-  const { imageUrl, firstName, lastName, averageRate, setNewImageUrl } = props;
+  const { imageUrl, firstName, lastName, setNewImageUrl } = props;
   // const value = 4.5;
 
   let config = {};
@@ -95,13 +95,6 @@ function PetOwnerInfoSection(props: PetOwnerInfoSectionProps) {
           >
             Dr {firstName} {lastName}
           </Typography>
-
-          <Rating
-            name="read-only"
-            value={averageRate}
-            precision={0.5}
-            readOnly
-          />
         </Grid>
         <Grid
           container
