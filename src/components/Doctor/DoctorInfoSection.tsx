@@ -33,10 +33,18 @@ interface DoctorInfoSection {
   imageUrl: string | undefined;
   averageRate: number;
   setNewImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
+  isOwnProfile: boolean;
 }
 
 function DoctorInfoSection(props: DoctorInfoSection) {
-  const { imageUrl, firstName, lastName, averageRate, setNewImageUrl } = props;
+  const {
+    imageUrl,
+    firstName,
+    lastName,
+    averageRate,
+    setNewImageUrl,
+    isOwnProfile,
+  } = props;
   // const value = 4.5;
 
   let config = {};
@@ -48,16 +56,28 @@ function DoctorInfoSection(props: DoctorInfoSection) {
     <Grid container sx={{ display: { xs: "flex" }, ml: 10, mt: 10, gap: 5 }}>
       <Grid md={3} sx={{ display: { md: "flex" } }}>
         <div>
-          <Badge
-            badgeContent={
-              <ChangeProfilePhoto setNewImageUrl={setNewImageUrl} />
-            }
-            color="primary"
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
-          >
+          {isOwnProfile ? (
+            <Badge
+              badgeContent={
+                <ChangeProfilePhoto setNewImageUrl={setNewImageUrl} />
+              }
+              color="primary"
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+            >
+              <Avatar
+                alt="user_profile_picture"
+                src={imageUrl}
+                sx={{
+                  height: "300px !important",
+                  width: "300px !important",
+                }}
+                variant="square"
+              />
+            </Badge>
+          ) : (
             <Avatar
               alt="user_profile_picture"
               src={imageUrl}
@@ -67,7 +87,7 @@ function DoctorInfoSection(props: DoctorInfoSection) {
               }}
               variant="square"
             />
-          </Badge>
+          )}
         </div>
       </Grid>
       <Grid
