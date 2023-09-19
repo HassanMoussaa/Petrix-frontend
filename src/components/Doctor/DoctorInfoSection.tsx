@@ -189,7 +189,7 @@ function DoctorInfoSection(props: DoctorInfoSection) {
               </Button>
               <Button
                 variant="contained"
-                href="/appointments"
+                href="/book_appointment"
                 sx={{
                   bgcolor: "#000",
                   fontSize: 12,
