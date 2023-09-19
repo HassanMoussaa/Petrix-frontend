@@ -22,7 +22,7 @@ function DoctorReviewSection(props: DoctorReviewSectionProps) {
   const { reviewList } = props;
 
   return (
-    <Paper elevation={3} sx={{ p: 2, maxHeight: 500, overflow: "auto" }}>
+    <Paper elevation={3} sx={{ p: 2, maxHeight: 350, overflow: "auto" }}>
       <Grid container spacing={2}>
         {reviewList.map((review) => (
           <Grid item key={review.id} xs={12}>
