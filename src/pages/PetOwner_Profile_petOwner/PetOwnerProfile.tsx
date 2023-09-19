@@ -169,13 +169,13 @@ function PetOwnerProfile() {
             <CustomTabPanel value={value} index={0}>
               {petOwnerInfo && <PetOwnerPets petList={petOwnerInfo.pets} />}
             </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
+            {/* <CustomTabPanel value={value} index={1}>
               item2
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
               Item Three
-            </CustomTabPanel>
-            <Zoom key="primary" in={value === 0} unmountOnExit>
+            </CustomTabPanel> */}
+            {/* <Zoom key="primary" in={value === 0} unmountOnExit>
               <Fab
                 sx={{ position: "absolute", bottom: 16, right: 16 } as SxProps}
                 aria-label="Create post"
@@ -184,7 +184,7 @@ function PetOwnerProfile() {
               >
                 <AddIcon />
               </Fab>
-            </Zoom>
+            </Zoom> */}
             <CreatePostModal open={isModalOpen} setOpen={setIsModalOpen} />
           </Box>
         </Grid>
