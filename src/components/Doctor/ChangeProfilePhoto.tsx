@@ -48,9 +48,7 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
     }
   };
 
-  // @ts-ignore
-
-  const handleUploadImage = async (e) => {
+  const handleUploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     // @ts-ignore
 
