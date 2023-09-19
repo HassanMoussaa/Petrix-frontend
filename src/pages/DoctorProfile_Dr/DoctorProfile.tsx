@@ -154,6 +154,7 @@ function DoctorProfile() {
           firstName={doctorInfo.firstName}
           lastName={doctorInfo.lastName}
           averageRate={doctorInfo.averageRate}
+          isOwnProfile={true}
         />
       )}
       <Grid
