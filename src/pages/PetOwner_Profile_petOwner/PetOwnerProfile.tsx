@@ -3,7 +3,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
 import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
-import DoctorInfoSection2 from "../../components/Doctor/DoctorInfoSection2";
+import PetOwnerInfoSection2 from "../../components/PetOwner/PetOwnerInfoSection2";
 import "./petOwnerProfile.css";
 import { Grid, Box, Tabs, Tab, Zoom } from "@mui/material";
 import DoctorToggleSection from "../../components/Doctor/DoctorToggleSection";
@@ -71,8 +71,8 @@ interface TabPanelProps {
   value: number;
 }
 function PetOwnerProfile() {
-  const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
-  const [newImageUrl, setNewImageUrl] = useState(doctorInfo?.photoUrl);
+  const [petOwnerInfo, setPetOwnerInfo] = useState<DoctorInfo>();
+  const [newImageUrl, setNewImageUrl] = useState(petOwnerInfo?.photoUrl);
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
 
@@ -110,14 +110,14 @@ function PetOwnerProfile() {
 
   // fetch section
 
-  async function fetchDoctorProfile() {
+  async function fetchPetOwnerProfile() {
     try {
       const response = await axios.get(
-        getAPIBaseURL() + "/doctors/myProfile",
+        getAPIBaseURL() + "/petOwners/myProfile",
         config
       );
 
-      setDoctorInfo(response.data);
+      setPetOwnerInfo(response.data);
       setNewImageUrl(response.data.photoUrl);
     } catch (error) {
       console.error("Error fetching doctor profile:", error);
@@ -131,29 +131,29 @@ function PetOwnerProfile() {
   };
 
   useEffect(() => {
-    fetchDoctorProfile();
+    fetchPetOwnerProfile();
   }, []);
 
   return (
     <div className="drBody">
-      {doctorInfo && (
+      {petOwnerInfo && (
         <NavBar
           imageUrl={newImageUrl}
           setNewImageUrl={setNewImageUrl}
-          firstName={doctorInfo.firstName}
-          lastName={doctorInfo.lastName}
+          firstName={petOwnerInfo.firstName}
+          lastName={petOwnerInfo.lastName}
           pageTitle={"Profile"}
         />
       )}
-      {doctorInfo && (
+      {/* {petOwnerInfo && (
         <DoctorInfoSection
           imageUrl={newImageUrl}
           setNewImageUrl={setNewImageUrl}
-          firstName={doctorInfo.firstName}
-          lastName={doctorInfo.lastName}
-          averageRate={doctorInfo.averageRate}
+          firstName={petOwnerInfo.firstName}
+          lastName={petOwnerInfo.lastName}
+          averageRate={petOwnerInfo.averageRate}
         />
-      )}
+      )} */}
       <Grid
         container
         sx={{
@@ -161,14 +161,14 @@ function PetOwnerProfile() {
           flexWrap: { xs: "inherit" },
         }}
       >
-        {doctorInfo && (
-          <DoctorInfoSection2
-            phoneNum={doctorInfo.phone || ""}
-            profileBio={doctorInfo.profile}
-            drEmail={doctorInfo.email}
-            specialityList={doctorInfo.specialties}
+        {/* {petOwnerInfo && (
+          <PetOwnerInfoSection2
+            phoneNum={petOwnerInfo.phone || ""}
+            profileBio={petOwnerInfo.profile}
+            drEmail={petOwnerInfo.email}
+            specialityList={petOwnerInfo.specialties}
           />
-        )}
+        )} */}
         <Grid
           container
           ml={23}
@@ -190,9 +190,9 @@ function PetOwnerProfile() {
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-              {doctorInfo && (
-                <DoctorToggleSection postList={doctorInfo.posts} />
-              )}
+              {/* {petOwnerInfo && (
+                <DoctorToggleSection postList={petOwnerInfo.posts} />
+              )} */}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
               item2
