@@ -179,6 +179,7 @@ function DoctorProfile_user() {
           firstName={doctorInfo.firstName}
           lastName={doctorInfo.lastName}
           averageRate={doctorInfo.averageRate}
+          isOwnProfile={false}
         />
       )}
       <Grid
