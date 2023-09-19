@@ -96,7 +96,7 @@ function PetOwnerInfoSection(props: PetOwnerInfoSectionProps) {
               fontSize: 28,
             }}
           >
-            Dr {firstName} {lastName}
+            {firstName} {lastName}
           </Typography>
           <Grid
             sx={{
@@ -129,22 +129,6 @@ function PetOwnerInfoSection(props: PetOwnerInfoSectionProps) {
             size="large"
           >
             Edit
-          </Button>
-          <Button
-            variant="contained"
-            href="/appointments"
-            sx={{
-              bgcolor: "#000",
-              borderRadius: 3,
-              maxWidth: 150,
-              height: 50,
-              "&:hover": {
-                backgroundColor: "#16A4C3",
-              },
-            }}
-            size="large"
-          >
-            Appointments
           </Button>
         </Grid>
       </Grid>
