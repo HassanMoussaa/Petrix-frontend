@@ -32,6 +32,12 @@ interface Pet {
   createdAt: string;
 }
 
+interface clinicLocation {
+  id: number;
+  latitude: number;
+  longitude: number;
+  name: string;
+}
 interface DoctorInfo {
   id: number;
   firstName: string;
@@ -45,6 +51,7 @@ interface DoctorInfo {
   userType: UserType;
   averageRate: number;
   pets: Pet[];
+  clinicLocations: clinicLocation[];
 }
 
 function BookAppointment() {
@@ -171,6 +178,7 @@ function BookAppointment() {
                 handleSubmit={handleSubmit}
                 loginError={error}
                 petsList={userInfo.pets}
+                clinicLocationsList={doctorInfo.clinicLocations}
               />
             )}
           </Grid>
