@@ -12,6 +12,7 @@ import Ai_imageClassification_Main from "./pages/Ai_petOwner_ImgClass/Ai_imageCl
 import Ai_results from "./pages/Ai_petOwner_ImgClass/Ai_results";
 import PetOwnerProfile from "./pages/PetOwner_Profile_petOwner/PetOwnerProfile";
 import DoctorProfile_user from "./pages/DoctorProfile_User/DoctorProfile_user";
+import BookAppointment from "./pages/DoctorProfile_User/BookAppointment";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
 
           {/* Route for doctor profile from petOwner */}
           <Route path="/profile" element={<DoctorProfile_user />} />
+          <Route path="/book_appointment" element={<BookAppointment />} />
         </Routes>
       </BrowserRouter>
     </div>
