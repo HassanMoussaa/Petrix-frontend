@@ -13,6 +13,7 @@ import {
   Container,
   Paper,
   Alert,
+  Avatar,
   TextField,
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
@@ -120,14 +121,41 @@ function BookAppointment() {
         />
       )}
       <Container maxWidth="lg" className="appointment-container">
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <Paper elevation={3} className="profile-box">
+        <Grid
+          container
+          spacing={3}
+          sx={{ display: "flex", flexDirection: "column" }}
+        >
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            sx={{ display: "flex", flexDirection: "column" }}
+          >
+            <Paper
+              className="profile-box"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Avatar
+                alt={`${doctorInfo?.firstName} ${doctorInfo?.lastName}`}
+                src={doctorInfo?.photoUrl}
+                sx={{
+                  width: 100,
+                  height: 100,
+                  marginBottom: 2,
+                }}
+              />
               {/* Small box for doctor name */}
               <Box sx={{ fontSize: 18, fontWeight: "bold" }}>
                 {doctorInfo?.firstName} {doctorInfo?.lastName}
               </Box>
             </Paper>
+          </Grid>
+          <Grid>
             {userInfo && doctorInfo && (
               <BookingForm
                 petsList={userInfo.pets}
