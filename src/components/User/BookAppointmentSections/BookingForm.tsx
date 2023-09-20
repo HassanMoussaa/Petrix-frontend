@@ -19,13 +19,23 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+
+interface Pet {
+  id: number;
+  name: string;
+  breed: string;
+  photo_url: string | null;
+  createdAt: string;
+}
+
 interface BookingFormProps {
   loginError: boolean;
   handleSubmit: React.FormEventHandler<HTMLFormElement>;
+  petsList: Pet[];
 }
 
 function BookingForm(props: BookingFormProps) {
-  const { handleSubmit, loginError } = props;
+  const { handleSubmit, loginError, petsList } = props;
   const [age, setAge] = React.useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -91,12 +101,11 @@ function BookingForm(props: BookingFormProps) {
             onChange={handleChange}
             label="Pets"
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            {petsList.map((pet) => (
+              <MenuItem key={pet.id} value={pet.name}>
+                {pet.name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Grid>
