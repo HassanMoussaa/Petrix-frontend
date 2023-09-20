@@ -23,6 +23,15 @@ interface UserType {
   id: number;
   type: string;
 }
+
+interface Pet {
+  id: number;
+  name: string;
+  breed: string;
+  photo_url: string | null;
+  createdAt: string;
+}
+
 interface DoctorInfo {
   id: number;
   firstName: string;
@@ -35,6 +44,7 @@ interface DoctorInfo {
   email: string;
   userType: UserType;
   averageRate: number;
+  pets: Pet[];
 }
 
 function BookAppointment() {
@@ -156,7 +166,13 @@ function BookAppointment() {
                 {doctorInfo?.firstName} {doctorInfo?.lastName}
               </Box>
             </Paper>
-            <BookingForm handleSubmit={handleSubmit} loginError={error} />
+            {userInfo && doctorInfo && (
+              <BookingForm
+                handleSubmit={handleSubmit}
+                loginError={error}
+                petsList={userInfo.pets}
+              />
+            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             <Paper elevation={3} className="time-slots-box">
