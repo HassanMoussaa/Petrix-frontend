@@ -101,38 +101,6 @@ function BookAppointment() {
       console.error("Error fetching doctor profile:", error);
     }
   }
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
-
-    const login_data = new FormData(event.currentTarget);
-    const email = login_data.get("email");
-    const password = login_data.get("password");
-
-    try {
-      const response = await axios.post(
-        getAPIBaseURL() + "/petOwners/appointment",
-        {
-          email,
-          password,
-        },
-        config
-      );
-
-      if (response.status === 200) {
-        navigate("/");
-      }
-    } catch (error: any) {
-      if (error) {
-        if (error.response && error.response.status === 401) {
-          console.log("Booking Failed!!");
-        }
-        console.log(error);
-      }
-      setError(true);
-    }
-  };
 
   useEffect(() => {
     fetchmyProfile();
@@ -161,19 +129,11 @@ function BookAppointment() {
             </Paper>
             {userInfo && doctorInfo && (
               <BookingForm
-                handleSubmit={handleSubmit}
-                loginError={error}
                 petsList={userInfo.pets}
                 clinicLocationsList={doctorInfo.clinicLocations}
                 docId={doctorInfo.id}
               />
             )}
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper elevation={3} className="time-slots-box">
-              {/* Section of small boxes for available time slots */}
-              {/* You can design this section later */}
-            </Paper>
           </Grid>
         </Grid>
       </Container>
