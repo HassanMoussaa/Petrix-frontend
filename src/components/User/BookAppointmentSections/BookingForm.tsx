@@ -19,6 +19,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import dayjs, { Dayjs } from "dayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 interface Pet {
   id: number;
@@ -28,14 +33,22 @@ interface Pet {
   createdAt: string;
 }
 
+interface clinicLocation {
+  id: number;
+  latitude: number;
+  longitude: number;
+  name: string;
+}
 interface BookingFormProps {
   loginError: boolean;
   handleSubmit: React.FormEventHandler<HTMLFormElement>;
   petsList: Pet[];
+  clinicLocationsList: clinicLocation[];
 }
 
 function BookingForm(props: BookingFormProps) {
-  const { handleSubmit, loginError, petsList } = props;
+  const { handleSubmit, loginError, petsList, clinicLocationsList } = props;
+  const [value, setValue] = React.useState<Dayjs | null>(dayjs("2022-04-17"));
   const [age, setAge] = React.useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -47,7 +60,7 @@ function BookingForm(props: BookingFormProps) {
         {/* Clinics */}
         <FormControl
           variant="standard"
-          sx={{ m: 1, maxWidth: 120, mt: 15, maxHeight: 50 }}
+          sx={{ m: 1, maxWidth: 200, mt: 15, maxHeight: 50 }}
         >
           <InputLabel id="demo-simple-select-standard-label">
             Clinics
@@ -59,39 +72,18 @@ function BookingForm(props: BookingFormProps) {
             onChange={handleChange}
             label="Clinics"
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            {clinicLocationsList.map((clinic) => (
+              <MenuItem key={clinic.id} value={clinic.name}>
+                {clinic.name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
-        {/* Date */}
-        <FormControl
-          variant="standard"
-          sx={{ m: 1, maxWidth: 120, mt: 5, maxHeight: 50 }}
-        >
-          <InputLabel id="demo-simple-select-standard-label">Date</InputLabel>
-          <Select
-            labelId="demo-simple-select-standard-label"
-            id="demo-simple-select-standard"
-            value={age}
-            onChange={handleChange}
-            label="Date"
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
+
         {/* Pets */}
         <FormControl
           variant="standard"
-          sx={{ m: 1, maxWidth: 120, mt: 5, maxHeight: 50 }}
+          sx={{ m: 1, maxWidth: 200, mt: 5, maxHeight: 50 }}
         >
           <InputLabel id="demo-simple-select-standard-label">Pets</InputLabel>
           <Select
@@ -107,6 +99,20 @@ function BookingForm(props: BookingFormProps) {
               </MenuItem>
             ))}
           </Select>
+        </FormControl>
+
+        {/* Date */}
+        <FormControl
+          variant="standard"
+          sx={{ m: 1, maxWidth: 200, mt: 5, maxHeight: 50 }}
+        >
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Date"
+              value={value}
+              onChange={(newValue) => setValue(newValue)}
+            />
+          </LocalizationProvider>
         </FormControl>
       </Grid>
     </div>
