@@ -41,8 +41,6 @@ interface clinicLocation {
   name: string;
 }
 interface BookingFormProps {
-  //   loginError: boolean;
-  //   handleSubmit: React.FormEventHandler<HTMLFormElement>;
   petsList: Pet[];
   clinicLocationsList: clinicLocation[];
   docId: number;
@@ -55,8 +53,8 @@ interface availableSlot {
 
 function BookingForm(props: BookingFormProps) {
   const { petsList, clinicLocationsList, docId, setSucessAlertOpen } = props;
-  // correct initial value
-  const [value, setValue] = React.useState<Dayjs | null>(dayjs("2022-04-17"));
+
+  const [value, setValue] = React.useState<Dayjs | null>(dayjs());
   //   const [age, setAge] = React.useState("");
 
   const [selectedPet, setSelectedPet] = React.useState<string>("");
@@ -97,18 +95,14 @@ function BookingForm(props: BookingFormProps) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Ensure a pet is selected before booking
     if (selectedPet === "") {
       console.error("Please select a pet.");
       return;
     }
 
-    // Extract values from state variables
-    // const selectedClinic = age;
     const selectedDate = value ? value.format("YYYY-DD-MM") : "";
     const selectedTime = selectedTimeSlot;
 
-    // Prepare the request body
     const requestBody = {
       doctorId: docId,
       petId: selectedPet,
@@ -116,7 +110,6 @@ function BookingForm(props: BookingFormProps) {
       start_time: selectedTime,
     };
     try {
-      // Make a POST request to book the appointment
       const response = await axios.post(
         getAPIBaseURL() + "/petOwners/appointment",
         requestBody,
@@ -126,11 +119,9 @@ function BookingForm(props: BookingFormProps) {
       if (response.status === 201) {
         console.log("Appointment created successfully!");
         setSucessAlertOpen(true);
-        // You can perform any additional actions here after a successful booking
       }
     } catch (error) {
       console.error("Error booking appointment:", error);
-      // Handle the error (e.g., display an error message to the user)
     }
   };
   useEffect(() => {
@@ -197,6 +188,7 @@ function BookingForm(props: BookingFormProps) {
                 value={value}
                 format="YYYY-DD-MM"
                 onChange={(newValue) => setValue(newValue)}
+                disablePast={true}
               />
             </LocalizationProvider>
           </FormControl>
