@@ -26,6 +26,8 @@ interface DoctorInfo {
 
 function BookAppointment() {
   const [userInfo, setUserInfo] = useState<DoctorInfo>();
+  const [newImageUrl, setNewImageUrl] = useState(userInfo?.photoUrl);
+
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
 
@@ -46,13 +48,28 @@ function BookAppointment() {
       const response = await axios.get(getAPIBaseURL() + apiEndpoint, config);
 
       setUserInfo(response.data);
-      //   setNewImageUrl(response.data.photoUrl);
+      setNewImageUrl(response.data.photoUrl);
     } catch (error) {
       console.error("Error fetching profile:", error);
     }
   }
+  useEffect(() => {
+    fetchmyProfile();
+  }, []);
 
-  return <div className="drBody"></div>;
+  return (
+    <div className="drBody">
+      {userInfo && (
+        <NavBar
+          imageUrl={newImageUrl}
+          setNewImageUrl={setNewImageUrl}
+          firstName={userInfo.firstName}
+          lastName={userInfo.lastName}
+          pageTitle={"Profile"}
+        />
+      )}
+    </div>
+  );
 }
 
 export default BookAppointment;
