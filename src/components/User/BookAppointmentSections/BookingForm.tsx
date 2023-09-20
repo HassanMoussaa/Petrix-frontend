@@ -15,8 +15,10 @@ import {
   TextField,
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import "./doctorProfile.css";
-
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 interface BookingFormProps {
   loginError: boolean;
   handleSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -24,63 +26,81 @@ interface BookingFormProps {
 
 function BookingForm(props: BookingFormProps) {
   const { handleSubmit, loginError } = props;
+  const [age, setAge] = React.useState("");
 
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value);
+  };
   return (
-    <Paper elevation={3} className="options-box">
-      {/* Select options */}
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{ mb: 5 }}
-        className="formBox_fields"
-      >
-        {loginError && (
-          <Alert severity="error" sx={{ mb: 2 }}>
-            Wrong Credentials! Try again.
-          </Alert>
-        )}
-
-        <TextField
-          sx={{ mb: 3 }}
-          required
-          fullWidth
-          id="email"
-          label="Email"
-          name="email"
-          className="input_login_field"
-          autoComplete="email"
-          inputProps={{
-            type: "email",
-            maxLength: 100,
-          }}
-        />
-
-        <TextField
-          sx={{ mb: 3 }}
-          required
-          fullWidth
-          name="password"
-          className="input_login_field"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          inputProps={{
-            minLength: 6,
-          }}
-        />
-
-        <Button
-          type="submit"
-          fullWidth
-          className="button_login_field"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+    <div>
+      <Grid sx={{ display: "flex", flexDirection: "column" }}>
+        {/* Clinics */}
+        <FormControl
+          variant="standard"
+          sx={{ m: 1, maxWidth: 120, mt: 15, maxHeight: 50 }}
         >
-          SIGN IN
-        </Button>
-      </Box>
-    </Paper>
+          <InputLabel id="demo-simple-select-standard-label">
+            Clinics
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-standard-label"
+            id="demo-simple-select-standard"
+            value={age}
+            onChange={handleChange}
+            label="Clinics"
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+        </FormControl>
+        {/* Date */}
+        <FormControl
+          variant="standard"
+          sx={{ m: 1, maxWidth: 120, mt: 5, maxHeight: 50 }}
+        >
+          <InputLabel id="demo-simple-select-standard-label">Date</InputLabel>
+          <Select
+            labelId="demo-simple-select-standard-label"
+            id="demo-simple-select-standard"
+            value={age}
+            onChange={handleChange}
+            label="Date"
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+        </FormControl>
+        {/* Pets */}
+        <FormControl
+          variant="standard"
+          sx={{ m: 1, maxWidth: 120, mt: 5, maxHeight: 50 }}
+        >
+          <InputLabel id="demo-simple-select-standard-label">Pets</InputLabel>
+          <Select
+            labelId="demo-simple-select-standard-label"
+            id="demo-simple-select-standard"
+            value={age}
+            onChange={handleChange}
+            label="Pets"
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+    </div>
   );
 }
 
