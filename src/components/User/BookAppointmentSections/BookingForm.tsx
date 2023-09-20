@@ -46,6 +46,7 @@ interface BookingFormProps {
   petsList: Pet[];
   clinicLocationsList: clinicLocation[];
   docId: number;
+  setSucessAlertOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface availableSlot {
   start: string;
@@ -53,12 +54,12 @@ interface availableSlot {
 }
 
 function BookingForm(props: BookingFormProps) {
-  const { petsList, clinicLocationsList, docId } = props;
+  const { petsList, clinicLocationsList, docId, setSucessAlertOpen } = props;
   // correct initial value
   const [value, setValue] = React.useState<Dayjs | null>(dayjs("2022-04-17"));
   //   const [age, setAge] = React.useState("");
 
-  const [selectedPet, setSelectedPet] = React.useState<number>(1);
+  const [selectedPet, setSelectedPet] = React.useState<string>("");
 
   const [availableSlots, setAvailableSlots] = useState<availableSlot[]>([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>("");
@@ -97,7 +98,7 @@ function BookingForm(props: BookingFormProps) {
     event.preventDefault();
 
     // Ensure a pet is selected before booking
-    if (selectedPet === null) {
+    if (selectedPet === "") {
       console.error("Please select a pet.");
       return;
     }
@@ -124,6 +125,7 @@ function BookingForm(props: BookingFormProps) {
 
       if (response.status === 201) {
         console.log("Appointment created successfully!");
+        setSucessAlertOpen(true);
         // You can perform any additional actions here after a successful booking
       }
     } catch (error) {
@@ -172,8 +174,9 @@ function BookingForm(props: BookingFormProps) {
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
               value={selectedPet}
-              onChange={(event) => setSelectedPet(event.target.value as number)}
+              onChange={(event) => setSelectedPet(event.target.value as string)}
               label="Pets"
+              required={true}
             >
               {petsList.map((pet) => (
                 <MenuItem key={pet.id} value={pet.id}>
@@ -213,6 +216,7 @@ function BookingForm(props: BookingFormProps) {
               onChange={(event) =>
                 setSelectedTimeSlot(event.target.value as string)
               }
+              required={true}
               label="Available Time Slots"
             >
               {availableSlots.map((slot, index) => (
