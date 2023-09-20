@@ -5,10 +5,35 @@ import axios from "axios";
 import LoginForm from "../../components/User/LoginForm";
 import getAPIBaseURL from "../../APIBaseURL";
 import Overlay from "../../components/NavBar/Overlay";
+import { fetchToken, onMessageListener } from "../../firebase";
 
 const Signin = () => {
   const [error, setError] = useState(Boolean);
   const navigate = useNavigate();
+  const [getFcmToken, setFcmToken] = useState("");
+
+  async function saveNotificationToken(notification_token: string) {
+    try {
+      const token = JSON.parse(localStorage.getItem("login") || "").token;
+      let config = { headers: { Authorization: `Bearer ${token}` } };
+
+      let response = await axios.post(
+        getAPIBaseURL() + "/user/save_notification_token",
+        { notification_token },
+        config
+      );
+      if (response.status === 200) {
+      } else {
+        console.log("Something went wrong!");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function getNotificationToken() {
+    fetchToken(saveNotificationToken);
+  }
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (
     event: React.FormEvent<HTMLFormElement>
@@ -44,6 +69,7 @@ const Signin = () => {
             user_bio,
           })
         );
+        await getNotificationToken();
         navigate("/");
       }
     } catch (error: any) {
