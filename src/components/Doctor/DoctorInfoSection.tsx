@@ -34,6 +34,7 @@ interface DoctorInfoSection {
   averageRate: number;
   setNewImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
   isOwnProfile: boolean;
+  docId: number;
 }
 
 function DoctorInfoSection(props: DoctorInfoSection) {
@@ -44,6 +45,7 @@ function DoctorInfoSection(props: DoctorInfoSection) {
     averageRate,
     setNewImageUrl,
     isOwnProfile,
+    docId,
   } = props;
   // const value = 4.5;
 
@@ -189,7 +191,7 @@ function DoctorInfoSection(props: DoctorInfoSection) {
               </Button>
               <Button
                 variant="contained"
-                href="/book_appointment"
+                href={`/book_appointment/${docId}`}
                 sx={{
                   bgcolor: "#000",
                   fontSize: 12,
