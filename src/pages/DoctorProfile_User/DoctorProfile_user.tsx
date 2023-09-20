@@ -134,7 +134,7 @@ function DoctorProfile_user() {
       let apiEndpoint;
 
       if (userType === 1) {
-        apiEndpoint = `/petOwner/myProfile/`;
+        apiEndpoint = `/petOwners/myProfile/`;
       } else if (userType === 2) {
         apiEndpoint = `/doctors/myProfile/`;
       }
