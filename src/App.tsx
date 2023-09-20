@@ -43,7 +43,10 @@ function App() {
 
           {/* Route for doctor profile from petOwner */}
           <Route path="/profile" element={<DoctorProfile_user />} />
-          <Route path="/book_appointment" element={<BookAppointment />} />
+          <Route
+            path="/book_appointment/:docId"
+            element={<BookAppointment />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
