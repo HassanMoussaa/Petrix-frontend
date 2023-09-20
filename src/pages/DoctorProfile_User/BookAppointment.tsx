@@ -57,6 +57,7 @@ interface DoctorInfo {
 function BookAppointment() {
   const [userInfo, setUserInfo] = useState<DoctorInfo>();
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
+  const [sucessAlertOpen, setSucessAlertOpen] = useState<boolean>(false);
 
   const [newImageUrl, setNewImageUrl] = useState(userInfo?.photoUrl);
 
@@ -132,10 +133,16 @@ function BookAppointment() {
                 petsList={userInfo.pets}
                 clinicLocationsList={doctorInfo.clinicLocations}
                 docId={doctorInfo.id}
+                setSucessAlertOpen={setSucessAlertOpen}
               />
             )}
           </Grid>
         </Grid>
+        {sucessAlertOpen && (
+          <Alert variant="filled" onClose={() => setSucessAlertOpen(false)}>
+            This is a success alert — check it out!
+          </Alert>
+        )}
       </Container>
     </div>
   );
