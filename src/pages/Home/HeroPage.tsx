@@ -77,10 +77,8 @@ function HeroPage() {
 
   const [show, setShow] = useState(false);
   const [notification, setNotification] = useState({ title: "", body: "" });
-  const [isTokenFound, setTokenFound] = useState(false);
-  const [getFcmToken, setFcmToken] = useState("");
 
-  fetchToken(setTokenFound, setFcmToken);
+  // fetchToken(setFcmToken);
 
   onMessageListener()
     .then((payload: any) => {
@@ -108,11 +106,6 @@ function HeroPage() {
           {notification.body}
         </Alert>
       )}
-      <Button onClick={() => setShow(true)}>Show notification</Button>
-
-      {isTokenFound && <h1>notification permission enabled</h1>}
-      {isTokenFound && <h1>FCM token: {getFcmToken}</h1>}
-      {!isTokenFound && <h1>Permission needed</h1>}
 
       <MainNavBar
         imageUrl={loginData?.user_profile_picture}
