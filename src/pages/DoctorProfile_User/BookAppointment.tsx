@@ -15,6 +15,7 @@ import {
   Alert,
   Avatar,
   TextField,
+  Typography,
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import "./doctorProfile.css";
@@ -128,31 +129,58 @@ function BookAppointment() {
         >
           <Grid
             item
-            xs={12}
             sm={6}
-            sx={{ display: "flex", flexDirection: "column" }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "end",
+              alignSelf: "center",
+              width: "20%",
+              height: "5rem",
+              ml: 5,
+            }}
           >
             <Paper
               className="profile-box"
               sx={{
                 display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                height: "100%",
+                gap: 2,
+                padding: 1,
               }}
             >
-              <Avatar
-                alt={`${doctorInfo?.firstName} ${doctorInfo?.lastName}`}
-                src={doctorInfo?.photoUrl}
-                sx={{
-                  width: 100,
-                  height: 100,
-                  marginBottom: 2,
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-              />
+              >
+                <Avatar
+                  alt={`${doctorInfo?.firstName} ${doctorInfo?.lastName}`}
+                  src={doctorInfo?.photoUrl}
+                  // sx={{
+                  //   width: "20%",
+                  //   height: "20%",
+                  //   textAlign: "center",
+                  // }}
+                ></Avatar>
+              </div>
               {/* Small box for doctor name */}
-              <Box sx={{ fontSize: 18, fontWeight: "bold" }}>
+              <Typography
+                sx={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+              >
                 {doctorInfo?.firstName} {doctorInfo?.lastName}
-              </Box>
+              </Typography>
             </Paper>
           </Grid>
           <Grid>
