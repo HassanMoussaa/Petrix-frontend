@@ -111,36 +111,22 @@ function BookAppointment() {
     const password = login_data.get("password");
 
     try {
-      const response = await axios.post(getAPIBaseURL() + "/users/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        getAPIBaseURL() + "/petOwners/appointment",
+        {
+          email,
+          password,
+        },
+        config
+      );
 
       if (response.status === 200) {
-        const JWT_token = response.data.token;
-        const userType = response.data.user_type;
-        const { user_id, firstName, lastName, user_profile_picture, user_bio } =
-          response.data.user;
-
-        localStorage.setItem(
-          "login",
-          JSON.stringify({
-            login: true,
-            token: JWT_token,
-            user_type: userType,
-            user_id,
-            firstName,
-            lastName,
-            user_profile_picture,
-            user_bio,
-          })
-        );
         navigate("/");
       }
     } catch (error: any) {
       if (error) {
         if (error.response && error.response.status === 401) {
-          console.log("Wrong Credentials!");
+          console.log("Booking Failed!!");
         }
         console.log(error);
       }
@@ -179,6 +165,7 @@ function BookAppointment() {
                 loginError={error}
                 petsList={userInfo.pets}
                 clinicLocationsList={doctorInfo.clinicLocations}
+                docId={doctorInfo.id}
               />
             )}
           </Grid>
