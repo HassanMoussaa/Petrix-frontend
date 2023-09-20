@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
-import { Grid, Box, Tabs, Tab, Zoom } from "@mui/material";
+import { Grid, Box, Tabs, Tab, Zoom, Container, Paper } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import "./doctorProfile.css";
 
@@ -26,6 +26,8 @@ interface DoctorInfo {
 
 function BookAppointment() {
   const [userInfo, setUserInfo] = useState<DoctorInfo>();
+  const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
+
   const [newImageUrl, setNewImageUrl] = useState(userInfo?.photoUrl);
 
   let config = {};
@@ -53,8 +55,24 @@ function BookAppointment() {
       console.error("Error fetching profile:", error);
     }
   }
+
+  async function fetchDoctorProfile() {
+    try {
+      const response = await axios.get(
+        getAPIBaseURL() + `/users/doctorProfile/${8}`,
+        config
+      );
+
+      setDoctorInfo(response.data);
+      setNewImageUrl(response.data.photoUrl);
+    } catch (error) {
+      console.error("Error fetching doctor profile:", error);
+    }
+  }
+
   useEffect(() => {
     fetchmyProfile();
+    fetchDoctorProfile();
   }, []);
 
   return (
@@ -68,6 +86,33 @@ function BookAppointment() {
           pageTitle={"Book Appointment"}
         />
       )}
+      <Container maxWidth="lg" className="appointment-container">
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <Paper elevation={3} className="profile-box">
+              {/* Small box for doctor name */}
+              <Box sx={{ fontSize: 18, fontWeight: "bold" }}>
+                {doctorInfo?.firstName} {doctorInfo?.lastName}
+              </Box>
+            </Paper>
+
+            <Paper elevation={3} className="options-box">
+              {/* Select options */}
+              <Box sx={{ fontSize: 18 }}>
+                <div>Click</div>
+                <div>Date</div>
+                <div>Animals</div>
+              </Box>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Paper elevation={3} className="time-slots-box">
+              {/* Section of small boxes for available time slots */}
+              {/* You can design this section later */}
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
     </div>
   );
 }
