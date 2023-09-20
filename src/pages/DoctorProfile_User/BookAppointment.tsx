@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import getAPIBaseURL from "../../APIBaseURL";
-import { Grid, Box, Tabs, Tab, Zoom, Container, Paper } from "@mui/material";
+import {
+  Grid,
+  Box,
+  Tabs,
+  Tab,
+  Zoom,
+  Button,
+  Container,
+  Paper,
+  Alert,
+  TextField,
+} from "@mui/material";
 import { useLocation } from "react-router-dom";
 import "./doctorProfile.css";
+import BookingForm from "../../components/User/BookAppointmentSections/BookingForm";
 
 interface UserType {
   id: number;
@@ -36,6 +49,8 @@ function BookAppointment() {
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
   const userType = login_status.user_type;
+  const [error, setError] = useState(Boolean);
+  const navigate = useNavigate();
 
   async function fetchmyProfile() {
     try {
@@ -69,6 +84,52 @@ function BookAppointment() {
       console.error("Error fetching doctor profile:", error);
     }
   }
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    const login_data = new FormData(event.currentTarget);
+    const email = login_data.get("email");
+    const password = login_data.get("password");
+
+    try {
+      const response = await axios.post(getAPIBaseURL() + "/users/login", {
+        email,
+        password,
+      });
+
+      if (response.status === 200) {
+        const JWT_token = response.data.token;
+        const userType = response.data.user_type;
+        const { user_id, firstName, lastName, user_profile_picture, user_bio } =
+          response.data.user;
+
+        localStorage.setItem(
+          "login",
+          JSON.stringify({
+            login: true,
+            token: JWT_token,
+            user_type: userType,
+            user_id,
+            firstName,
+            lastName,
+            user_profile_picture,
+            user_bio,
+          })
+        );
+        navigate("/");
+      }
+    } catch (error: any) {
+      if (error) {
+        if (error.response && error.response.status === 401) {
+          console.log("Wrong Credentials!");
+        }
+        console.log(error);
+      }
+      setError(true);
+    }
+  };
 
   useEffect(() => {
     fetchmyProfile();
@@ -95,15 +156,7 @@ function BookAppointment() {
                 {doctorInfo?.firstName} {doctorInfo?.lastName}
               </Box>
             </Paper>
-
-            <Paper elevation={3} className="options-box">
-              {/* Select options */}
-              <Box sx={{ fontSize: 18 }}>
-                <div>Click</div>
-                <div>Date</div>
-                <div>Animals</div>
-              </Box>
-            </Paper>
+            <BookingForm handleSubmit={handleSubmit} loginError={error} />
           </Grid>
           <Grid item xs={12} sm={6}>
             <Paper elevation={3} className="time-slots-box">
