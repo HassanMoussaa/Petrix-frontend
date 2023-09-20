@@ -41,21 +41,26 @@ interface clinicLocation {
   name: string;
 }
 interface BookingFormProps {
-  loginError: boolean;
-  handleSubmit: React.FormEventHandler<HTMLFormElement>;
+  //   loginError: boolean;
+  //   handleSubmit: React.FormEventHandler<HTMLFormElement>;
   petsList: Pet[];
   clinicLocationsList: clinicLocation[];
   docId: number;
 }
+interface availableSlot {
+  start: string;
+  end: string;
+}
 
 function BookingForm(props: BookingFormProps) {
-  const { handleSubmit, loginError, petsList, clinicLocationsList, docId } =
-    props;
+  const { petsList, clinicLocationsList, docId } = props;
   // correct initial value
   const [value, setValue] = React.useState<Dayjs | null>(dayjs("2022-04-17"));
-  const [age, setAge] = React.useState("");
+  //   const [age, setAge] = React.useState("");
 
-  const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+  const [selectedPet, setSelectedPet] = React.useState<number>(1);
+
+  const [availableSlots, setAvailableSlots] = useState<availableSlot[]>([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>("");
 
   let config = {};
@@ -64,9 +69,9 @@ function BookingForm(props: BookingFormProps) {
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value);
-  };
+  //   const handleChange = (event: SelectChangeEvent) => {
+  //     setAge(event.target.value);
+  //   };
 
   async function fetchAvailableSlots() {
     try {
@@ -88,95 +93,141 @@ function BookingForm(props: BookingFormProps) {
     }
   }
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // Ensure a pet is selected before booking
+    if (selectedPet === null) {
+      console.error("Please select a pet.");
+      return;
+    }
+
+    // Extract values from state variables
+    // const selectedClinic = age;
+    const selectedDate = value ? value.format("YYYY-DD-MM") : "";
+    const selectedTime = selectedTimeSlot;
+
+    // Prepare the request body
+    const requestBody = {
+      doctorId: docId,
+      petId: selectedPet,
+      date: selectedDate,
+      start_time: selectedTime,
+    };
+    try {
+      // Make a POST request to book the appointment
+      const response = await axios.post(
+        getAPIBaseURL() + "/petOwners/appointment",
+        requestBody,
+        config
+      );
+
+      if (response.status === 201) {
+        console.log("Appointment created successfully!");
+        // You can perform any additional actions here after a successful booking
+      }
+    } catch (error) {
+      console.error("Error booking appointment:", error);
+      // Handle the error (e.g., display an error message to the user)
+    }
+  };
   useEffect(() => {
     fetchAvailableSlots();
   }, [value]);
 
   return (
     <div>
-      <Grid sx={{ display: "flex", flexDirection: "column" }}>
-        {/* Clinics */}
-        <FormControl
-          variant="standard"
-          sx={{ m: 1, maxWidth: 200, mt: 15, maxHeight: 50 }}
-        >
-          <InputLabel id="demo-simple-select-standard-label">
-            Clinics
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-standard-label"
-            id="demo-simple-select-standard"
-            value={age}
-            onChange={handleChange}
-            label="Clinics"
+      <Box component="form" onSubmit={handleSubmit}>
+        <Grid sx={{ display: "flex", flexDirection: "column" }}>
+          {/* Clinics
+          <FormControl
+            variant="standard"
+            sx={{ m: 1, maxWidth: 200, mt: 15, maxHeight: 50 }}
           >
-            {clinicLocationsList.map((clinic) => (
-              <MenuItem key={clinic.id} value={clinic.name}>
-                {clinic.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+            <InputLabel id="demo-simple-select-standard-label">
+              Clinics
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              value={age}
+              onChange={handleChange}
+              label="Clinics"
+            >
+              {clinicLocationsList.map((clinic) => (
+                <MenuItem key={clinic.id} value={clinic.name}>
+                  {clinic.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl> */}
 
-        {/* Pets */}
-        <FormControl
-          variant="standard"
-          sx={{ m: 1, maxWidth: 200, mt: 5, maxHeight: 50 }}
-        >
-          <InputLabel id="demo-simple-select-standard-label">Pets</InputLabel>
-          <Select
-            labelId="demo-simple-select-standard-label"
-            id="demo-simple-select-standard"
-            value={age}
-            onChange={handleChange}
-            label="Pets"
+          {/* Pets */}
+          <FormControl
+            variant="standard"
+            sx={{ m: 1, maxWidth: 200, mt: 5, maxHeight: 50 }}
           >
-            {petsList.map((pet) => (
-              <MenuItem key={pet.id} value={pet.name}>
-                {pet.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+            <InputLabel id="demo-simple-select-standard-label">Pets</InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              value={selectedPet}
+              onChange={(event) => setSelectedPet(event.target.value as number)}
+              label="Pets"
+            >
+              {petsList.map((pet) => (
+                <MenuItem key={pet.id} value={pet.id}>
+                  {pet.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
-        {/* Date */}
-        <FormControl
-          variant="standard"
-          sx={{ m: 1, maxWidth: 200, mt: 5, maxHeight: 50 }}
-        >
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Date"
-              value={value}
-              format="YYYY-DD-MM"
-              onChange={(newValue) => setValue(newValue)}
-            />
-          </LocalizationProvider>
-        </FormControl>
-
-        {/* Available Time Slots */}
-        <FormControl
-          variant="standard"
-          sx={{ m: 1, maxWidth: 200, mt: 5, maxHeight: 50 }}
-        >
-          <InputLabel id="demo-simple-select-standard-label">
-            Available Time Slots
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-standard-label"
-            id="demo-simple-select-standard"
-            value={selectedTimeSlot}
-            onChange={(e) => setSelectedTimeSlot(e.target.value)}
-            label="Available Time Slots"
+          {/* Date */}
+          <FormControl
+            variant="standard"
+            sx={{ m: 1, maxWidth: 200, mt: 5, maxHeight: 50 }}
           >
-            {availableSlots.map((slot, index) => (
-              <MenuItem key={index} value={slot}>
-                {slot}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Date"
+                value={value}
+                format="YYYY-DD-MM"
+                onChange={(newValue) => setValue(newValue)}
+              />
+            </LocalizationProvider>
+          </FormControl>
+
+          {/* Available Time Slots */}
+          <FormControl
+            variant="standard"
+            sx={{ m: 1, maxWidth: 200, mt: 5, maxHeight: 50 }}
+          >
+            <InputLabel id="demo-simple-select-standard-label">
+              Available Time Slots
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              value={selectedTimeSlot}
+              onChange={(event) =>
+                setSelectedTimeSlot(event.target.value as string)
+              }
+              label="Available Time Slots"
+            >
+              {availableSlots.map((slot, index) => (
+                <MenuItem key={index} value={slot.start}>
+                  {slot.start}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        {/* Book Appointment Button */}
+        <Button variant="contained" type="submit" sx={{ m: 2 }}>
+          Book Appointment
+        </Button>
+      </Box>
     </div>
   );
 }
