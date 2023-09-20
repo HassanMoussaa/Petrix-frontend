@@ -4,9 +4,18 @@ import Welcome from "../../components/User/WelcomeSection/Welcome";
 import Card from "../../components/User/WelcomeSection/Card";
 
 import "./heropage.css";
-import { Grid, Box, Typography, Alert } from "@mui/material";
+import {
+  Grid,
+  Box,
+  Typography,
+  Alert,
+  AlertTitle,
+  Button,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import TopDoctors from "../../components/User/WelcomeSection/TopDoctors";
+import { useState } from "react";
+import { fetchToken, onMessageListener } from "../../firebase";
 
 const image_classification_card = {
   imageUrl: "ImageClassification.svg",
@@ -66,6 +75,23 @@ const hero_cards: HeroCardMapping = {
 function HeroPage() {
   const navigate = useNavigate();
 
+  const [show, setShow] = useState(false);
+  const [notification, setNotification] = useState({ title: "", body: "" });
+  const [isTokenFound, setTokenFound] = useState(false);
+  const [getFcmToken, setFcmToken] = useState("");
+
+  fetchToken(setTokenFound, setFcmToken);
+
+  onMessageListener()
+    .then((payload: any) => {
+      setNotification({
+        title: payload.notification.title,
+        body: payload.notification.body,
+      });
+      setShow(true);
+    })
+    .catch((err: any) => console.log("failed", err));
+
   const loginData = JSON.parse(localStorage.getItem("login") || "");
   const user_type =
     loginData?.user_type == 1
@@ -76,6 +102,18 @@ function HeroPage() {
 
   return (
     <div className="heropage_body">
+      {show && (
+        <Alert severity="info" onClose={() => setShow(false)}>
+          <AlertTitle>{notification.title}</AlertTitle>
+          {notification.body}
+        </Alert>
+      )}
+      <Button onClick={() => setShow(true)}>Show notification</Button>
+
+      {isTokenFound && <h1>notification permission enabled</h1>}
+      {isTokenFound && <h1>FCM token: {getFcmToken}</h1>}
+      {!isTokenFound && <h1>Permission needed</h1>}
+
       <MainNavBar
         imageUrl={loginData?.user_profile_picture}
         firstName={loginData?.firstName}
