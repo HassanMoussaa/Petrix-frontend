@@ -220,7 +220,11 @@ function BookingForm(props: BookingFormProps) {
           </FormControl>
         </Grid>
         {/* Book Appointment Button */}
-        <Button variant="contained" type="submit" sx={{ m: 2, mt: 10 }}>
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{ m: 2, mt: 10, backgroundColor: "#16A4C3" }}
+        >
           Book Appointment
         </Button>
       </Box>
