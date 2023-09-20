@@ -40,7 +40,7 @@ function BookAppointment() {
       let apiEndpoint;
 
       if (userType === 1) {
-        apiEndpoint = `/petOwner/myProfile/`;
+        apiEndpoint = `/petOwners/myProfile/`;
       } else if (userType === 2) {
         apiEndpoint = `/doctors/myProfile/`;
       }
@@ -65,7 +65,7 @@ function BookAppointment() {
           setNewImageUrl={setNewImageUrl}
           firstName={userInfo.firstName}
           lastName={userInfo.lastName}
-          pageTitle={"Profile"}
+          pageTitle={"Book Appointment"}
         />
       )}
     </div>
