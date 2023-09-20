@@ -65,8 +65,8 @@ const hero_cards: HeroCardMapping = {
 
 function HeroPage() {
   const navigate = useNavigate();
-  // @ts-ignore
-  const loginData = JSON.parse(localStorage.getItem("login"));
+
+  const loginData = JSON.parse(localStorage.getItem("login") || "");
   const user_type =
     loginData?.user_type == 1
       ? "petOwner"
