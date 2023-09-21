@@ -34,6 +34,7 @@ interface Post {
   title: string;
   body: string;
   createdAt: string;
+  is_liked: boolean;
 }
 interface Review {
   id: number;
