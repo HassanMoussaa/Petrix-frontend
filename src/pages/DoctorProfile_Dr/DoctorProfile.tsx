@@ -63,6 +63,8 @@ interface DoctorInfo {
   posts: Post[];
   doctorReviews: Review[];
   averageRate: number;
+  check_if_followed: boolean;
+  followerCount: number;
 }
 
 interface TabPanelProps {
@@ -156,6 +158,8 @@ function DoctorProfile() {
           averageRate={doctorInfo.averageRate}
           isOwnProfile={true}
           docId={doctorInfo.id}
+          check_if_followed={doctorInfo.check_if_followed}
+          followerCount={doctorInfo.followerCount}
         />
       )}
       <Grid
