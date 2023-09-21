@@ -121,6 +121,9 @@ function Ai_imageClassification_Main() {
       model: "microsoft/resnet-50",
     });
     console.log("RES:: ", res);
+    navigate("/ai_results", {
+      state: { selectedImage, classificationResults: JSON.stringify(res) },
+    });
   };
 
   // Function to convert Data URL to Blob
