@@ -54,11 +54,25 @@ function DoctorPost() {
   const location = useLocation();
   const postId = location.state?.postId;
 
+  let login_status = JSON.parse(localStorage.getItem("login") || "");
+  const userType = login_status.user_type;
+
   useEffect(() => {
     async function fetchDoctorProfile() {
       try {
         const response = await axios.get(
           getAPIBaseURL() + "/doctors/myProfile",
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setDoctorInfo(response.data);
+      } catch (error) {
+        console.error("Error fetching doctor profile:", error);
+      }
+    }
+    async function fetchPetOwnerProfile() {
+      try {
+        const response = await axios.get(
+          getAPIBaseURL() + "/petOwners/myProfile",
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setDoctorInfo(response.data);
@@ -95,7 +109,8 @@ function DoctorPost() {
       }
     }
 
-    fetchDoctorProfile();
+    userType === 2 ? fetchDoctorProfile() : fetchPetOwnerProfile();
+
     fetchPost();
     fetchPostComments();
   }, [postId]);
