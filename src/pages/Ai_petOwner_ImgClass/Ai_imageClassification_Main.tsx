@@ -2,9 +2,19 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
-import { Box, Paper, Typography, TextField, Button, Grid } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Typography,
+  Snackbar,
+  Alert,
+  Button,
+  Grid,
+  Container,
+} from "@mui/material";
 import { useLocation } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { HfInference } from "@huggingface/inference";
 interface UserType {
   id: number;
   type: string;
@@ -24,39 +34,174 @@ interface DoctorInfo {
 }
 
 function Ai_imageClassification_Main() {
-  const [petOwnerInfo, setPetOwnerInfo] = useState<DoctorInfo | null>(null);
-  const [newImageUrl, setNewImageUrl] = useState(petOwnerInfo?.photoUrl);
+  const [userInfo, setUserInfo] = useState<DoctorInfo>();
+  const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
+  const [sucessAlertOpen, setSucessAlertOpen] = useState<boolean>(false);
 
-  const token = JSON.parse(localStorage.getItem("login") || "").token;
-  const location = useLocation();
-  const postId = location.state?.postId;
+  const [newImageUrl, setNewImageUrl] = useState(userInfo?.photoUrl);
+
+  let config = {};
+  let login_status = JSON.parse(localStorage.getItem("login") || "");
+
+  const token = login_status.token;
+  config = { headers: { Authorization: `Bearer ${token}` } };
+  const userType = login_status.user_type;
+  const [error, setError] = useState(Boolean);
+  const navigate = useNavigate();
+
+  const [alertOpen, setAlertOpen] = useState<boolean>(false);
+
+  const [alertMessage, setAlertMessage] = useState<string>("");
+
+  async function fetchmyProfile() {
+    try {
+      let apiEndpoint;
+
+      if (userType === 1) {
+        apiEndpoint = `/petOwners/myProfile/`;
+      } else if (userType === 2) {
+        apiEndpoint = `/doctors/myProfile/`;
+      }
+
+      const response = await axios.get(getAPIBaseURL() + apiEndpoint, config);
+
+      setUserInfo(response.data);
+      setNewImageUrl(response.data.photoUrl);
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  }
+
+  async function fetchDoctorProfile() {
+    try {
+      const response = await axios.get(
+        getAPIBaseURL() + `/users/doctorProfile/${8}`,
+        config
+      );
+
+      setDoctorInfo(response.data);
+      setNewImageUrl(response.data.photoUrl);
+    } catch (error) {
+      console.error("Error fetching doctor profile:", error);
+    }
+  }
+
+  // AI Logic
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        if (event.target && event.target.result) {
+          setSelectedImage(event?.target?.result as string);
+        }
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const classifyImage = async (): Promise<void> => {
+    if (!selectedImage) {
+      setAlertMessage("Please select an image !");
+      setAlertOpen(true);
+      return;
+    }
+
+    // Convert the Data URL to a Blob
+    const blobData = dataURLtoBlob(selectedImage);
+
+    const inference = new HfInference("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");
+    const res = await inference.imageClassification({
+      data: blobData,
+      model: "microsoft/resnet-50",
+    });
+    console.log("RES:: ", res);
+  };
+
+  // Function to convert Data URL to Blob
+  const dataURLtoBlob = (dataURL: string): Blob => {
+    const parts = dataURL.split(",");
+    const contentTypeMatch = parts[0].match(/:(.*?);/);
+    const contentType = contentTypeMatch
+      ? contentTypeMatch[1]
+      : "application/octet-stream";
+
+    const base64Data = atob(parts[1]);
+    const arrayBuffer = new ArrayBuffer(base64Data.length);
+    const view = new Uint8Array(arrayBuffer);
+
+    for (let i = 0; i < base64Data.length; i++) {
+      view[i] = base64Data.charCodeAt(i);
+    }
+
+    return new Blob([arrayBuffer], { type: contentType });
+  };
 
   useEffect(() => {
-    async function fetchDoctorProfile() {
-      try {
-        const response = await axios.get(
-          getAPIBaseURL() + "/petOwners/myProfile",
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setPetOwnerInfo(response.data);
-      } catch (error) {
-        console.error("Error fetching doctor profile:", error);
-      }
-    }
-    fetchDoctorProfile();
-  }, [postId]);
+    fetchmyProfile();
+    // fetchDoctorProfile();
+  }, []);
 
   return (
     <div>
-      {petOwnerInfo && (
+      {userInfo && (
         <NavBar
           imageUrl={newImageUrl}
           setNewImageUrl={setNewImageUrl}
-          firstName={petOwnerInfo.firstName}
-          lastName={petOwnerInfo.lastName}
+          firstName={userInfo.firstName}
+          lastName={userInfo.lastName}
           pageTitle={"AI CLASSIFICATION"}
         />
       )}
+
+      <Container>
+        <Grid container justifyContent="center" alignItems="center" spacing={2}>
+          <Grid item xs={12} textAlign="center">
+            <Typography variant="h4">Add A Photo Of Your Animal</Typography>
+          </Grid>
+
+          {selectedImage && (
+            <Grid item xs={12} textAlign="center" style={{ marginTop: "20px" }}>
+              {/* <Typography variant="h5">Selected Image:</Typography> */}
+              <img
+                src={selectedImage}
+                alt="Selected"
+                style={{ maxWidth: "100%", maxHeight: "500px" }}
+              />
+            </Grid>
+          )}
+
+          <Grid item xs={6} textAlign="center">
+            <input type="file" accept="image/*" onChange={handleImageUpload} />
+          </Grid>
+
+          <Grid item xs={6} textAlign="center">
+            <Button
+              variant="outlined"
+              sx={{ color: "#212121" }}
+              onClick={classifyImage}
+            >
+              Classify Image
+            </Button>
+          </Grid>
+        </Grid>
+      </Container>
+
+      <Snackbar
+        open={alertOpen}
+        autoHideDuration={6000}
+        onClose={() => setAlertOpen(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert severity="error" onClose={() => setAlertOpen(false)}>
+          {alertMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
