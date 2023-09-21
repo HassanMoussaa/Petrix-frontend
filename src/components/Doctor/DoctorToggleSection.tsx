@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import getAPIBaseURL from "../../APIBaseURL";
+
 import { Grid, Paper, Typography, List, IconButton } from "@mui/material";
 import {
   FavoriteBorderOutlined,
@@ -12,10 +15,15 @@ interface Post {
   title: string;
   body: string;
   createdAt: string;
+  is_liked: boolean;
 }
 
 interface DoctorToggleSection {
   postList: Post[];
+}
+
+interface LikeStatus {
+  [postId: number]: boolean;
 }
 
 function DoctorToggleSection(props: DoctorToggleSection) {
@@ -24,6 +32,62 @@ function DoctorToggleSection(props: DoctorToggleSection) {
   const handleButtonClick = (postId: number) => {
     navigate(`/post`, { state: { postId } });
   };
+
+  let config = {};
+  let login_status = JSON.parse(localStorage.getItem("login") || "");
+  const token = login_status.token;
+  config = { headers: { Authorization: `Bearer ${token}` } };
+
+  // logic for like feature
+
+  // const [likersCountIncrementer, setLikersCountIncrementerr] =
+  //   useState(followerCount);
+
+  const initialLikeStatus: LikeStatus = postList.reduce<LikeStatus>(
+    (likeStatus, post) => {
+      likeStatus[post.id] = post.is_liked;
+      return likeStatus;
+    },
+    {}
+  );
+  const [likeStatus, setLikeStatus] = useState<LikeStatus>(initialLikeStatus);
+
+  async function likeUser(id: number) {
+    try {
+      await axios.post(
+        getAPIBaseURL() + `/users/like`,
+        { post_id: id },
+        config
+      );
+
+      // Update the like status for the specific post
+      setLikeStatus((prevLikeStatus) => ({
+        ...prevLikeStatus,
+        [id]: true,
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function unLikeUser(id: number) {
+    try {
+      await axios.post(
+        getAPIBaseURL() + `/users/unlike`,
+        { post_id: id },
+        config
+      );
+
+      // Update the like status for the specific post
+      setLikeStatus((prevLikeStatus) => ({
+        ...prevLikeStatus,
+        [id]: false,
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Grid
       container
@@ -69,9 +133,18 @@ function DoctorToggleSection(props: DoctorToggleSection) {
                       gap: 1,
                     }}
                   >
-                    <IconButton>
-                      <FavoriteBorderOutlined />
-                    </IconButton>
+                    {likeStatus[post.id] ? (
+                      <IconButton
+                        onClick={() => unLikeUser(post.id)}
+                        color="error"
+                      >
+                        <FavoriteBorderOutlined />
+                      </IconButton>
+                    ) : (
+                      <IconButton onClick={() => likeUser(post.id)}>
+                        <FavoriteBorderOutlined />
+                      </IconButton>
+                    )}
 
                     <IconButton onClick={() => handleButtonClick(post.id)}>
                       <ChatBubbleOutlineOutlined />
