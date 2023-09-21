@@ -19,7 +19,7 @@ const Signin = () => {
       let config = { headers: { Authorization: `Bearer ${token}` } };
 
       let response = await axios.post(
-        getAPIBaseURL() + "/user/save_notification_token",
+        getAPIBaseURL() + "/users/save_notification_token",
         { notification_token },
         config
       );

@@ -22,6 +22,7 @@ export const fetchToken = (saveNotificationToken) => {
       if (currentToken) {
         // setTokenFound(true);
         saveNotificationToken(currentToken);
+        // console.log("not", currentToken);
       } else {
         console.log("no token found");
         // setTokenFound(false);
