@@ -10,7 +10,7 @@ import DoctorToggleSection from "../../components/Doctor/DoctorToggleSection";
 import Fab from "@mui/material/Fab";
 import { SxProps } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
-import CreatePostModal from "../../components/Doctor/CreatePostModal";
+import CreateReviewModal from "../../components/Doctor/CreateReviewModal";
 import DoctorReviewSection from "../../components/Doctor/DoctorReviewSection";
 import { useLocation } from "react-router-dom";
 
@@ -73,6 +73,10 @@ function DoctorProfile_user() {
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
   const [userInfo, setUserInfo] = useState<DoctorInfo>();
 
+  const [reviews, setReviews] = useState<Review[]>(
+    doctorInfo?.doctorReviews || []
+  );
+
   const [newImageUrl, setNewImageUrl] = useState(doctorInfo?.photoUrl);
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
@@ -124,6 +128,7 @@ function DoctorProfile_user() {
 
       setDoctorInfo(response.data);
       setNewImageUrl(response.data.photoUrl);
+      setReviews(response.data.doctorReviews);
     } catch (error) {
       console.error("Error fetching doctor profile:", error);
     }
@@ -156,6 +161,12 @@ function DoctorProfile_user() {
     setIsModalOpen(true);
   };
 
+  // section for review edits
+  const updateReviews = (newReview: Review) => {
+    console.log("hi");
+    setReviews([...reviews, newReview]);
+  };
+
   useEffect(() => {
     fetchmyProfile();
     fetchDoctorProfile();
@@ -165,7 +176,7 @@ function DoctorProfile_user() {
     <div className="drBody">
       {userInfo && (
         <NavBar
-          imageUrl={newImageUrl}
+          imageUrl={userInfo.photoUrl}
           setNewImageUrl={setNewImageUrl}
           firstName={userInfo.firstName}
           lastName={userInfo.lastName}
@@ -224,24 +235,33 @@ function DoctorProfile_user() {
               )}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-              {doctorInfo && (
-                <DoctorReviewSection reviewList={doctorInfo.doctorReviews} />
-              )}
+              {doctorInfo && <DoctorReviewSection reviewList={reviews} />}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
               Item Three
             </CustomTabPanel>
-            <Zoom key="primary" in={value === 1} unmountOnExit>
-              <Fab
-                sx={{ position: "absolute", bottom: 16, right: 16 } as SxProps}
-                aria-label="Create post"
-                color="primary"
-                onClick={handleOpenModal}
-              >
-                <AddIcon />
-              </Fab>
-            </Zoom>
-            <CreatePostModal open={isModalOpen} setOpen={setIsModalOpen} />
+            {userType === 1 && (
+              <Zoom key="primary" in={value === 1} unmountOnExit>
+                <Fab
+                  sx={
+                    { position: "absolute", bottom: 16, right: 16 } as SxProps
+                  }
+                  aria-label="Create review"
+                  color="primary"
+                  onClick={handleOpenModal}
+                >
+                  <AddIcon />
+                </Fab>
+              </Zoom>
+            )}
+            {doctorInfo && (
+              <CreateReviewModal
+                open={isModalOpen}
+                setOpen={setIsModalOpen}
+                doctorId={doctorInfo.id}
+                updateReviews={updateReviews}
+              />
+            )}
           </Box>
         </Grid>
       </Grid>
