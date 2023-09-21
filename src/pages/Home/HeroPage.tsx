@@ -14,8 +14,6 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import TopDoctors from "../../components/User/WelcomeSection/TopDoctors";
-import { useState } from "react";
-import { fetchToken, onMessageListener } from "../../firebase";
 
 const image_classification_card = {
   imageUrl: "ImageClassification.svg",
@@ -75,22 +73,12 @@ const hero_cards: HeroCardMapping = {
 function HeroPage() {
   const navigate = useNavigate();
 
-  const [show, setShow] = useState(false);
-  const [notification, setNotification] = useState({ title: "", body: "" });
+  // took care of error for if the user is not signed in
 
-  // fetchToken(setFcmToken);
+  const loginData = localStorage.getItem("login")
+    ? JSON.parse(localStorage.getItem("login") || "")
+    : "";
 
-  onMessageListener()
-    .then((payload: any) => {
-      setNotification({
-        title: payload.notification.title,
-        body: payload.notification.body,
-      });
-      setShow(true);
-    })
-    .catch((err: any) => console.log("failed", err));
-
-  const loginData = JSON.parse(localStorage.getItem("login") || "");
   const user_type =
     loginData?.user_type == 1
       ? "petOwner"
@@ -100,13 +88,6 @@ function HeroPage() {
 
   return (
     <div className="heropage_body">
-      {show && (
-        <Alert severity="info" onClose={() => setShow(false)}>
-          <AlertTitle>{notification.title}</AlertTitle>
-          {notification.body}
-        </Alert>
-      )}
-
       <MainNavBar
         imageUrl={loginData?.user_profile_picture}
         firstName={loginData?.firstName}

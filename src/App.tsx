@@ -13,10 +13,13 @@ import Ai_results from "./pages/Ai_petOwner_ImgClass/Ai_results";
 import PetOwnerProfile from "./pages/PetOwner_Profile_petOwner/PetOwnerProfile";
 import DoctorProfile_user from "./pages/DoctorProfile_User/DoctorProfile_user";
 import BookAppointment from "./pages/DoctorProfile_User/BookAppointment";
+import Notfication from "./components/notification";
 
 function App() {
   return (
     <div className="App">
+      <Notfication />
+
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />

@@ -14,6 +14,7 @@ const Signin = () => {
 
   async function saveNotificationToken(notification_token: string) {
     try {
+      console.log("not", notification_token);
       const token = JSON.parse(localStorage.getItem("login") || "").token;
       let config = { headers: { Authorization: `Bearer ${token}` } };
 
