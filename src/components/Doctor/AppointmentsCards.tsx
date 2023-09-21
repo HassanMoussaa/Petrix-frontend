@@ -17,10 +17,17 @@ interface Appointment {
 interface AppointmentsCardsProps {
   appointments: Appointment[];
   appointmentType: "accepted" | "rejected" | "pending";
+  removeAppointment: (appointmentId: number) => void;
+  fetchPendingAppointments: () => void;
 }
 
 function AppointmentsCards(props: AppointmentsCardsProps) {
-  const { appointments, appointmentType } = props;
+  const {
+    appointments,
+    appointmentType,
+    removeAppointment,
+    fetchPendingAppointments,
+  } = props;
 
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
@@ -36,6 +43,8 @@ function AppointmentsCards(props: AppointmentsCardsProps) {
         config
       );
       console.log(response.data.message);
+      removeAppointment(appointmentId);
+      fetchPendingAppointments();
     } catch (error) {
       console.error("Error accepting appointment:", error);
     }
@@ -50,6 +59,7 @@ function AppointmentsCards(props: AppointmentsCardsProps) {
         config
       );
       console.log(response.data.message);
+      removeAppointment(appointmentId);
     } catch (error) {
       console.error("Error rejecting appointment:", error);
     }

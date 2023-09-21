@@ -140,6 +140,13 @@ function Appointments() {
     }
   }
 
+  // logic to clean state after action
+  const removeAppointment = (appointmentId: number) => {
+    setPendingAppointments((prevAppointments) =>
+      prevAppointments.filter((appointment) => appointment.id !== appointmentId)
+    );
+  };
+
   useEffect(() => {
     fetchDoctorProfile();
     fetchPendingAppointments();
@@ -182,12 +189,16 @@ function Appointments() {
             <AppointmentsCards
               appointments={pendingAppointments}
               appointmentType="pending"
+              removeAppointment={removeAppointment}
+              fetchPendingAppointments={fetchPendingAppointments}
             />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
             <AppointmentsCards
               appointments={acceptedAppointments}
               appointmentType="accepted"
+              removeAppointment={removeAppointment}
+              fetchPendingAppointments={fetchPendingAppointments}
             />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
