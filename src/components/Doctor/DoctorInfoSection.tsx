@@ -35,6 +35,8 @@ interface DoctorInfoSection {
   setNewImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
   isOwnProfile: boolean;
   docId: number;
+  check_if_followed: boolean;
+  followerCount: number;
 }
 
 function DoctorInfoSection(props: DoctorInfoSection) {
@@ -46,6 +48,8 @@ function DoctorInfoSection(props: DoctorInfoSection) {
     setNewImageUrl,
     isOwnProfile,
     docId,
+    check_if_followed,
+    followerCount,
   } = props;
   // const value = 4.5;
 
@@ -53,6 +57,45 @@ function DoctorInfoSection(props: DoctorInfoSection) {
   let login_status = JSON.parse(localStorage.getItem("login") || "");
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
+
+  // logic for follow feature
+  const [isFollowed, setIsFollowed] = useState(check_if_followed);
+  const [followersCountIncrementer, setFollowersCountIncrementer] =
+    useState(followerCount);
+
+  async function followUser() {
+    try {
+      await axios.post(
+        getAPIBaseURL() + `/users/follow`,
+        { followed_user_id: docId },
+        config
+      );
+
+      setIsFollowed(true);
+      setFollowersCountIncrementer(
+        (followersCountIncrementer) => followersCountIncrementer + 1
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function unFollowUser() {
+    try {
+      await axios.post(
+        getAPIBaseURL() + `/users/unfollow`,
+        { unfollowed_user_id: docId },
+        config
+      );
+
+      setIsFollowed(false);
+      setFollowersCountIncrementer(
+        (followersCountIncrementer) => followersCountIncrementer - 1
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Grid container sx={{ display: { xs: "flex" }, ml: 10, mt: 10, gap: 5 }}>
@@ -172,23 +215,19 @@ function DoctorInfoSection(props: DoctorInfoSection) {
             <>
               {/* Rendering different buttons for non-own profiles */}
 
-              <Button
-                variant="contained"
-                sx={{
-                  bgcolor: "#16A4C3",
-                  borderRadius: 3,
-                  fontWeight: "bold",
-                  maxWidth: 100,
-                  height: 50,
-                  fontSize: 12,
-                  "&:hover": {
-                    backgroundColor: "#000",
-                  },
-                }}
-                size="large"
-              >
-                Follow
-              </Button>
+              {isFollowed ? (
+                <Button
+                  onClick={unFollowUser}
+                  variant="contained"
+                  color="error"
+                >
+                  Unfollow
+                </Button>
+              ) : (
+                <Button onClick={followUser} variant="contained" color="error">
+                  Follow
+                </Button>
+              )}
               <Button
                 variant="contained"
                 href={`/book_appointment/${docId}`}
