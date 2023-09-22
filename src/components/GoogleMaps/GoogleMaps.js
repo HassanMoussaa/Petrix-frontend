@@ -19,8 +19,6 @@ const GoogleMaps = ({ location, setLocation }) => {
   const lat = parseInt(location[1]);
   const lng = parseInt(location[0]);
 
-  console.log("LOC:: ", lat, lng);
-
   const onLoad = React.useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds({
       lat,
@@ -37,7 +35,8 @@ const GoogleMaps = ({ location, setLocation }) => {
 
   const handleCurrentLocation = async () => {
     const res = await getCurrentLocation();
-    setLocation(res);
+    console.log("RES:: ", res);
+    saveClinicLocation(res[1], res[0]);
   };
 
   //function to save clinic Coordinates
@@ -48,28 +47,30 @@ const GoogleMaps = ({ location, setLocation }) => {
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
 
-  const saveClinicLocation = async () => {
+  const saveClinicLocation = async (latitude, longitude) => {
     try {
+      console.log("SAVE:: ", latitude, longitude);
+
       const response = await axios.post(
-        getAPIBaseURL() + "./",
+        getAPIBaseURL() + "/doctors/location",
         {
-          lat,
-          lng,
+          lng: longitude,
+          lat: latitude,
         },
         config
       );
-
-      //    add section for success
+      setLocation([longitude, latitude]);
     } catch (error) {
       console.error("Error fetching doctor profile:", error);
     }
   };
 
+  console.log("LOCATION:: ", location);
+
   const onMarkerDragEnd = async (e) => {
     const lat = e.latLng.lat();
     const lng = e.latLng.lng();
-    const res = await getLocationFromCoordinates({ lat, lng });
-    setLocation(res);
+    saveClinicLocation(lat, lng);
   };
 
   if (!isLoaded) {
@@ -90,7 +91,7 @@ const GoogleMaps = ({ location, setLocation }) => {
           lat,
           lng,
         }}
-        zoom={13}
+        // zoom={13}
       >
         <CustomButton onClick={handleCurrentLocation}>
           <Typography>User current location</Typography>

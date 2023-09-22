@@ -155,8 +155,6 @@ function DoctorProfile() {
       : [35.49442, 33.88894]
   );
 
-  console.log("LOC1:: ", location);
-
   return (
     <div className="drBody">
       {doctorInfo && (
