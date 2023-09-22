@@ -13,7 +13,8 @@ import AddIcon from "@mui/icons-material/Add";
 import CreateReviewModal from "../../components/Doctor/CreateReviewModal";
 import DoctorReviewSection from "../../components/Doctor/DoctorReviewSection";
 import { useLocation } from "react-router-dom";
-
+import UserLocation from "../../components/UserLocation/UserLocation";
+import { useParams } from "react-router-dom";
 interface Specialty {
   id: number;
   speciality: string;
@@ -65,6 +66,10 @@ interface DoctorInfo {
   averageRate: number;
   check_if_followed: boolean;
   followerCount: number;
+  clinicLocations: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 interface TabPanelProps {
@@ -73,6 +78,7 @@ interface TabPanelProps {
   value: number;
 }
 function DoctorProfile_user() {
+  const params = useParams();
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
   const [userInfo, setUserInfo] = useState<DoctorInfo>();
 
@@ -86,9 +92,6 @@ function DoctorProfile_user() {
 
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
-
-  const location = useLocation();
-  const docId = location.state?.id;
 
   const userType = login_status.user_type;
   // For toggle section
@@ -124,6 +127,7 @@ function DoctorProfile_user() {
 
   async function fetchDoctorProfile() {
     try {
+      const docId = params?.id;
       const response = await axios.get(
         getAPIBaseURL() + `/users/doctorProfile/${docId}`,
         config
@@ -243,7 +247,14 @@ function DoctorProfile_user() {
               {doctorInfo && <DoctorReviewSection reviewList={reviews} />}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-              Item Three
+              {doctorInfo?.clinicLocations && (
+                <UserLocation
+                  location={[
+                    doctorInfo?.clinicLocations?.longitude,
+                    doctorInfo?.clinicLocations?.latitude,
+                  ]}
+                />
+              )}
             </CustomTabPanel>
             {userType === 1 && (
               <Zoom key="primary" in={value === 1} unmountOnExit>
