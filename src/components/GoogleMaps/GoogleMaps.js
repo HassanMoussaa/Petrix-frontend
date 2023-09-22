@@ -2,10 +2,7 @@ import React from "react";
 import getAPIBaseURL from "../../APIBaseURL";
 import styled from "styled-components";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import {
-  getCurrentLocation,
-  getLocationFromCoordinates,
-} from "../../utils/locationHelper";
+import { getCurrentLocation } from "../../utils/locationHelper";
 import { Typography } from "@mui/material";
 import axios from "axios";
 
@@ -35,7 +32,6 @@ const GoogleMaps = ({ location, setLocation }) => {
 
   const handleCurrentLocation = async () => {
     const res = await getCurrentLocation();
-    console.log("RES:: ", res);
     saveClinicLocation(res[1], res[0]);
   };
 
@@ -91,7 +87,7 @@ const GoogleMaps = ({ location, setLocation }) => {
           lat,
           lng,
         }}
-        // zoom={13}
+        zoom={13}
       >
         <CustomButton onClick={handleCurrentLocation}>
           <Typography>User current location</Typography>
