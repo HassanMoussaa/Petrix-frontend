@@ -14,6 +14,7 @@ import PetOwnerProfile from "./pages/PetOwner_Profile_petOwner/PetOwnerProfile";
 import DoctorProfile_user from "./pages/DoctorProfile_User/DoctorProfile_user";
 import BookAppointment from "./pages/DoctorProfile_User/BookAppointment";
 import Notfication from "./components/notification";
+import Petrix_doctors from "./pages/Ai_petOwner_ImgClass/Petrix_doctors";
 
 function App() {
   return (
@@ -25,15 +26,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<HeroPage />} />
-
           {/* doctor routes */}
           <Route path="/myProfile_doctor" element={<DoctorProfile />} />
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/post" element={<DoctorPost />} />
-
           {/* petOwner routes */}
           <Route path="/myProfile_petOwner" element={<PetOwnerProfile />} />
-
           <Route
             path="/ai_imageClassification"
             element={<Ai_imageClassification_Main />}
@@ -43,13 +41,11 @@ function App() {
             element={<Ai_imageClassification_Main />}
           />
           <Route path="/ai_results" element={<Ai_results />} />
-
           {/* Route for doctor profile from petOwner */}
           <Route path="/profile" element={<DoctorProfile_user />} />
-          <Route
-            path="/book_appointment/:docId"
-            element={<BookAppointment />}
-          />
+
+          <Route element={<BookAppointment />} />
+          <Route path="/petrix-doctors" element={<Petrix_doctors />} />
         </Routes>
       </BrowserRouter>
     </div>
