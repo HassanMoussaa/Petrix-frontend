@@ -13,7 +13,7 @@ import {
   Container,
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 interface UserType {
   id: number;
   type: string;
@@ -45,6 +45,7 @@ function Ai_results() {
   config = { headers: { Authorization: `Bearer ${token}` } };
   const userType = login_status.user_type;
   const [error, setError] = useState(Boolean);
+  const navigate = useNavigate();
 
   async function fetchmyProfile() {
     try {
@@ -68,6 +69,12 @@ function Ai_results() {
   // Ai results
   const location = useLocation();
   const { selectedImage, classificationResults } = location.state;
+
+  const handlePetrixDoctorsClick = () => {
+    // Call an API to save the animal/pet and get results
+    // Assuming `apiResponse` contains the results
+    // navigate("/petrix-doctors", { state: { results: classificationResults } });
+  };
 
   useEffect(() => {
     fetchmyProfile();
@@ -111,9 +118,27 @@ function Ai_results() {
                   textAlign="center"
                   sx={{ display: "flex", gap: 3, justifyContent: "center" }}
                 >
-                  <Button variant="outlined">Button 1</Button>
-                  <Button variant="outlined">Button 2</Button>
-                  <Button variant="outlined">Button 3</Button>
+                  <Button
+                    variant="contained"
+                    sx={{ backgroundColor: "#16A4C3" }}
+                    onClick={handlePetrixDoctorsClick}
+                  >
+                    Check Petrix <br /> Doctors
+                  </Button>
+                  <Button
+                    variant="contained"
+                    sx={{ backgroundColor: "#16A4C3" }}
+                  >
+                    Ask Ai Bot
+                  </Button>
+
+                  <Button
+                    variant="contained"
+                    sx={{ backgroundColor: "#16A4C3" }}
+                    href="/ai_imageClassification"
+                  >
+                    Re-Upload
+                  </Button>
                 </Box>
               </Box>
             )}
