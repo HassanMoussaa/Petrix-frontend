@@ -15,6 +15,7 @@ import DoctorProfile_user from "./pages/DoctorProfile_User/DoctorProfile_user";
 import BookAppointment from "./pages/DoctorProfile_User/BookAppointment";
 import Notfication from "./components/notification";
 import Petrix_doctors from "./pages/Ai_petOwner_ImgClass/Petrix_doctors";
+import DoctorsNearYou from "./pages/GoogleMaps/DoctorsNearYou";
 
 function App() {
   return (
@@ -42,10 +43,12 @@ function App() {
           />
           <Route path="/ai_results" element={<Ai_results />} />
           {/* Route for doctor profile from petOwner */}
-          <Route path="/profile" element={<DoctorProfile_user />} />
+          <Route path="/profile/:id" element={<DoctorProfile_user />} />
 
           <Route element={<BookAppointment />} />
           <Route path="/petrix-doctors" element={<Petrix_doctors />} />
+
+          <Route path="/doctors-near-you" element={<DoctorsNearYou />} />
         </Routes>
       </BrowserRouter>
     </div>
