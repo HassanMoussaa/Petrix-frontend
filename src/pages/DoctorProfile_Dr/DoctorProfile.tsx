@@ -14,6 +14,7 @@ import { SxProps } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
 import CreatePostModal from "../../components/Doctor/CreatePostModal";
 import DoctorReviewSection from "../../components/Doctor/DoctorReviewSection";
+import GoogleMaps from "../../components/GoogleMaps/GoogleMaps";
 
 interface Specialty {
   id: number;
@@ -66,6 +67,10 @@ interface DoctorInfo {
   averageRate: number;
   check_if_followed: boolean;
   followerCount: number;
+  clinicLocations: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 interface TabPanelProps {
@@ -139,6 +144,19 @@ function DoctorProfile() {
     fetchDoctorProfile();
   }, []);
 
+  // maps Sections
+
+  const [location, setLocation] = useState(
+    doctorInfo?.clinicLocations
+      ? [
+          doctorInfo?.clinicLocations?.longitude,
+          doctorInfo?.clinicLocations?.latitude,
+        ]
+      : [35.49442, 33.88894]
+  );
+
+  console.log("LOC1:: ", location);
+
   return (
     <div className="drBody">
       {doctorInfo && (
@@ -209,7 +227,7 @@ function DoctorProfile() {
               )}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-              Item Three
+              <GoogleMaps location={location} setLocation={setLocation} />
             </CustomTabPanel>
             <Zoom key="primary" in={value === 0} unmountOnExit>
               <Fab
