@@ -122,7 +122,10 @@ function Ai_imageClassification_Main() {
     });
     console.log("RES:: ", res);
     navigate("/ai_results", {
-      state: { selectedImage, classificationResults: JSON.stringify(res) },
+      state: {
+        selectedImage,
+        classificationResults: JSON.parse(JSON.stringify(res)),
+      },
     });
   };
 
