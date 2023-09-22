@@ -1,0 +1,124 @@
+import React from "react";
+import getAPIBaseURL from "../../APIBaseURL";
+import styled from "styled-components";
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import {
+  getCurrentLocation,
+  getLocationFromCoordinates,
+} from "../../utils/locationHelper";
+import { Typography } from "@mui/material";
+import axios from "axios";
+
+const GoogleMaps = ({ location, setLocation }) => {
+  const [map, setMap] = React.useState(null);
+
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyDTfjTU0uNZK4EMSuWd5vUiMi4ShwgTlFw",
+  });
+  const lat = parseInt(location[1]);
+  const lng = parseInt(location[0]);
+
+  console.log("LOC:: ", lat, lng);
+
+  const onLoad = React.useCallback(function callback(map) {
+    const bounds = new window.google.maps.LatLngBounds({
+      lat,
+      lng,
+    });
+    map.fitBounds(bounds);
+
+    setMap(map);
+  }, []);
+
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null);
+  }, []);
+
+  const handleCurrentLocation = async () => {
+    const res = await getCurrentLocation();
+    setLocation(res);
+  };
+
+  //function to save clinic Coordinates
+
+  let config = {};
+  let login_status = JSON.parse(localStorage.getItem("login") || "");
+
+  const token = login_status.token;
+  config = { headers: { Authorization: `Bearer ${token}` } };
+
+  const saveClinicLocation = async () => {
+    try {
+      const response = await axios.post(
+        getAPIBaseURL() + "./",
+        {
+          lat,
+          lng,
+        },
+        config
+      );
+
+      //    add section for success
+    } catch (error) {
+      console.error("Error fetching doctor profile:", error);
+    }
+  };
+
+  const onMarkerDragEnd = async (e) => {
+    const lat = e.latLng.lat();
+    const lng = e.latLng.lng();
+    const res = await getLocationFromCoordinates({ lat, lng });
+    setLocation(res);
+  };
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <Typography>Please drag and drop to save clinic location</Typography>
+      <GoogleMap
+        mapContainerStyle={{
+          width: "100%",
+          height: "400px",
+        }}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+        center={{
+          lat,
+          lng,
+        }}
+        zoom={13}
+      >
+        <CustomButton onClick={handleCurrentLocation}>
+          <Typography>User current location</Typography>
+        </CustomButton>
+        <Marker
+          position={{ lat, lng }}
+          onDragEnd={(e) => onMarkerDragEnd(e)}
+          draggable={true}
+        />
+      </GoogleMap>
+    </div>
+  );
+};
+
+export default GoogleMaps;
+
+const CustomButton = styled.div`
+  border: 1px solid #fff;
+  border-radius: 7px;
+  position: absolute;
+  bottom: 0;
+  z-index: 1000;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  background: #fff;
+  padding: 7px;
+  .location-icon {
+    margin-right: 10px;
+  }
+`;
