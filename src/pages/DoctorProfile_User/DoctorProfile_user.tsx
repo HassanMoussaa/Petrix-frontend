@@ -88,7 +88,7 @@ function DoctorProfile_user() {
   config = { headers: { Authorization: `Bearer ${token}` } };
 
   const location = useLocation();
-  const docId = location.state?.docId;
+  const docId = location.state?.id;
 
   const userType = login_status.user_type;
   // For toggle section
@@ -125,7 +125,7 @@ function DoctorProfile_user() {
   async function fetchDoctorProfile() {
     try {
       const response = await axios.get(
-        getAPIBaseURL() + `/users/doctorProfile/${8}`,
+        getAPIBaseURL() + `/users/doctorProfile/${docId}`,
         config
       );
 
