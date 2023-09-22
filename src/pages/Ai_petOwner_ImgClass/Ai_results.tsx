@@ -70,10 +70,15 @@ function Ai_results() {
   const location = useLocation();
   const { selectedImage, classificationResults } = location.state;
 
+  const petLabel = classificationResults[0].label;
+  const arr = petLabel.split(" ");
+
+  const breed = arr[arr.length - 1];
   const handlePetrixDoctorsClick = () => {
     // Call an API to save the animal/pet and get results
     // Assuming `apiResponse` contains the results
-    // navigate("/petrix-doctors", { state: { results: classificationResults } });
+
+    navigate("/petrix-doctors", { state: { breed } });
   };
 
   useEffect(() => {
@@ -112,7 +117,7 @@ function Ai_results() {
                   Breed
                 </Typography>
                 <Typography textAlign="center" variant="body1">
-                  {JSON.parse(classificationResults)?.[0]?.label}
+                  {classificationResults[0].label}
                 </Typography>
                 <Box
                   textAlign="center"
