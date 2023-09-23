@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Box, Button, Typography, TextField, Alert } from "@mui/material";
 
-function welcome() {
+function Welcome() {
   return (
     <Box sx={{ flexGrow: 5 }}>
       <Grid container sx={{ mt: 15, justifyContent: "center" }}>
@@ -13,8 +13,34 @@ function welcome() {
             flexDirection: "column",
             gap: 5,
             mt: 5,
+            position: "relative",
           }}
         >
+          <div
+            className="claws-image"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100px",
+              height: "auto",
+              zIndex: 1,
+            }}
+          >
+            <Box
+              component="img"
+              src={process.env.PUBLIC_URL + "/images/Claws.svg"}
+              alt="logo"
+              sx={{
+                width: "100px",
+                height: "auto",
+                ml: "-35px",
+                mt: "-35px",
+                opacity: "0.5",
+              }}
+            />
+          </div>
+
           <Grid sx={{ fontSize: 35 }}>
             <b>
               Until one has loved an <br /> animal, a part of one's soul <br />
@@ -40,4 +66,4 @@ function welcome() {
   );
 }
 
-export default welcome;
+export default Welcome;
