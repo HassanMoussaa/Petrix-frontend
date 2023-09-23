@@ -54,7 +54,7 @@ interface availableSlot {
 function BookingForm(props: BookingFormProps) {
   const { petsList, clinicLocationsList, docId, setSucessAlertOpen } = props;
 
-  const [value, setValue] = React.useState<Dayjs | null>(dayjs());
+  const [date, setDate] = React.useState<Dayjs | null>(dayjs());
   //   const [age, setAge] = React.useState("");
 
   const [selectedPet, setSelectedPet] = React.useState<string>("");
@@ -74,6 +74,7 @@ function BookingForm(props: BookingFormProps) {
 
   async function fetchAvailableSlots() {
     try {
+      console.log("hrioehrihed");
       const response = await axios.get(
         getAPIBaseURL() + "/petOwners/availableSlots",
         {
@@ -81,7 +82,7 @@ function BookingForm(props: BookingFormProps) {
           params: {
             docId: docId,
             // @ts-ignore
-            date: moment(value).format("MM-DD-YYYY"),
+            date: date.format("MM-DD-YYYY"),
           },
         }
       );
@@ -100,7 +101,7 @@ function BookingForm(props: BookingFormProps) {
       return;
     }
 
-    const selectedDate = value ? value.format("YYYY-DD-MM") : "";
+    const selectedDate = date ? date.format("YYYY-DD-MM") : "";
     const selectedTime = selectedTimeSlot;
 
     const requestBody = {
@@ -126,7 +127,7 @@ function BookingForm(props: BookingFormProps) {
   };
   useEffect(() => {
     fetchAvailableSlots();
-  }, [value]);
+  }, [date]);
 
   return (
     <div>
@@ -185,9 +186,9 @@ function BookingForm(props: BookingFormProps) {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Date"
-                value={value}
-                format="YYYY-DD-MM"
-                onChange={(newValue) => setValue(newValue)}
+                value={date}
+                format="MM-DD-YYYY"
+                onChange={(newValue) => setDate(newValue)}
                 disablePast={true}
               />
             </LocalizationProvider>
