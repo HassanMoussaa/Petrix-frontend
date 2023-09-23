@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import getAPIBaseURL from "../../APIBaseURL";
 import axios from "axios";
 import PetSignupForm from "../../components/PetOwner/PetOwnerSignupForm";
@@ -13,6 +14,7 @@ function Signup() {
   const [emailUsedError, setEmailUsedError] = useState(false);
   const [userType, setUserType] = useState("petOwner");
   let speciality: FormDataEntryValue;
+  const navigate = useNavigate();
 
   const handleUserTypeChange = (newUserType: string) => {
     setUserType(newUserType);
@@ -71,6 +73,7 @@ function Signup() {
 
         if (response?.status === 201) {
           setSignUpError(false);
+          navigate("/login");
         } else {
           console.log("Something went wrong!");
           setSignUpError(true);
