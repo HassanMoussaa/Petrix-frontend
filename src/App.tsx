@@ -44,10 +44,11 @@ function App() {
           <Route path="/ai_results" element={<Ai_results />} />
           {/* Route for doctor profile from petOwner */}
           <Route path="/profile/:id" element={<DoctorProfile_user />} />
-
-          <Route element={<BookAppointment />} />
+          <Route
+            path="/book_appointment/:docId"
+            element={<BookAppointment />}
+          />
           <Route path="/petrix-doctors" element={<Petrix_doctors />} />
-
           <Route path="/doctors-near-you" element={<DoctorsNearYou />} />
         </Routes>
       </BrowserRouter>
