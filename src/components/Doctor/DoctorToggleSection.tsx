@@ -89,74 +89,46 @@ function DoctorToggleSection(props: DoctorToggleSection) {
   }
 
   return (
-    <Grid
-      container
-      sx={{
-        display: { xs: "flex" },
-        flexDirection: { xs: "column" },
-        backgroundColor: "white",
-      }}
+    <div
+      className="scrollable-container"
+      style={{ maxHeight: "500px", overflow: "auto" }}
     >
       <Grid
         container
-        spacing={2}
-        sx={{
-          display: { xs: "flex" },
-          flexDirection: { xs: "column" },
-          backgroundColor: "white",
-          p: 2,
-          gap: 2,
-        }}
+        sx={{ backgroundColor: "white", p: 2, gap: 2 }}
+        className="scrollable-content"
       >
-        <Paper style={{ maxHeight: 500, overflow: "auto", width: "100%" }}>
-          <List
-            sx={{
-              display: { xs: "flex" },
-              flexDirection: { xs: "column" },
-              backgroundColor: "white",
-              gap: 2,
-            }}
-          >
-            {postList.map((post) => (
-              <Grid item key={post.id} xs={12}>
-                <Paper
-                  elevation={3}
-                  sx={{ p: 2, display: "flex", flexDirection: "column" }}
-                >
-                  <Typography variant="h6">{post.title}</Typography>
-                  <Typography>{post.body}</Typography>
-                  <Typography variant="caption">{post.createdAt}</Typography>
-                  <div
-                    style={{
-                      marginTop: "auto",
-                      display: "flex",
-                      gap: 1,
-                    }}
-                  >
-                    {likeStatus[post.id] ? (
-                      <IconButton
-                        onClick={() => unLikeUser(post.id)}
-                        color="error"
-                      >
-                        <FavoriteBorderOutlined />
-                      </IconButton>
-                    ) : (
-                      <IconButton onClick={() => likeUser(post.id)}>
-                        <FavoriteBorderOutlined />
-                      </IconButton>
-                    )}
-
-                    <IconButton onClick={() => handleButtonClick(post.id)}>
-                      <ChatBubbleOutlineOutlined />
+        <List sx={{ gap: 2 }}>
+          {postList.map((post) => (
+            <Grid item key={post.id}>
+              <div>
+                <Typography variant="h6">{post.title}</Typography>
+                <Typography>{post.body}</Typography>
+                <Typography variant="caption">{post.createdAt}</Typography>
+                <div style={{ marginTop: "auto", display: "flex", gap: 1 }}>
+                  {likeStatus[post.id] ? (
+                    <IconButton
+                      onClick={() => unLikeUser(post.id)}
+                      color="error"
+                    >
+                      <FavoriteBorderOutlined />
                     </IconButton>
-                  </div>
-                </Paper>
-              </Grid>
-            ))}
-          </List>
-        </Paper>
+                  ) : (
+                    <IconButton onClick={() => likeUser(post.id)}>
+                      <FavoriteBorderOutlined />
+                    </IconButton>
+                  )}
+
+                  <IconButton onClick={() => handleButtonClick(post.id)}>
+                    <ChatBubbleOutlineOutlined />
+                  </IconButton>
+                </div>
+              </div>
+            </Grid>
+          ))}
+        </List>
       </Grid>
-    </Grid>
+    </div>
   );
 }
 
