@@ -74,15 +74,13 @@ function BookingForm(props: BookingFormProps) {
 
   async function fetchAvailableSlots() {
     try {
-      console.log("hrioehrihed");
       const response = await axios.get(
         getAPIBaseURL() + "/petOwners/availableSlots",
         {
           headers: { Authorization: `Bearer ${token}` },
           params: {
             docId: docId,
-            // @ts-ignore
-            date: date.format("MM-DD-YYYY"),
+            date: date ? date.format("MM-DD-YYYY") : "",
           },
         }
       );
@@ -101,7 +99,7 @@ function BookingForm(props: BookingFormProps) {
       return;
     }
 
-    const selectedDate = date ? date.format("YYYY-DD-MM") : "";
+    const selectedDate = date ? date.format("MM-DD-YYYY") : "";
     const selectedTime = selectedTimeSlot;
 
     const requestBody = {
