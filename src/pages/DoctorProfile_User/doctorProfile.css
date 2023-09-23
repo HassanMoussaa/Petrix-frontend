@@ -16,3 +16,13 @@
 .selectedImage_profile {
   padding-top: 5%;
 }
+
+.scrollable-container {
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.scrollable-content {
+  max-height: 500px;
+  overflow: auto;
+}
