@@ -41,7 +41,7 @@ function DoctorSignupForm(props: SignupFormProps) {
     handleSubmit,
   } = props;
 
-  const [selectedCountry, setSelectedCountry] = useState<string>("Lebanon");
+  const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [selectedSpeciality, setSelectedSpeciality] = useState<string[]>([""]);
 
   const handleChange = (event: SelectChangeEvent<string>) => {
@@ -165,23 +165,30 @@ function DoctorSignupForm(props: SignupFormProps) {
         <Typography sx={{ mb: 2 }}>Passwords didn't match!</Typography>
       )}
 
-      <InputLabel id="country">Country</InputLabel>
-      <Select
-        name="country"
-        labelId="country"
-        id="country"
-        value={selectedCountry}
-        onChange={handleChange}
-        required
-        sx={{ mb: 3 }}
-        className="input_signup_field"
+      <FormControl
+        variant="standard"
+        sx={{ m: 1, width: "70%", maxHeight: 50 }}
       >
-        {countries.map((country) => (
-          <MenuItem key={country.label} value={country.label}>
-            {country.label}
-          </MenuItem>
-        ))}
-      </Select>
+        <InputLabel id="demo-simple-select-standard-label" sx={{ zIndex: 3 }}>
+          Country
+        </InputLabel>
+        <Select
+          name="country"
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={selectedCountry}
+          onChange={handleChange}
+          label="country"
+          required={true}
+          sx={{ backgroundColor: "white" }}
+        >
+          {countries.map((country) => (
+            <MenuItem key={country.label} value={country.label}>
+              {country.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
 
       <TextField
         required
@@ -195,7 +202,7 @@ function DoctorSignupForm(props: SignupFormProps) {
         className="input_signup_field"
       />
 
-      <InputLabel id="speciality-select-label">Speciality</InputLabel>
+      {/* <InputLabel id="speciality-select-label">Speciality</InputLabel>
       <Select
         className="input_signup_field"
         labelId="speciality-select-label"
@@ -212,7 +219,33 @@ function DoctorSignupForm(props: SignupFormProps) {
             {specialty}
           </MenuItem>
         ))}
-      </Select>
+      </Select> */}
+
+      <FormControl
+        variant="standard"
+        sx={{ m: 1, width: "70%", maxHeight: 50 }}
+      >
+        <InputLabel id="demo-simple-select-standard-label" sx={{ zIndex: 3 }}>
+          Speciality
+        </InputLabel>
+        <Select
+          name="speciality"
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          multiple
+          value={selectedSpeciality}
+          onChange={handleChangeSpeciality}
+          label="Speciality"
+          required={true}
+          sx={{ backgroundColor: "white" }}
+        >
+          {petSpecialties.map((specialty) => (
+            <MenuItem key={specialty} value={specialty}>
+              {specialty}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
 
       <Button
         type="submit"
