@@ -10,7 +10,8 @@ interface Doctor {
   firstName: string;
   lastName: string;
   appointmentCount: number;
-  // rate: string;
+  averageRate: number;
+  rate: number;
 }
 
 function TopDoctors() {
@@ -34,9 +35,14 @@ function TopDoctors() {
   }, []);
 
   return (
-    <Grid container>
+    <Grid container sx={{}}>
       <Grid item xs={12}>
-        <Typography variant="h5">
+        <Typography
+          variant="h5"
+          textAlign={"center"}
+          sx={{ mb: 8 }}
+          fontSize={32}
+        >
           <b>Top Doctors</b>
         </Typography>
       </Grid>
@@ -47,14 +53,21 @@ function TopDoctors() {
           <Alert severity="error">Error fetching data from the server</Alert>
         </Grid>
       ) : (
-        <Grid container xs={12} sx={{ overflowX: "auto" }}>
+        <Grid
+          container
+          xs={12}
+          sx={{ overflowX: "auto", display: "flex", justifyContent: "center" }}
+          ml={5}
+        >
           {topDoctors.length > 0 &&
             topDoctors.map((doctor) => (
               <Grid item key={doctor.id} xs={3} md={2} sx={{ p: 2 }}>
                 <DoctorCard
                   imageUrl={doctor.photoUrl}
-                  rate={doctor.appointmentCount}
+                  rate={doctor.averageRate}
+                  appointmentCount={doctor.appointmentCount}
                   title={doctor.firstName + doctor.lastName}
+                  id={doctor.id}
                 />
               </Grid>
             ))}
