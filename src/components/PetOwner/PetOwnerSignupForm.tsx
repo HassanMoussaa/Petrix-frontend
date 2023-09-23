@@ -8,6 +8,7 @@ import {
   RadioGroup,
   FormLabel,
   FormControlLabel,
+  FormControl,
   InputLabel,
   Select,
   MenuItem,
@@ -38,7 +39,7 @@ function PetSignupForm(props: SignupFormProps) {
     handleSubmit,
   } = props;
 
-  const [selectedCountry, setSelectedCountry] = useState<string>("Lebanon");
+  const [selectedCountry, setSelectedCountry] = useState<string>("");
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     setSelectedCountry(event.target.value);
@@ -120,8 +121,9 @@ function PetSignupForm(props: SignupFormProps) {
       {!passwordMatch && (
         <Typography sx={{ mb: 2 }}>Passwords didn't match!</Typography>
       )}
-      <div className="country_city_group">
-        <Select
+      <Grid sx={{ display: "flex", justifyContent: "center" }}>
+        {/* <div className="country_city_group"> */}
+        {/* <Select
           name="country"
           labelId="country"
           id="country"
@@ -136,7 +138,31 @@ function PetSignupForm(props: SignupFormProps) {
               {country.label}
             </MenuItem>
           ))}
-        </Select>
+        </Select> */}
+        <FormControl
+          variant="standard"
+          sx={{ m: 1, width: "100%", maxHeight: 50 }}
+        >
+          <InputLabel id="demo-simple-select-standard-label" sx={{ zIndex: 3 }}>
+            Country
+          </InputLabel>
+          <Select
+            name="country"
+            labelId="demo-simple-select-standard-label"
+            id="demo-simple-select-standard"
+            value={selectedCountry}
+            onChange={handleChange}
+            label="country"
+            required={true}
+            sx={{ backgroundColor: "white" }}
+          >
+            {countries.map((country) => (
+              <MenuItem key={country.label} value={country.label}>
+                {country.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
         <TextField
           required
@@ -145,11 +171,12 @@ function PetSignupForm(props: SignupFormProps) {
           label="city"
           type="city"
           id="city"
-          className="input_signup_field_updated"
+          className="input_signup_field_updated_city"
           autoComplete="city"
           sx={{ mb: 3 }}
         />
-      </div>
+        {/* </div> */}
+      </Grid>
 
       <Button
         type="submit"
