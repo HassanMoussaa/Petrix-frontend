@@ -12,7 +12,7 @@ import {
   Container,
   Paper,
   Alert,
-  TextField,
+  Typography,
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
@@ -210,11 +210,17 @@ function BookingForm(props: BookingFormProps) {
               required={true}
               label="Available Time Slots"
             >
-              {availableSlots.map((slot, index) => (
-                <MenuItem key={index} value={slot.start}>
-                  {slot.start}
-                </MenuItem>
-              ))}
+              {availableSlots.length === 0 ? (
+                <Typography variant="body1" color="textSecondary">
+                  No available slots found.
+                </Typography>
+              ) : (
+                availableSlots.map((slot, index) => (
+                  <MenuItem key={index} value={slot.start}>
+                    {slot.start}
+                  </MenuItem>
+                ))
+              )}
             </Select>
           </FormControl>
         </Grid>
