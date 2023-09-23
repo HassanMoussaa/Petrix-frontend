@@ -1,22 +1,23 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
+import Grid from "@mui/material/Grid";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
+import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 
 interface BasicCardProps {
   imageUrl: string;
-  // body: string;
   rate: number;
+  appointmentCount: number;
   title: string;
   onClick?: () => void;
+  id: number;
 }
 
 export default function BasicCard(props: BasicCardProps) {
-  const { imageUrl, rate, title, onClick } = props;
+  const { imageUrl, rate, title, appointmentCount, onClick, id } = props;
 
   const navigate = useNavigate();
   const handleCardClick = () => {
@@ -24,7 +25,12 @@ export default function BasicCard(props: BasicCardProps) {
       onClick();
     }
 
-    navigate("/");
+    let login_status = {};
+    if ((login_status = JSON.parse(localStorage.getItem("login") || ""))) {
+      navigate(`/profile/${id}`);
+    }
+
+    navigate("/login");
   };
   return (
     <Card
@@ -37,8 +43,16 @@ export default function BasicCard(props: BasicCardProps) {
       }}
       onClick={handleCardClick}
     >
-      <CardContent>
-        <Box
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 0,
+        }}
+      >
+        {/* <Box
           component="img"
           src={process.env.PUBLIC_URL + `/images/${imageUrl}`}
           alt="logo"
@@ -51,13 +65,25 @@ export default function BasicCard(props: BasicCardProps) {
 
             borderRadius: 100,
           }}
+        /> */}
+        <Avatar
+          alt="Remy Sharp"
+          src={imageUrl}
+          // sx={{ width: "40%", height: "40%" }}
+          sx={{ width: 90, height: 90 }}
         />
-
         <Typography sx={{ mb: 1.5, mt: 1.5 }} align="center">
           <b>{title}</b>
         </Typography>
-        <Typography align="center">{rate}</Typography>
-        {/* <Typography align="center">{body}f</Typography> */}
+        <Grid>
+          <Rating name="read-only" value={rate} precision={0.5} readOnly />
+
+          <Typography align="center" fontSize={10} color={"#A4A1A1"}>
+            {" "}
+            # Appointments:
+            {appointmentCount}
+          </Typography>
+        </Grid>
       </CardContent>
     </Card>
   );
