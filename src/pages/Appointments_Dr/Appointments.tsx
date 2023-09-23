@@ -157,7 +157,7 @@ function Appointments() {
     <div className="drBody">
       {doctorInfo && (
         <NavBar
-          imageUrl={newImageUrl}
+          imageUrl={doctorInfo.photoUrl}
           setNewImageUrl={setNewImageUrl}
           firstName={doctorInfo.firstName}
           lastName={doctorInfo.lastName}
