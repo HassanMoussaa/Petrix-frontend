@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
+import dayjs from "dayjs";
 
 import { Grid, Paper, Typography, List, IconButton } from "@mui/material";
 import {
@@ -29,6 +30,8 @@ interface LikeStatus {
 function DoctorToggleSection(props: DoctorToggleSection) {
   const { postList } = props;
   const navigate = useNavigate();
+  const dayjs = require("dayjs");
+
   const handleButtonClick = (postId: number) => {
     navigate(`/post`, { state: { postId } });
   };
@@ -102,9 +105,13 @@ function DoctorToggleSection(props: DoctorToggleSection) {
           {postList.map((post) => (
             <Grid item key={post.id}>
               <div>
-                <Typography variant="h6">{post.title}</Typography>
+                <Typography variant="h6" sx={{ fontSize: "30px" }}>
+                  {post.title}
+                </Typography>
                 <Typography>{post.body}</Typography>
-                <Typography variant="caption">{post.createdAt}</Typography>
+                <Typography variant="caption">
+                  {dayjs(post.createdAt).format("MMMM DD, YYYY HH:mm A")}
+                </Typography>
                 <div style={{ marginTop: "auto", display: "flex", gap: 1 }}>
                   {likeStatus[post.id] ? (
                     <IconButton
