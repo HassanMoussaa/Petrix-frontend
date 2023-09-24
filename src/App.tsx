@@ -16,6 +16,7 @@ import BookAppointment from "./pages/DoctorProfile_User/BookAppointment";
 import Notfication from "./components/notification";
 import Petrix_doctors from "./pages/Ai_petOwner_ImgClass/Petrix_doctors";
 import DoctorsNearYou from "./pages/GoogleMaps/DoctorsNearYou";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
   return (
@@ -27,29 +28,98 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<HeroPage />} />
+
           {/* doctor routes */}
-          <Route path="/myProfile_doctor" element={<DoctorProfile />} />
-          <Route path="/appointments" element={<Appointments />} />
-          <Route path="/post" element={<DoctorPost />} />
+          <Route
+            path="/myProfile_doctor"
+            element={
+              <ProtectedRoute>
+                <DoctorProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/appointments"
+            element={
+              <ProtectedRoute>
+                <Appointments />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/post"
+            element={
+              <ProtectedRoute>
+                <DoctorPost />
+              </ProtectedRoute>
+            }
+          />
           {/* petOwner routes */}
-          <Route path="/myProfile_petOwner" element={<PetOwnerProfile />} />
           <Route
-            path="/ai_imageClassification"
-            element={<Ai_imageClassification_Main />}
+            path="/myProfile_petOwner"
+            element={
+              <ProtectedRoute>
+                <PetOwnerProfile />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/ai_imageClassification"
-            element={<Ai_imageClassification_Main />}
+            element={
+              <ProtectedRoute>
+                <Ai_imageClassification_Main />
+              </ProtectedRoute>
+            }
           />
-          <Route path="/ai_results" element={<Ai_results />} />
+          <Route
+            path="/ai_imageClassification"
+            element={
+              <ProtectedRoute>
+                <Ai_imageClassification_Main />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/ai_results"
+            element={
+              <ProtectedRoute>
+                <Ai_results />
+              </ProtectedRoute>
+            }
+          />
           {/* Route for doctor profile from petOwner */}
-          <Route path="/profile/:id" element={<DoctorProfile_user />} />
+          <Route
+            path="/profile/:id"
+            element={
+              <ProtectedRoute>
+                <DoctorProfile_user />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/book_appointment/:docId"
-            element={<BookAppointment />}
+            element={
+              <ProtectedRoute>
+                <BookAppointment />
+              </ProtectedRoute>
+            }
           />
-          <Route path="/petrix-doctors" element={<Petrix_doctors />} />
-          <Route path="/doctors-near-you" element={<DoctorsNearYou />} />
+          <Route
+            path="/petrix-doctors"
+            element={
+              <ProtectedRoute>
+                <Petrix_doctors />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/doctors-near-you"
+            element={
+              <ProtectedRoute>
+                <DoctorsNearYou />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
