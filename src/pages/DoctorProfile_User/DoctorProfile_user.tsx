@@ -12,8 +12,9 @@ import { SxProps } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
 import CreateReviewModal from "../../components/Doctor/CreateReviewModal";
 import DoctorReviewSection from "../../components/Doctor/DoctorReviewSection";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import UserLocation from "../../components/UserLocation/UserLocation";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 interface Specialty {
   id: number;
@@ -81,6 +82,7 @@ function DoctorProfile_user() {
   const params = useParams();
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
   const [userInfo, setUserInfo] = useState<DoctorInfo>();
+  const navigate = useNavigate();
 
   const [reviews, setReviews] = useState<Review[]>(
     doctorInfo?.doctorReviews || []
@@ -93,7 +95,13 @@ function DoctorProfile_user() {
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
 
+  const user_id = login_status.user_id;
   const userType = login_status.user_type;
+
+  const docId = params?.id;
+  if (user_id == docId) {
+    navigate("/myProfile_doctor");
+  }
   // For toggle section
 
   function a11yProps(index: number) {
@@ -144,7 +152,6 @@ function DoctorProfile_user() {
   async function fetchmyProfile() {
     try {
       let apiEndpoint;
-
       if (userType === 1) {
         apiEndpoint = `/petOwners/myProfile/`;
       } else if (userType === 2) {
