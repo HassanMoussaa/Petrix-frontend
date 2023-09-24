@@ -200,6 +200,7 @@ function DoctorProfile() {
           sx={{
             display: { xs: "flex" },
             flexDirection: { xs: "column" },
+            position: "relative",
           }}
         >
           <Box sx={{ width: "100%" }}>
@@ -229,7 +230,13 @@ function DoctorProfile() {
             </CustomTabPanel>
             <Zoom key="primary" in={value === 0} unmountOnExit>
               <Fab
-                sx={{ position: "absolute", bottom: 16, right: 16 } as SxProps}
+                sx={
+                  {
+                    position: "absolute",
+                    bottom: 16,
+                    right: 16,
+                  } as SxProps
+                }
                 aria-label="Create post"
                 color="primary"
                 onClick={handleOpenModal}
