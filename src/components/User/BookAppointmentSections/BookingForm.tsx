@@ -211,9 +211,10 @@ function BookingForm(props: BookingFormProps) {
               label="Available Time Slots"
             >
               {availableSlots.length === 0 ? (
-                <Typography variant="body1" color="textSecondary">
-                  No available slots found.
-                </Typography>
+                // <Typography variant="body1" color="textSecondary">
+                //   No available slots found.
+                // </Typography>
+                <MenuItem disabled>No available slots found.</MenuItem>
               ) : (
                 availableSlots.map((slot, index) => (
                   <MenuItem key={index} value={slot.start}>
