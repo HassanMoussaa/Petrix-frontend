@@ -64,10 +64,10 @@ function DoctorCard({ doctor }: DoctorCardProps) {
             variant="contained"
             sx={{ background: "#16A4C3" }}
             onClick={() => {
-              navigate("/profile", {
-                state: {
-                  id,
-                },
+              navigate(`/profile/${id}`, {
+                // state: {
+                //   id,
+                // },
               });
             }}
           >
