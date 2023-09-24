@@ -79,7 +79,7 @@ function DoctorsNearYou() {
           setNewImageUrl={setNewImageUrl}
           firstName={userInfo.firstName}
           lastName={userInfo.lastName}
-          pageTitle={"AI CLASSIFICATION"}
+          pageTitle={"PETRIX Maps"}
         />
       )}
       <DoctorLocations />
