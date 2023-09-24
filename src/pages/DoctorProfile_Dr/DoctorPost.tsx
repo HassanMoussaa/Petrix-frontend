@@ -3,7 +3,15 @@ import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
 import "./doctorProfile.css";
-import { Box, Paper, Typography, TextField, Button, Grid } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Typography,
+  TextField,
+  Button,
+  Grid,
+  Avatar,
+} from "@mui/material";
 import { useLocation } from "react-router-dom";
 
 interface UserType {
@@ -26,6 +34,7 @@ interface Comment {
   user: {
     firstName: string;
     lastName: string;
+    photoUrl: string;
   };
 }
 
@@ -57,6 +66,10 @@ function DoctorPost() {
   let login_status = JSON.parse(localStorage.getItem("login") || "");
   const userType = login_status.user_type;
 
+  // Pagination part
+  const [currentPage, setCurrentPage] = useState(1);
+  const commentsPerPage = 5; //
+  const [commentsExpanded, setCommentsExpanded] = useState(false);
   useEffect(() => {
     async function fetchDoctorProfile() {
       try {
@@ -113,7 +126,15 @@ function DoctorPost() {
 
     fetchPost();
     fetchPostComments();
-  }, [postId]);
+  }, [postId, currentPage]);
+
+  const totalPages = Math.ceil(postComments.length / commentsPerPage);
+  const [displayedCommentsCount, setDisplayedCommentsCount] =
+    useState(commentsPerPage);
+
+  const handleShowMoreComments = () => {
+    setCommentsExpanded(!commentsExpanded);
+  };
 
   const handleAddComment = async () => {
     if (selectedPost && newComment) {
@@ -136,7 +157,7 @@ function DoctorPost() {
     <div className="drBody">
       {doctorInfo && (
         <NavBar
-          imageUrl={newImageUrl}
+          imageUrl={doctorInfo.photoUrl}
           setNewImageUrl={setNewImageUrl}
           firstName={doctorInfo.firstName}
           lastName={doctorInfo.lastName}
@@ -156,26 +177,7 @@ function DoctorPost() {
       {selectedPost && (
         <Grid container justifyContent="center" mt={3}>
           <Grid item xs={12} md={8}>
-            <Typography variant="h5">Comments</Typography>
-            <div
-              style={{
-                maxHeight: "300px",
-                overflowY: "auto",
-              }}
-            >
-              {postComments.map((comment) => (
-                <Paper
-                  key={comment.id}
-                  sx={{ p: 2, mt: 2, backgroundColor: "white" }}
-                >
-                  <Typography variant="caption">
-                    {comment.user.firstName} {comment.user.lastName} -{" "}
-                    {comment.createdAt}
-                  </Typography>
-                  <Typography variant="body1">{comment.body}</Typography>
-                </Paper>
-              ))}
-            </div>
+            <Typography variant="h5">Add a Comment</Typography>
             <TextField
               fullWidth
               variant="outlined"
@@ -193,6 +195,50 @@ function DoctorPost() {
               sx={{ mt: 2 }}
             >
               Add Comment
+            </Button>
+          </Grid>
+        </Grid>
+      )}
+      {selectedPost && (
+        <Grid container justifyContent="center" mt={3}>
+          <Grid item xs={12} md={8}>
+            <Typography variant="h5">Comments</Typography>
+            <div
+              style={{
+                backgroundColor: "white",
+                padding: "16px",
+                borderRadius: "8px",
+              }}
+            >
+              {postComments
+                .slice(0, commentsExpanded ? undefined : displayedCommentsCount)
+                .map((comment) => (
+                  <div key={comment.id} style={{ marginBottom: "16px" }}>
+                    <Grid container alignItems="center" spacing={2}>
+                      <Grid item>
+                        <Avatar src={comment.user.photoUrl} />
+                      </Grid>
+                      <Grid item>
+                        <Typography variant="body1">
+                          {comment.user.firstName} {comment.user.lastName}
+                        </Typography>
+                        <Typography variant="caption">
+                          {comment.createdAt}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Typography variant="body1" style={{ marginTop: "8px" }}>
+                      {comment.body}
+                    </Typography>
+                  </div>
+                ))}
+            </div>
+            <Button
+              variant="outlined"
+              onClick={handleShowMoreComments}
+              sx={{ mt: 2 }}
+            >
+              {commentsExpanded ? "Hide Comments" : "Show More"}
             </Button>
           </Grid>
         </Grid>
