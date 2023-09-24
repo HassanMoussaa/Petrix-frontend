@@ -4,7 +4,7 @@ export const getLocationFromCoordinates = async (coords) => {
   return new Promise((resolve, reject) => {
     geocoder.geocode({ location: coords }, (result, status) => {
       if (status === "OK") {
-        resolve([coords?.lng, coords?.lat]);
+        resolve([coords?.lat, coords?.lng]);
       } else {
         reject(new Error("Geocoder failed due to: " + status));
       }

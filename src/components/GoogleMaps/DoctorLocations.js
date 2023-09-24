@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const DoctorLocations = () => {
@@ -9,16 +9,27 @@ const DoctorLocations = () => {
     { id: 2, name: "Location 2", lat: 34.0522, lng: -118.2437 },
     { id: 3, name: "Location 3", lat: 40.7128, lng: -74.006 },
   ];
+
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const mapRef = useRef(null);
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
+
+    if (mapRef.current) {
+      const map = mapRef.current.state.map;
+      map.panTo({ lat: location.lat, lng: location.lng });
+      map.setZoom(5);
+    }
   };
 
   return (
     <LoadScript googleMapsApiKey={apiKey}>
       <div style={{ height: "100vh", width: "100vw" }}>
         <GoogleMap
+          onLoad={(map) => {
+            mapRef.current = map;
+          }}
           center={locations[0]}
           zoom={8}
           mapContainerStyle={{ height: "100%", width: "100%" }}
@@ -37,8 +48,8 @@ const DoctorLocations = () => {
                 lng: selectedLocation.lng,
               }}
               icon={{
-                url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png", // You can customize the marker icon
-                scaledSize: new window.google.maps.Size(40, 40), // Adjust the size as needed
+                url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                scaledSize: new window.google.maps.Size(40, 40),
               }}
             />
           )}

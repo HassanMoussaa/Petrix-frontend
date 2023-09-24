@@ -7,8 +7,8 @@ const UserLocation = ({ location }) => {
     googleMapsApiKey: "AIzaSyDTfjTU0uNZK4EMSuWd5vUiMi4ShwgTlFw",
   });
 
-  const lat = parseFloat(location[1]);
-  const lng = parseFloat(location[0]);
+  const lat = parseFloat(location[0]);
+  const lng = parseFloat(location[1]);
 
   console.log("COORDS:: ", lat, lng);
 
@@ -26,14 +26,14 @@ const UserLocation = ({ location }) => {
         lat,
         lng,
       }}
-      zoom={10}
+      zoom={15}
     >
       <Marker
         position={{
           lat,
           lng,
         }}
-        draggable={false}
+        // draggable={true}
       />
     </GoogleMap>
   );

@@ -13,8 +13,8 @@ const GoogleMaps = ({ location, setLocation }) => {
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDTfjTU0uNZK4EMSuWd5vUiMi4ShwgTlFw",
   });
-  const lat = parseInt(location[1]);
-  const lng = parseInt(location[0]);
+  const lat = parseFloat(location[0]);
+  const lng = parseFloat(location[1]);
 
   const onLoad = React.useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds({
@@ -32,7 +32,8 @@ const GoogleMaps = ({ location, setLocation }) => {
 
   const handleCurrentLocation = async () => {
     const res = await getCurrentLocation();
-    saveClinicLocation(res[1], res[0]);
+    saveClinicLocation(res[0], res[1]);
+    console.log(res);
   };
 
   //function to save clinic Coordinates
@@ -50,12 +51,12 @@ const GoogleMaps = ({ location, setLocation }) => {
       const response = await axios.post(
         getAPIBaseURL() + "/doctors/location",
         {
-          lng: longitude,
           lat: latitude,
+          lng: longitude,
         },
         config
       );
-      setLocation([longitude, latitude]);
+      setLocation([latitude, longitude]);
     } catch (error) {
       console.error("Error fetching doctor profile:", error);
     }
@@ -87,7 +88,7 @@ const GoogleMaps = ({ location, setLocation }) => {
           lat,
           lng,
         }}
-        zoom={13}
+        zoom={15}
       >
         <CustomButton onClick={handleCurrentLocation}>
           <Typography>User current location</Typography>
