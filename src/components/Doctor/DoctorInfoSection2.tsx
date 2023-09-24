@@ -41,7 +41,7 @@ interface DoctorInfoSection2 {
 
 function DoctorInfoSection2(props: DoctorInfoSection2) {
   const { phoneNum, profileBio, drEmail, specialityList } = props;
-
+  console.log(drEmail);
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -137,9 +137,8 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
             >
               <Typography
                 sx={{
-                  // fontWeight: "bold",
-                  color: "#16A4C3",
                   fontSize: 20,
+                  color: "#16A4C3",
                 }}
               >
                 Contact Info
@@ -154,24 +153,14 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
                 gap: 1,
               }}
             >
-              <Typography
-                sx={{
-                  // fontWeight: "bold",
-                  //   color: "#16A4C3",
-                  fontSize: 20,
-                }}
-              >
-                <LocalPhoneOutlinedIcon />:{phoneNum}
-              </Typography>
-              <Typography
-                sx={{
-                  // fontWeight: "bold",
-                  //   color: "#16A4C3",
-                  fontSize: 20,
-                }}
-              >
-                <EmailOutlinedIcon />:{drEmail}
-              </Typography>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <LocalPhoneOutlinedIcon sx={{ fontSize: 20, marginRight: 1 }} />
+                <Typography sx={{ fontSize: 20 }}>{phoneNum}</Typography>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <EmailOutlinedIcon sx={{ fontSize: 20, marginRight: 1 }} />
+                <Typography sx={{ fontSize: 20 }}>{drEmail}</Typography>
+              </Box>
             </Grid>
           </Grid>
           <Grid
