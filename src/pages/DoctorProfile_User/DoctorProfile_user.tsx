@@ -251,8 +251,8 @@ function DoctorProfile_user() {
               {doctorInfo?.clinicLocations && (
                 <UserLocation
                   location={[
-                    doctorInfo?.clinicLocations?.longitude,
                     doctorInfo?.clinicLocations?.latitude,
+                    doctorInfo?.clinicLocations?.longitude,
                   ]}
                 />
               )}

@@ -149,10 +149,10 @@ function DoctorProfile() {
   const [location, setLocation] = useState(
     doctorInfo?.clinicLocations
       ? [
-          doctorInfo?.clinicLocations?.longitude,
           doctorInfo?.clinicLocations?.latitude,
+          doctorInfo?.clinicLocations?.longitude,
         ]
-      : [35.49442, 33.88894]
+      : [33.8938, 35.5018]
   );
 
   return (
