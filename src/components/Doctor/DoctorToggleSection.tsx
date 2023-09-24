@@ -3,7 +3,7 @@ import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
 import dayjs from "dayjs";
 
-import { Grid, Paper, Typography, List, IconButton } from "@mui/material";
+import { Grid, Box, Typography, List, IconButton } from "@mui/material";
 import {
   FavoriteBorderOutlined,
   ChatBubbleOutlineOutlined,
@@ -105,14 +105,29 @@ function DoctorToggleSection(props: DoctorToggleSection) {
           {postList.map((post) => (
             <Grid item key={post.id}>
               <div>
-                <Typography variant="h6" sx={{ fontSize: "30px" }}>
-                  {post.title}
-                </Typography>
-                <Typography>{post.body}</Typography>
-                <Typography variant="caption">
-                  {dayjs(post.createdAt).format("MMMM DD, YYYY HH:mm A")}
-                </Typography>
-                <div style={{ marginTop: "auto", display: "flex", gap: 1 }}>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Typography variant="h6" sx={{ fontSize: "30px" }}>
+                    {post.title}
+                  </Typography>
+
+                  <Typography
+                    variant="caption"
+                    alignSelf={"flex-start"}
+                    sx={{ color: "gray", fontSize: 9 }}
+                  >
+                    {dayjs(post.createdAt).format("MMMM DD, YYYY HH:mm A")}
+                  </Typography>
+                </Box>
+                <Typography sx={{ mt: 2 }}>{post.body}</Typography>
+
+                <div
+                  style={{
+                    marginTop: "10px",
+                    display: "flex",
+                    gap: 1,
+                    marginBottom: "10px",
+                  }}
+                >
                   {likeStatus[post.id] ? (
                     <IconButton
                       onClick={() => unLikeUser(post.id)}
