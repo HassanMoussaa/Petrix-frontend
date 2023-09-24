@@ -98,7 +98,14 @@ function DoctorToggleSection(props: DoctorToggleSection) {
     >
       <Grid
         container
-        sx={{ backgroundColor: "white", p: 2, gap: 2 }}
+        sx={{
+          backgroundColor: "white",
+          p: 2,
+          gap: 2,
+          border: 1,
+          borderRadius: "16px",
+          borderColor: "#A7A7A7",
+        }}
         className="scrollable-content"
       >
         <List sx={{ gap: 2 }}>

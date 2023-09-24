@@ -24,7 +24,15 @@ function DoctorReviewSection(props: DoctorReviewSectionProps) {
   return (
     <Paper
       elevation={3}
-      sx={{ p: 2, maxHeight: 350, overflowX: "hidden", overflowY: "auto" }}
+      sx={{
+        p: 2,
+        maxHeight: 350,
+        overflowX: "hidden",
+        overflowY: "auto",
+        border: 1,
+        borderRadius: "16px",
+        borderColor: "#A7A7A7",
+      }}
     >
       <Grid container spacing={2}>
         {reviewList.map((review) => (

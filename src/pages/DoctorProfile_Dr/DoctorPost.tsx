@@ -167,7 +167,15 @@ function DoctorPost() {
       {selectedPost && (
         <Grid container justifyContent="center" mt={3}>
           <Grid item xs={12} md={8}>
-            <Paper sx={{ p: 2, backgroundColor: "white" }}>
+            <Paper
+              sx={{
+                p: 2,
+                backgroundColor: "white",
+                border: 1,
+                borderRadius: "8px",
+                borderColor: "#A7A7A7",
+              }}
+            >
               <Typography variant="h4">{selectedPost.title}</Typography>
               <Typography variant="body1">{selectedPost.body}</Typography>
             </Paper>
@@ -208,6 +216,8 @@ function DoctorPost() {
                 backgroundColor: "white",
                 padding: "16px",
                 borderRadius: "8px",
+                border: "1px solid",
+                borderColor: "#A7A7A7",
               }}
             >
               {postComments
