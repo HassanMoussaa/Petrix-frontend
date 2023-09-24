@@ -224,6 +224,7 @@ function DoctorProfile_user() {
           sx={{
             display: { xs: "flex" },
             flexDirection: { xs: "column" },
+            position: "relative",
           }}
         >
           <Box sx={{ width: "100%" }}>
