@@ -40,6 +40,7 @@ function Ai_results() {
   const [sucessAlertOpen, setSucessAlertOpen] = useState<boolean>(false);
   const [newImageUrl, setNewImageUrl] = useState(userInfo?.photoUrl);
   const [showAnimalNameDialog, setShowAnimalNameDialog] = useState(false);
+  const [shouldNavigateToChat, setShouldNavigateToChat] = useState(false);
 
   let login_status = JSON.parse(localStorage.getItem("login") || "");
 
@@ -101,7 +102,11 @@ function Ai_results() {
         );
 
         if (response.status === 200) {
-          navigate("/petrix-doctors", { state: { breed, name } });
+          if (shouldNavigateToChat) {
+            navigate("/chatbot", { state: { breed, name } });
+          } else {
+            navigate("/petrix-doctors", { state: { breed, name } });
+          }
         } else {
           console.error("API error:", response.data);
         }
@@ -158,13 +163,20 @@ function Ai_results() {
                   <Button
                     variant="contained"
                     sx={{ backgroundColor: "#16A4C3" }}
-                    onClick={handlePetrixDoctorsClick}
+                    onClick={() => {
+                      handlePetrixDoctorsClick();
+                      setShouldNavigateToChat(false);
+                    }}
                   >
                     Check Petrix <br /> Doctors
                   </Button>
                   <Button
                     variant="contained"
                     sx={{ backgroundColor: "#16A4C3" }}
+                    onClick={() => {
+                      handlePetrixDoctorsClick();
+                      setShouldNavigateToChat(true);
+                    }}
                   >
                     Ask Ai Bot
                   </Button>
