@@ -7,6 +7,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import "./appointments.css";
 import AppointmentsCards from "../../components/Doctor/AppointmentsCards";
+import BackButton from "../../components/BackButton";
 
 interface Specialty {
   id: number;
@@ -164,6 +165,7 @@ function Appointments() {
           pageTitle={"Appointments"}
         />
       )}
+      <BackButton />
       <Grid
         container
         ml={23}

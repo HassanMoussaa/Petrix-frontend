@@ -16,6 +16,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import UserLocation from "../../components/UserLocation/UserLocation";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import BackButton from "../../components/BackButton";
 interface Specialty {
   id: number;
   speciality: string;
@@ -205,6 +206,7 @@ function DoctorProfile_user() {
           pageTitle={"Profile"}
         />
       )}
+      <BackButton customStyling={{ left: "5%" }} />
       {doctorInfo && (
         <DoctorInfoSection
           imageUrl={newImageUrl}

@@ -15,6 +15,7 @@ import {
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { HfInference } from "@huggingface/inference";
+import BackButton from "../../components/BackButton";
 interface UserType {
   id: number;
   type: string;
@@ -36,7 +37,7 @@ interface DoctorInfo {
 function Ai_imageClassification_Main() {
   const [userInfo, setUserInfo] = useState<DoctorInfo>();
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
-  const [sucessAlertOpen, setSucessAlertOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [newImageUrl, setNewImageUrl] = useState(userInfo?.photoUrl);
   const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
@@ -114,11 +115,12 @@ function Ai_imageClassification_Main() {
 
   const classifyImage = async (): Promise<void> => {
     if (!selectedImage) {
+      setLoading(false);
       setAlertMessage("Please select an image !");
       setAlertOpen(true);
       return;
     }
-
+    setLoading(true);
     // Convert the Data URL to a Blob
     const blobData = dataURLtoBlob(selectedImage);
 
@@ -127,6 +129,7 @@ function Ai_imageClassification_Main() {
       data: blobData,
       model: "microsoft/resnet-50",
     });
+    setLoading(false);
     console.log("RES:: ", res);
     navigate("/ai_results", {
       state: {
@@ -172,7 +175,7 @@ function Ai_imageClassification_Main() {
           pageTitle={"AI CLASSIFICATION"}
         />
       )}
-
+      <BackButton />
       <Container>
         <Grid container justifyContent="center" alignItems="center" spacing={2}>
           <Grid item xs={12} textAlign="center">
@@ -195,13 +198,17 @@ function Ai_imageClassification_Main() {
           </Grid>
 
           <Grid item xs={6} textAlign="center">
-            <Button
-              variant="outlined"
-              sx={{ color: "#212121" }}
-              onClick={classifyImage}
-            >
-              Classify Image
-            </Button>
+            {!loading ? (
+              <Button
+                variant="outlined"
+                sx={{ color: "#212121" }}
+                onClick={classifyImage}
+              >
+                Classify Image
+              </Button>
+            ) : (
+              <p>Loading...</p>
+            )}
           </Grid>
         </Grid>
       </Container>

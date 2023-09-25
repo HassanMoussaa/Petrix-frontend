@@ -113,7 +113,6 @@ function Petrix_doctors() {
           pageTitle={"Recommended Doctors "}
         />
       )}
-
       <Container>
         <Grid container spacing={2} mt={10} ml={4}>
           {searchResults.map((doctor) => (

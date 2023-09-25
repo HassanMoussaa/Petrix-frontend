@@ -15,6 +15,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CreatePostModal from "../../components/Doctor/CreatePostModal";
 import DoctorReviewSection from "../../components/Doctor/DoctorReviewSection";
 import GoogleMaps from "../../components/GoogleMaps/GoogleMaps";
+import BackButton from "../../components/BackButton";
 
 interface Specialty {
   id: number;
@@ -175,6 +176,7 @@ function DoctorProfile() {
           pageTitle={"Profile"}
         />
       )}
+      <BackButton />
       {doctorInfo && (
         <DoctorInfoSection
           imageUrl={newImageUrl}

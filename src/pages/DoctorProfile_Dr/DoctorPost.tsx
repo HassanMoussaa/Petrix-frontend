@@ -13,6 +13,7 @@ import {
   Avatar,
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import BackButton from "../../components/BackButton";
 
 interface UserType {
   id: number;
@@ -164,6 +165,7 @@ function DoctorPost() {
           pageTitle={"Blog Page"}
         />
       )}
+      <BackButton />
       {selectedPost && (
         <Grid container justifyContent="center" mt={3}>
           <Grid item xs={12} md={8}>
