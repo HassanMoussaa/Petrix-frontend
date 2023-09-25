@@ -38,6 +38,11 @@ interface Specialty {
     UserId: number;
   };
 }
+interface Availability {
+  day: number;
+  start_time: string;
+  end_time: string;
+}
 interface DoctorInfoSection {
   firstName: string;
   lastName: string;
@@ -51,6 +56,8 @@ interface DoctorInfoSection {
   phoneNum: string;
   profileBio: string;
   specialityList: Specialty[];
+  availabilityList: Availability[];
+  fetchDoctorProfile: () => void;
 }
 
 function DoctorInfoSection(props: DoctorInfoSection) {
@@ -67,6 +74,8 @@ function DoctorInfoSection(props: DoctorInfoSection) {
     phoneNum,
     profileBio,
     specialityList,
+    availabilityList,
+    fetchDoctorProfile,
   } = props;
   // const value = 4.5;
 
@@ -228,7 +237,8 @@ function DoctorInfoSection(props: DoctorInfoSection) {
                 profile={profileBio}
                 phone={phoneNum}
                 specialties={specialityList}
-                availability={{ days: [], start_time: "", end_time: "" }}
+                availability={availabilityList}
+                fetchDoctorProfile={fetchDoctorProfile}
               />
               <Button
                 variant="contained"

@@ -39,6 +39,12 @@ interface Specialty {
     UserId: number;
   };
 }
+
+interface Availability {
+  day: number;
+  start_time: string;
+  end_time: string;
+}
 interface EditProfileModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -47,11 +53,8 @@ interface EditProfileModalProps {
   profile: string;
   phone: string;
   specialties: Specialty[];
-  availability: {
-    days: number[];
-    start_time: string;
-    end_time: string;
-  };
+  availability: Availability[];
+  fetchDoctorProfile: () => void;
 }
 
 function EditProfileModal(props: EditProfileModalProps) {
@@ -64,6 +67,7 @@ function EditProfileModal(props: EditProfileModalProps) {
     phone,
     specialties,
     availability,
+    fetchDoctorProfile,
   } = props;
 
   const [updatedProfile, setUpdatedProfile] = useState(profile);
@@ -72,29 +76,45 @@ function EditProfileModal(props: EditProfileModalProps) {
     specialties.map((speciality) => speciality.speciality)
   );
 
-  // const [updatedSpecialties, setUpdatedSpecialties] =
-  //   useState<Specialty[]>(specialties);
-  const [updatedAvailability, setUpdatedAvailability] = useState(availability);
-  const [selectedDays, setSelectedDays] = useState<number[]>(availability.days);
+  const [selectedAvailability, setSelectedAvailability] = useState<number[]>(
+    availability.map((availability) => availability.day)
+  );
+
+  const [selectedDays, setSelectedDays] = useState<number[]>(
+    availability.map((availability) => availability.day)
+  );
+
+  // const [updatedAvailability, setUpdatedAvailability] = useState(availability);
+  const [startTime, setStartTime] = useState<string>(
+    availability[0]?.start_time || ""
+  );
+  const [endTime, setEndTime] = useState<string>(availability[0].end_time);
+
+  let config = {};
+  let login_status = JSON.parse(localStorage.getItem("login") || "");
+
+  const token = login_status.token;
+  config = { headers: { Authorization: `Bearer ${token}` } };
 
   const handleSave = async () => {
     try {
       const response = await axios.post(
-        getAPIBaseURL() + "/users/updateDoctorProfile",
+        getAPIBaseURL() + "/doctors/updateProfile",
         {
           profile: updatedProfile,
           phone: updatedPhone,
           specialties: selectedSpeciality,
           availability: {
-            days: selectedDays,
-            start_time: updatedAvailability.start_time,
-            end_time: updatedAvailability.end_time,
+            days: selectedAvailability,
+            start_time: startTime,
+            end_time: endTime,
           },
-        }
+        },
+        config
       );
 
       console.log("Profile updated successfully:", response.data);
-
+      fetchDoctorProfile();
       onClose();
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -109,8 +129,6 @@ function EditProfileModal(props: EditProfileModalProps) {
     } = event;
 
     if (value.length > 4) {
-      // Show a toast message or prevent further selection
-      // For example, you can set an error state or display a message
       console.error("Please select only 4 specialties");
     } else {
       setSelectedSpeciality(
@@ -195,24 +213,14 @@ function EditProfileModal(props: EditProfileModalProps) {
         <TextField
           label="Start Time"
           fullWidth
-          value={updatedAvailability.start_time}
-          onChange={(e) =>
-            setUpdatedAvailability({
-              ...updatedAvailability,
-              start_time: e.target.value,
-            })
-          }
+          value={startTime}
+          onChange={(e) => setStartTime(e.target.value)}
         />
         <TextField
           label="End Time"
           fullWidth
-          value={updatedAvailability.end_time}
-          onChange={(e) =>
-            setUpdatedAvailability({
-              ...updatedAvailability,
-              end_time: e.target.value,
-            })
-          }
+          value={endTime}
+          onChange={(e) => setEndTime(e.target.value)}
         />
         <Button onClick={handleSave} variant="contained" color="primary">
           Save
