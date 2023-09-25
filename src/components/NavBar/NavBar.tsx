@@ -24,7 +24,13 @@ interface ResponsiveAppBarProps {
 }
 
 function ResponsiveAppBar(props: ResponsiveAppBarProps) {
-  const { imageUrl, firstName, lastName, pageTitle, setNewImageUrl } = props;
+  const {
+    imageUrl,
+    firstName,
+    lastName,
+    pageTitle,
+    setNewImageUrl = () => {},
+  } = props;
   const login_status = JSON.parse(localStorage.getItem("login") || "{}");
   const user_type = login_status?.user_type ?? null;
 
