@@ -12,7 +12,8 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { styled } from "styled-components";
 
 interface ResponsiveAppBarProps {
   firstName: string;
@@ -24,8 +25,10 @@ interface ResponsiveAppBarProps {
 
 function ResponsiveAppBar(props: ResponsiveAppBarProps) {
   const { imageUrl, firstName, lastName, pageTitle, setNewImageUrl } = props;
+  const login_status = JSON.parse(localStorage.getItem("login") || "{}");
+  const user_type = login_status?.user_type ?? null;
 
-  const login_status = localStorage.getItem("login");
+  const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -49,21 +52,48 @@ function ResponsiveAppBar(props: ResponsiveAppBarProps) {
     setAnchorElUser(null);
   };
 
+  const handleNavClick = (route: string) => {
+    const loginData = localStorage.getItem("login")
+      ? JSON.parse(localStorage.getItem("login") || "")
+      : "";
+
+    if (!loginData) {
+      navigate("/login");
+    } else {
+      navigate(route);
+    }
+    setAnchorElNav(null);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+    setAnchorElUser(null);
+  };
+
+  const handleProfileNavigation = () => {
+    if (user_type === 2) {
+      navigate("/myProfile_doctor");
+    } else {
+      navigate("/myProfile_petOwner");
+    }
+  };
+
   const pages = [pageTitle];
-  const settings = ["Profile", "Dashboard", "Logout"];
   return (
     <AppBar position="static" elevation={0} style={{ background: "#F3F5F8" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box
-            component="img"
-            src={process.env.PUBLIC_URL + "/images/Petrix-nav-logo.svg"}
-            alt="logo"
-            sx={{
-              display: { xs: "none", md: "flex" },
-            }}
-          />
-
+          <Link to={"/"}>
+            <Box
+              component="img"
+              src={process.env.PUBLIC_URL + "/images/Petrix-nav-logo.svg"}
+              alt="logo"
+              sx={{
+                display: { xs: "none", md: "flex" },
+              }}
+            />
+          </Link>
           <Box
             sx={{
               flexGrow: 1,
@@ -163,11 +193,12 @@ function ResponsiveAppBar(props: ResponsiveAppBarProps) {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
+                  <MenuItem onClick={handleProfileNavigation}>
+                    <Typography textAlign="center">Profile</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
                 </Menu>
               </Box>
             ) : (
@@ -192,3 +223,9 @@ function ResponsiveAppBar(props: ResponsiveAppBarProps) {
   );
 }
 export default ResponsiveAppBar;
+
+const CustomLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+`;
