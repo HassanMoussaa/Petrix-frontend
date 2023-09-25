@@ -71,6 +71,14 @@ interface DoctorInfo {
     latitude: number;
     longitude: number;
   };
+  availabilities: Availability[];
+  fetchDoctorProfile: () => void;
+}
+
+interface Availability {
+  day: number;
+  start_time: string;
+  end_time: string;
 }
 
 interface TabPanelProps {
@@ -211,6 +219,8 @@ function DoctorProfile_user() {
           phoneNum={doctorInfo.phone || ""}
           profileBio={doctorInfo.profile}
           specialityList={doctorInfo.specialties}
+          availabilityList={doctorInfo.availabilities}
+          fetchDoctorProfile={fetchDoctorProfile}
         />
       )}
       <Grid
