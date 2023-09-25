@@ -8,40 +8,42 @@ function Welcome() {
         <Grid
           xs={12}
           md={4}
+          container
+          justifyContent="center"
+          alignItems="center"
           sx={{
             display: "flex",
             flexDirection: "column",
             gap: 5,
             mt: 5,
-            position: "relative",
+            alignItems: "center",
           }}
         >
-          <div
-            className="claws-image"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100px",
-              height: "auto",
-              zIndex: 1,
-            }}
-          >
-            <Box
-              component="img"
-              src={process.env.PUBLIC_URL + "/images/Claws.svg"}
-              alt="logo"
-              sx={{
+          <Grid sx={{ fontSize: 35, position: "relative" }}>
+            <div
+              className="claws-image"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
                 width: "100px",
                 height: "auto",
-                ml: "-35px",
-                mt: "-35px",
-                opacity: "0.5",
+                zIndex: 1,
               }}
-            />
-          </div>
-
-          <Grid sx={{ fontSize: 35 }}>
+            >
+              <Box
+                component="img"
+                src={process.env.PUBLIC_URL + "/images/Claws.svg"}
+                alt="logo"
+                sx={{
+                  width: "100px",
+                  height: "auto",
+                  ml: "-35px",
+                  mt: "-35px",
+                  opacity: "0.5",
+                }}
+              />
+            </div>
             <b>
               Until one has loved an <br /> animal, a part of one's soul <br />
               remains unawakened
