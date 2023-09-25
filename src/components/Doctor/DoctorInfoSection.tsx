@@ -26,7 +26,18 @@ import {
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import ChangeProfilePhoto from "./ChangeProfilePhoto";
+import EditProfileModal from "./EditProfileModal";
 
+interface Specialty {
+  id: number;
+  speciality: string;
+  User_Specialties: {
+    createdAt: string;
+    updatedAt: string;
+    SpecialtyId: number;
+    UserId: number;
+  };
+}
 interface DoctorInfoSection {
   firstName: string;
   lastName: string;
@@ -37,6 +48,9 @@ interface DoctorInfoSection {
   docId: number;
   check_if_followed: boolean;
   followerCount: number;
+  phoneNum: string;
+  profileBio: string;
+  specialityList: Specialty[];
 }
 
 function DoctorInfoSection(props: DoctorInfoSection) {
@@ -50,6 +64,9 @@ function DoctorInfoSection(props: DoctorInfoSection) {
     docId,
     check_if_followed,
     followerCount,
+    phoneNum,
+    profileBio,
+    specialityList,
   } = props;
   // const value = 4.5;
 
@@ -96,6 +113,13 @@ function DoctorInfoSection(props: DoctorInfoSection) {
       console.log(error);
     }
   }
+
+  //work for edit button
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const handleEditClick = () => {
+    setIsEditModalOpen(true);
+  };
 
   return (
     <Grid container sx={{ display: { xs: "flex" }, ml: 10, mt: 10, gap: 5 }}>
@@ -190,9 +214,22 @@ function DoctorInfoSection(props: DoctorInfoSection) {
                   },
                 }}
                 size="large"
+                onClick={handleEditClick}
               >
                 Edit
               </Button>
+
+              {/* Edit Profile Modal */}
+              <EditProfileModal
+                isOpen={isEditModalOpen}
+                onClose={() => setIsEditModalOpen(false)}
+                firstName={firstName}
+                lastName={lastName}
+                profile={profileBio}
+                phone={phoneNum}
+                specialties={specialityList}
+                availability={{ days: [], start_time: "", end_time: "" }}
+              />
               <Button
                 variant="contained"
                 href="/appointments"
