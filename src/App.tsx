@@ -17,6 +17,7 @@ import Notfication from "./components/notification";
 import Petrix_doctors from "./pages/Ai_petOwner_ImgClass/Petrix_doctors";
 import DoctorsNearYou from "./pages/GoogleMaps/DoctorsNearYou";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import AiChatBot from "./pages/Ai_ChatBot/AiChatBot";
 
 function App() {
   return (
@@ -75,7 +76,7 @@ function App() {
             path="/chatbot"
             element={
               <ProtectedRoute>
-                <Ai_imageClassification_Main />
+                <AiChatBot />
               </ProtectedRoute>
             }
           />
