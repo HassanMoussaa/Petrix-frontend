@@ -39,6 +39,7 @@ function Ai_imageClassification_Main() {
   const [sucessAlertOpen, setSucessAlertOpen] = useState<boolean>(false);
 
   const [newImageUrl, setNewImageUrl] = useState(userInfo?.photoUrl);
+  const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
 
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
@@ -92,7 +93,13 @@ function Ai_imageClassification_Main() {
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const file = e.target.files?.[0];
+    const files = e.target.files;
+
     if (file) {
+      if (files && files.length > 0) {
+        setSelectedImageFile(files[0]);
+      }
+
       const reader = new FileReader();
 
       reader.onload = (event) => {
@@ -125,6 +132,7 @@ function Ai_imageClassification_Main() {
       state: {
         selectedImage,
         classificationResults: JSON.parse(JSON.stringify(res)),
+        selectedImageFile,
       },
     });
   };
@@ -168,7 +176,7 @@ function Ai_imageClassification_Main() {
       <Container>
         <Grid container justifyContent="center" alignItems="center" spacing={2}>
           <Grid item xs={12} textAlign="center">
-            <Typography variant="h4">Add A Photo Of Your Animal</Typography>
+            <Typography variant="h4">Add A Photo Of Your Pet</Typography>
           </Grid>
 
           {selectedImage && (
