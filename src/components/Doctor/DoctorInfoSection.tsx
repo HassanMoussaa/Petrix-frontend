@@ -82,6 +82,7 @@ function DoctorInfoSection(props: DoctorInfoSection) {
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
   const token = login_status.token;
+  const user_type = login_status.user_type;
   config = { headers: { Authorization: `Bearer ${token}` } };
 
   // logic for follow feature
@@ -275,24 +276,26 @@ function DoctorInfoSection(props: DoctorInfoSection) {
                   Follow
                 </Button>
               )}
-              <Button
-                variant="contained"
-                href={`/book_appointment/${docId}`}
-                sx={{
-                  bgcolor: "#000",
-                  fontSize: 12,
-                  fontWeight: "bold",
-                  borderRadius: 3,
-                  maxWidth: 200,
-                  height: 50,
-                  "&:hover": {
-                    backgroundColor: "#16A4C3",
-                  },
-                }}
-                size="large"
-              >
-                Book Appointment
-              </Button>
+              {user_type === 1 && (
+                <Button
+                  variant="contained"
+                  href={`/book_appointment/${docId}`}
+                  sx={{
+                    bgcolor: "#000",
+                    fontSize: 12,
+                    fontWeight: "bold",
+                    borderRadius: 3,
+                    maxWidth: 200,
+                    height: 50,
+                    "&:hover": {
+                      backgroundColor: "#16A4C3",
+                    },
+                  }}
+                  size="large"
+                >
+                  Book Appointment
+                </Button>
+              )}
             </>
           )}
         </Grid>
