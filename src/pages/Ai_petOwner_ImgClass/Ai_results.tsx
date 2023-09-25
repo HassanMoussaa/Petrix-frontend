@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
+
 import {
   Box,
   Paper,
@@ -14,6 +15,7 @@ import {
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
+import AnimalNameForm from "../../components/User/AiComponents/AnimalNameForm";
 interface UserType {
   id: number;
   type: string;
@@ -37,12 +39,12 @@ function Ai_results() {
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
   const [sucessAlertOpen, setSucessAlertOpen] = useState<boolean>(false);
   const [newImageUrl, setNewImageUrl] = useState(userInfo?.photoUrl);
+  const [showAnimalNameDialog, setShowAnimalNameDialog] = useState(false);
 
-  let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
 
   const token = login_status.token;
-  config = { headers: { Authorization: `Bearer ${token}` } };
+  let config = { headers: { Authorization: `Bearer ${token}` } };
   const userType = login_status.user_type;
   const [error, setError] = useState(Boolean);
   const navigate = useNavigate();
@@ -68,17 +70,47 @@ function Ai_results() {
 
   // Ai results
   const location = useLocation();
-  const { selectedImage, classificationResults } = location.state;
+  const { selectedImage, classificationResults, selectedImageFile } =
+    location.state;
 
   const petLabel = classificationResults[0].label;
   const arr = petLabel.split(" ");
-
+  // console.log(selectedImage);
   const breed = arr[arr.length - 1];
   const handlePetrixDoctorsClick = () => {
-    // Call an API to save the animal/pet and get results
-    // Assuming `apiResponse` contains the results
+    setShowAnimalNameDialog(true);
+  };
 
-    navigate("/petrix-doctors", { state: { breed } });
+  const handleNameSubmit = async (name: string) => {
+    if (selectedImage) {
+      const formData = new FormData();
+      formData.append("image", selectedImageFile);
+      formData.append("name", name);
+      formData.append("breed", breed);
+
+      try {
+        const response = await axios.post(
+          getAPIBaseURL() + "/users/save_pet",
+          formData,
+          {
+            headers: {
+              ...config.headers,
+              "Content-Type": "multipart/form-data", // Set the content type for FormData
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          navigate("/petrix-doctors", { state: { breed, name } });
+        } else {
+          console.error("API error:", response.data);
+        }
+      } catch (error) {
+        console.error("API call error:", error);
+      }
+
+      setShowAnimalNameDialog(false);
+    }
   };
 
   useEffect(() => {
@@ -160,6 +192,13 @@ function Ai_results() {
           </Grid>
         </Grid>
       </Container>
+
+      {/* Animal Name Dialog */}
+      <AnimalNameForm
+        open={showAnimalNameDialog}
+        onClose={() => setShowAnimalNameDialog(false)}
+        onNameSubmit={handleNameSubmit}
+      />
     </div>
   );
 }
