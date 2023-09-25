@@ -19,38 +19,38 @@ const image_classification_card = {
   imageUrl: "ImageClassification.svg",
   title: "AI Image Classification",
   body: "Upload photo of an animal to check its type",
-  navigate: "page1",
+  route: "/ai_imageClassification",
 };
 const chatbot_card = {
   imageUrl: "ChatBot.svg",
   title: "AI Chat Bot",
   body: "Chat of AI",
-  navigate: "page2",
+  route: "/chatbot",
 };
 const doctors_near_you_card = {
   imageUrl: "ImageClassification.svg",
   title: "AI Image Classification",
   body: "Upload photo of an animal to check its type",
-  navigate: "page1",
+  route: "/doctors-near-you",
 };
 const customized_pages_card = {
   imageUrl: "Customized_pages .svg",
   title: "Customized Pages",
   body: "Customize your profile",
-  navigate: "page3",
+  route: "/myProfile_doctor",
 };
 const handle_bookings_card = {
   imageUrl: "HandleBookings.svg",
   title: "Handle Bookings",
   body: "Manage your appointments",
-  navigate: "page4",
+  route: "myProfile_doctor",
 };
 
 interface HeroCard {
   imageUrl: string;
   title: string;
   body: string;
-  navigate: string;
+  route: string;
 }
 
 interface HeroCardMapping {
@@ -100,42 +100,46 @@ function HeroPage() {
         </Typography>
       </Grid>
       <Grid container justifyContent={"center"} gap={1}>
-        <Grid xs={3}>
-          <Typography
-            align="center"
-            fontSize={22}
-            mt={5}
-            mb={3}
-            sx={{
-              display: {
-                xs: "none",
-                md: "flex",
-                justifyContent: "center",
-                color: "#FA6900",
-              },
-            }}
-          >
-            <b>PET OWNER</b>
-          </Typography>
-        </Grid>
-        <Grid xs={3}>
-          <Typography
-            align="center"
-            fontSize={22}
-            mt={5}
-            mb={3}
-            sx={{
-              display: {
-                xs: "none",
-                md: "flex",
-                justifyContent: "center",
-                color: "#16A4C3",
-              },
-            }}
-          >
-            <b>DOCTORS</b>
-          </Typography>
-        </Grid>
+        {user_type === "petOwner" && (
+          <Grid xs={3}>
+            <Typography
+              align="center"
+              fontSize={22}
+              mt={5}
+              mb={3}
+              sx={{
+                display: {
+                  xs: "none",
+                  md: "flex",
+                  justifyContent: "center",
+                  color: "#FA6900",
+                },
+              }}
+            >
+              <b>PET OWNER</b>
+            </Typography>
+          </Grid>
+        )}
+        {user_type === "doctor" && (
+          <Grid xs={3}>
+            <Typography
+              align="center"
+              fontSize={22}
+              mt={5}
+              mb={3}
+              sx={{
+                display: {
+                  xs: "none",
+                  md: "flex",
+                  justifyContent: "center",
+                  color: "#16A4C3",
+                },
+              }}
+            >
+              <b>DOCTORS</b>
+            </Typography>
+          </Grid>
+        )}
       </Grid>
       <Grid
         container
@@ -145,14 +149,18 @@ function HeroPage() {
           gap: 5,
         }}
       >
-        {hero_cards[user_type].map((card) => (
-          <Card
-            imageUrl={card.imageUrl}
-            title={card.title}
-            body={card.body}
-            onClick={() => navigate(`/${card.navigate}`)}
-          />
-        ))}
+        {hero_cards[user_type].map((card) => {
+          return (
+            <Card
+              imageUrl={card.imageUrl}
+              title={card.title}
+              body={card.body}
+              onClick={() => {
+                navigate(card.route);
+              }}
+            />
+          );
+        })}
       </Grid>
 
       <TopDoctors />
