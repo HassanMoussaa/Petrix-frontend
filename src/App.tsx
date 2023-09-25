@@ -72,7 +72,7 @@ function App() {
             }
           />
           <Route
-            path="/ai_imageClassification"
+            path="/chatbot"
             element={
               <ProtectedRoute>
                 <Ai_imageClassification_Main />
