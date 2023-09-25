@@ -208,6 +208,9 @@ function DoctorProfile_user() {
           docId={doctorInfo.id}
           check_if_followed={doctorInfo.check_if_followed}
           followerCount={doctorInfo.followerCount}
+          phoneNum={doctorInfo.phone || ""}
+          profileBio={doctorInfo.profile}
+          specialityList={doctorInfo.specialties}
         />
       )}
       <Grid
