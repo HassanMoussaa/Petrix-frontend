@@ -15,6 +15,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CreatePostModal from "../../components/Doctor/CreatePostModal";
 import DoctorReviewSection from "../../components/Doctor/DoctorReviewSection";
 import PetOwnerInfoSection from "../../components/PetOwner/PetOwnerInfoSection";
+import BackButton from "../../components/BackButton";
 
 interface UserType {
   id: number;
@@ -122,6 +123,7 @@ function PetOwnerProfile() {
           pageTitle={"Profile"}
         />
       )}
+      <BackButton />
       {petOwnerInfo && (
         <PetOwnerInfoSection
           imageUrl={newImageUrl}
