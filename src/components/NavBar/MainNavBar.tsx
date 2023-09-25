@@ -12,10 +12,9 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link } from "react-router-dom";
-
-const pages = ["HOME", "SERVICE", "AI ASSISTENT"];
-const settings = ["Profile", "Dashboard", "Logout"];
+import { Link, useNavigate } from "react-router-dom";
+import { ROUTES } from "../../routes";
+import { styled } from "styled-components";
 
 interface ResponsiveAppBarProps {
   firstName: string;
@@ -25,8 +24,9 @@ interface ResponsiveAppBarProps {
 
 function ResponsiveAppBar(props: ResponsiveAppBarProps) {
   const { imageUrl, firstName, lastName } = props;
-
-  const login_status = localStorage.getItem("login");
+  const navigate = useNavigate();
+  const login_status = JSON.parse(localStorage.getItem("login") || "{}");
+  const user_type = login_status?.user_type ?? null;
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -42,26 +42,48 @@ function ResponsiveAppBar(props: ResponsiveAppBarProps) {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleNavClick = (route: string) => {
+    const loginData = localStorage.getItem("login")
+      ? JSON.parse(localStorage.getItem("login") || "")
+      : "";
+
+    if (!loginData) {
+      navigate("/login");
+    } else {
+      navigate(route);
+    }
     setAnchorElNav(null);
+    setAnchorElUser(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
     setAnchorElUser(null);
+  };
+
+  const handleProfileNavigation = () => {
+    if (user_type === 2) {
+      navigate("/myProfile_doctor");
+    } else {
+      navigate("/myProfile_petOwner");
+    }
   };
 
   return (
     <AppBar position="static" elevation={0} style={{ background: "#F3F5F8" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box
-            component="img"
-            src={process.env.PUBLIC_URL + "/images/Petrix-nav-logo.svg"}
-            alt="logo"
-            sx={{
-              display: { xs: "none", md: "flex" },
-            }}
-          />
+          <Link to={"/"}>
+            <Box
+              component="img"
+              src={process.env.PUBLIC_URL + "/images/Petrix-nav-logo.svg"}
+              alt="logo"
+              sx={{
+                display: { xs: "none", md: "flex" },
+              }}
+            />
+          </Link>
 
           <Box
             sx={{
@@ -94,35 +116,42 @@ function ResponsiveAppBar(props: ResponsiveAppBarProps) {
                 horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+              onClose={() => setAnchorElNav(null)}
               sx={{
                 display: { xs: "block", md: "none" },
                 justifyContent: "center",
               }}
               style={{ justifyContent: "center" }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {ROUTES.map((page, index) => (
+                <MenuItem
+                  key={index}
+                  onClick={() => handleNavClick(page.route as string)}
+                >
+                  <CustomLink to={page.route as string}>
+                    <Typography textAlign="center">{page.name}</Typography>
+                  </CustomLink>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <Box
-            component="img"
-            src={process.env.PUBLIC_URL + "/images/Petrix-nav-logo.png"}
-            alt="logo"
-            sx={{ display: { xs: "flex", md: "none" }, mr: 40 }}
-          />
+          <Link to={"/"}>
+            <Box
+              component="img"
+              src={process.env.PUBLIC_URL + "/images/Petrix-nav-logo.png"}
+              alt="logo"
+              sx={{ display: { xs: "flex", md: "none" }, mr: 40 }}
+            />
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {ROUTES.map((page, index) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={index}
+                onClick={() => handleNavClick(page.route as string)}
                 sx={{ my: 2, color: "black", display: "block" }}
                 // TODO: make current page bold
               >
-                {page}
+                <CustomLink to={page.route as string}>{page.name}</CustomLink>
               </Button>
             ))}
           </Box>
@@ -160,13 +189,14 @@ function ResponsiveAppBar(props: ResponsiveAppBarProps) {
                     horizontal: "right",
                   }}
                   open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
+                  onClose={() => setAnchorElUser(null)}
                 >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
+                  <MenuItem onClick={handleProfileNavigation}>
+                    <Typography textAlign="center">Profile</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
                 </Menu>
               </Box>
             ) : (
@@ -191,3 +221,9 @@ function ResponsiveAppBar(props: ResponsiveAppBarProps) {
   );
 }
 export default ResponsiveAppBar;
+
+const CustomLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+`;
