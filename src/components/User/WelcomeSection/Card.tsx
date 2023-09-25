@@ -19,13 +19,6 @@ export default function BasicCard(props: BasicCardProps) {
 
   const navigate = useNavigate();
 
-  const handleCardClick = () => {
-    if (onClick) {
-      onClick();
-    }
-
-    navigate("/");
-  };
   return (
     <Card
       sx={{
@@ -34,8 +27,9 @@ export default function BasicCard(props: BasicCardProps) {
         display: "flex",
         flexDirection: "column",
         mb: 10,
+        cursor: "pointer",
       }}
-      onClick={handleCardClick}
+      onClick={onClick}
     >
       <CardContent>
         <Box
