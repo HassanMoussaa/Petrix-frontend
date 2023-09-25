@@ -14,7 +14,7 @@ import {
   Alert,
   Typography,
 } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -52,8 +52,14 @@ interface availableSlot {
 }
 
 function BookingForm(props: BookingFormProps) {
-  const { petsList, clinicLocationsList, docId, setSucessAlertOpen } = props;
+  const {
+    petsList = [],
+    clinicLocationsList,
+    docId,
+    setSucessAlertOpen,
+  } = props;
 
+  const navigate = useNavigate();
   const [date, setDate] = React.useState<Dayjs | null>(dayjs());
   //   const [age, setAge] = React.useState("");
 
@@ -118,6 +124,9 @@ function BookingForm(props: BookingFormProps) {
       if (response.status === 201) {
         console.log("Appointment created successfully!");
         setSucessAlertOpen(true);
+        setTimeout(() => {
+          navigate(-1);
+        }, 3000);
       }
     } catch (error) {
       console.error("Error booking appointment:", error);
@@ -168,7 +177,7 @@ function BookingForm(props: BookingFormProps) {
               label="Pets"
               required={true}
             >
-              {petsList.map((pet) => (
+              {petsList?.map((pet) => (
                 <MenuItem key={pet.id} value={pet.id}>
                   {pet.name}
                 </MenuItem>
