@@ -17,7 +17,9 @@ function Signup() {
   const navigate = useNavigate();
 
   const handleUserTypeChange = (newUserType: string) => {
-    setUserType(newUserType);
+    if (userType !== newUserType && newUserType) {
+      setUserType(newUserType);
+    }
   };
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (
     event: React.FormEvent<HTMLFormElement>
@@ -95,59 +97,58 @@ function Signup() {
 
   return (
     <Overlay>
-      <div>
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ maxHeight: "100vh" }}
+      >
+        <Box
+          style={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}
+          className="formBox_signup"
         >
-          <Box
-            style={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}
-            className="formBox_signup"
+          <div className="signin_logo">
+            <img
+              src={process.env.PUBLIC_URL + "/images/PetrixMainLogo.svg"}
+              alt="logo"
+            ></img>
+          </div>
+          <ToggleButtonGroup
+            className="toggle_container"
+            value={userType}
+            exclusive
+            onChange={(event, newValue) => handleUserTypeChange(newValue)}
+            aria-label="User Type"
           >
-            <div className="signin_logo">
-              <img
-                src={process.env.PUBLIC_URL + "/images/PetrixMainLogo.svg"}
-                alt="logo"
-              ></img>
-            </div>
-            <ToggleButtonGroup
-              className="toggle_container"
-              value={userType}
-              exclusive
-              onChange={(event, newValue) => handleUserTypeChange(newValue)}
-              aria-label="User Type"
-            >
-              <ToggleButton value="petOwner" aria-label="Pet Owner">
-                Pet Owner
-              </ToggleButton>
-              <ToggleButton value="doctor" aria-label="Doctor">
-                Doctor
-              </ToggleButton>
-            </ToggleButtonGroup>
-            {userType === "petOwner" ? (
-              <PetSignupForm
-                signUpError={signUpError}
-                setSignUpError={setSignUpError}
-                emailUsedError={emailUsedError}
-                setEmailUsedError={setEmailUsedError}
-                passwordMatch={passwordMatch}
-                handleSubmit={handleSubmit}
-              />
-            ) : (
-              <DoctorSignupForm
-                signUpError={signUpError}
-                setSignUpError={setSignUpError}
-                emailUsedError={emailUsedError}
-                setEmailUsedError={setEmailUsedError}
-                passwordMatch={passwordMatch}
-                handleSubmit={handleSubmit}
-              />
-            )}
-          </Box>
-        </Grid>
-      </div>
+            <ToggleButton value="petOwner" aria-label="Pet Owner">
+              Pet Owner
+            </ToggleButton>
+            <ToggleButton value="doctor" aria-label="Doctor">
+              Doctor
+            </ToggleButton>
+          </ToggleButtonGroup>
+          {userType === "petOwner" ? (
+            <PetSignupForm
+              signUpError={signUpError}
+              setSignUpError={setSignUpError}
+              emailUsedError={emailUsedError}
+              setEmailUsedError={setEmailUsedError}
+              passwordMatch={passwordMatch}
+              handleSubmit={handleSubmit}
+            />
+          ) : (
+            <DoctorSignupForm
+              signUpError={signUpError}
+              setSignUpError={setSignUpError}
+              emailUsedError={emailUsedError}
+              setEmailUsedError={setEmailUsedError}
+              passwordMatch={passwordMatch}
+              handleSubmit={handleSubmit}
+            />
+          )}
+        </Box>
+      </Grid>
     </Overlay>
   );
 }
