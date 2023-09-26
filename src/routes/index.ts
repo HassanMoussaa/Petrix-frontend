@@ -7,5 +7,5 @@ interface Routes {
 export const ROUTES: Routes[] = [
     {name: "HOME", route: "/"},
     {name: "SERVICE", route: "/"},
-    {name: "AI ASSISTENT", route: "/chatbot"},
+    {name: "AI ASSISTANT", route: "/chatbot"},
 ]

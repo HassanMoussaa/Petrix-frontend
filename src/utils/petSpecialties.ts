@@ -4,10 +4,8 @@ export const petSpecialties = [
   "Bird",
   "Fish",
   "Reptile",
-  "Small Mammals",
   "Horse",
   "Rabbit",
-  "Guinea Pig",
   "Hamster",
   "Ferret",
   "Turtle",
@@ -15,7 +13,6 @@ export const petSpecialties = [
   "Lizard",
   "Amphibian",
   "Spider",
-  "Insect",
   "Exotic Pets",
   "Other"
 ];
