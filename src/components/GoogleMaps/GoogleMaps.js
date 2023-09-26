@@ -16,19 +16,19 @@ const GoogleMaps = ({ location, setLocation }) => {
   const lat = parseFloat(location[0]);
   const lng = parseFloat(location[1]);
 
-  const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds({
-      lat,
-      lng,
-    });
-    map.fitBounds(bounds);
+  // const onLoad = React.useCallback(function callback(map) {
+  //   const bounds = new window.google.maps.LatLngBounds({
+  //     lat,
+  //     lng,
+  //   });
+  //   map.fitBounds(bounds);
 
-    setMap(map);
-  }, []);
+  //   setMap(map);
+  // }, []);
 
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null);
-  }, []);
+  // const onUnmount = React.useCallback(function callback(map) {
+  //   setMap(null);
+  // }, []);
 
   const handleCurrentLocation = async () => {
     const res = await getCurrentLocation();
@@ -62,8 +62,6 @@ const GoogleMaps = ({ location, setLocation }) => {
     }
   };
 
-  console.log("LOCATION:: ", location);
-
   const onMarkerDragEnd = async (e) => {
     const lat = e.latLng.lat();
     const lng = e.latLng.lng();
@@ -82,13 +80,11 @@ const GoogleMaps = ({ location, setLocation }) => {
           width: "100%",
           height: "400px",
         }}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
         center={{
           lat,
           lng,
         }}
-        zoom={15}
+        zoom={14}
       >
         <CustomButton onClick={handleCurrentLocation}>
           <Typography>User current location</Typography>
