@@ -16,7 +16,7 @@ function Welcome() {
             flexDirection: "column",
             gap: 5,
             mt: 5,
-            alignItems: "center",
+            alignItems: "start",
           }}
         >
           <Grid sx={{ fontSize: 35, position: "relative" }}>

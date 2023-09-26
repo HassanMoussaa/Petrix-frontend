@@ -14,9 +14,10 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import TopDoctors from "../../components/User/WelcomeSection/TopDoctors";
+import Footer from "../../components/Footer/Footer";
 
 const image_classification_card = {
-  imageUrl: "ImageClassification.svg",
+  imageUrl: "classification-54.svg",
   title: "AI Image Classification",
   body: "Upload photo of an animal to check its type",
   route: "/ai_imageClassification",
@@ -28,9 +29,9 @@ const chatbot_card = {
   route: "/chatbot",
 };
 const doctors_near_you_card = {
-  imageUrl: "ImageClassification.svg",
-  title: "AI Image Classification",
-  body: "Upload photo of an animal to check its type",
+  imageUrl: "Map_near.svg",
+  title: "Doctors Near You",
+  body: "Click to check doctors near you!",
   route: "/doctors-near-you",
 };
 const customized_pages_card = {
@@ -164,6 +165,8 @@ function HeroPage() {
       </Grid>
 
       <TopDoctors />
+
+      <Footer userType={user_type} />
     </div>
   );
 }
