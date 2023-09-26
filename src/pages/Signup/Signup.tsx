@@ -36,11 +36,11 @@ function Signup() {
     const confirm_password = signup_data.get("confirm_password");
     const city = signup_data.get("city");
     const country = signup_data.get("country");
-
+    let specialties = [""];
     if (userType === "doctor") {
-      const speciality = signup_data.get("speciality");
+      const speciality = signup_data.get("speciality") as string;
+      specialties = speciality.split(",").filter((sp) => sp !== "");
     }
-
     if (password !== confirm_password) {
       setPasswordMatch(false);
     } else {
@@ -61,7 +61,7 @@ function Signup() {
               password,
               city,
               country,
-              speciality,
+              specialties,
             };
 
       try {
