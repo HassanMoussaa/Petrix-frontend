@@ -1,0 +1,16 @@
+.footer {
+  background-color: white !important;
+  min-height: 300px !important;
+}
+
+.footerLink {
+  font-weight: 700 !important;
+  text-decoration: none;
+  color: black;
+}
+
+.footerTitle {
+  color: #fff !important;
+  font-weight: 900 !important;
+  font-size: 32px !important;
+}
