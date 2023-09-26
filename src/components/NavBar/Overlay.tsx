@@ -22,6 +22,7 @@ const Overlay: React.FC<OverlayProps> = ({ children }) => {
         ), url(${process.env.PUBLIC_URL}/images/signin.png)`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
+        overflow: "auto",
       }}
     >
       {children}
