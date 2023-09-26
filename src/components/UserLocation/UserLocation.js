@@ -1,5 +1,5 @@
 import React from "react";
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 
 const UserLocation = ({ location }) => {
   const { isLoaded } = useJsApiLoader({
@@ -9,8 +9,6 @@ const UserLocation = ({ location }) => {
 
   const lat = parseFloat(location[0]);
   const lng = parseFloat(location[1]);
-
-  console.log("COORDS:: ", lat, lng);
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -28,13 +26,7 @@ const UserLocation = ({ location }) => {
       }}
       zoom={15}
     >
-      <Marker
-        position={{
-          lat,
-          lng,
-        }}
-        // draggable={true}
-      />
+      {lat && lng && <MarkerF position={{ lat, lng }} />}
     </GoogleMap>
   );
 };
