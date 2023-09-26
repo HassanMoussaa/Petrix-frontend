@@ -88,22 +88,22 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
 
           <Box sx={{ flexGrow: 1, mt: 1 }}>
             <Grid container spacing={2}>
-              <Grid item xs={8}>
+              <Grid item xs={7}>
                 {specialityList[0] && (
                   <Item>{specialityList[0].speciality}</Item>
                 )}
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={5}>
                 {specialityList[1] && (
                   <Item>{specialityList[1].speciality}</Item>
                 )}
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={5}>
                 {specialityList[2] && (
                   <Item>{specialityList[2].speciality}</Item>
                 )}
               </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={7}>
                 {specialityList[3] && (
                   <Item>{specialityList[3].speciality}</Item>
                 )}
