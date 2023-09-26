@@ -132,6 +132,9 @@ function PetOwnerProfile() {
           lastName={petOwnerInfo.lastName}
           city={petOwnerInfo.city}
           country={petOwnerInfo.country}
+          phoneNum={petOwnerInfo.phone || ""}
+          profileBio={petOwnerInfo.profile}
+          fetchPetOwnerProfile={fetchPetOwnerProfile}
         />
       )}
       <Grid
