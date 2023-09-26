@@ -91,6 +91,8 @@ interface TabPanelProps {
 function DoctorProfile() {
   const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
   const [newImageUrl, setNewImageUrl] = useState(doctorInfo?.photoUrl);
+  const [location, setLocation] = useState<Number[]>();
+
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
 
@@ -156,14 +158,15 @@ function DoctorProfile() {
 
   // maps Sections
 
-  const [location, setLocation] = useState(
-    doctorInfo?.clinicLocations
-      ? [
-          doctorInfo?.clinicLocations?.latitude,
-          doctorInfo?.clinicLocations?.longitude,
-        ]
-      : [33.8938, 35.5018]
-  );
+  useEffect(() => {
+    setLocation([
+      doctorInfo?.clinicLocations?.latitude || 33.8938,
+      doctorInfo?.clinicLocations?.longitude || 35.5018,
+    ]);
+  }, [
+    doctorInfo?.clinicLocations?.latitude,
+    doctorInfo?.clinicLocations?.longitude,
+  ]);
 
   return (
     <div className="drBody">
