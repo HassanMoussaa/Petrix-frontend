@@ -28,6 +28,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import ChangeProfilePhoto from "../Doctor/ChangeProfilePhoto";
 import { countries } from "../../utils/countries";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import EditProfileModel_PO from "./EditProfileModel_PO";
 interface PetOwnerInfoSectionProps {
   firstName: string;
   lastName: string;
@@ -35,17 +36,35 @@ interface PetOwnerInfoSectionProps {
   city: string;
   country: string;
   setNewImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
+  phoneNum: string;
+  profileBio: string;
+  fetchPetOwnerProfile: () => void;
 }
 
 function PetOwnerInfoSection(props: PetOwnerInfoSectionProps) {
-  const { imageUrl, firstName, lastName, setNewImageUrl, city, country } =
-    props;
+  const {
+    imageUrl,
+    firstName,
+    lastName,
+    setNewImageUrl,
+    city,
+    country,
+    phoneNum,
+    profileBio,
+    fetchPetOwnerProfile,
+  } = props;
   // const value = 4.5;
 
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const handleEditClick = () => {
+    setIsEditModalOpen(true);
+  };
 
   return (
     <Grid container sx={{ display: { xs: "flex" }, ml: 10, mt: 10, gap: 5 }}>
@@ -127,9 +146,21 @@ function PetOwnerInfoSection(props: PetOwnerInfoSectionProps) {
               },
             }}
             size="large"
+            onClick={handleEditClick}
           >
             Edit
           </Button>
+
+          {/* Edit Profile Modal */}
+          <EditProfileModel_PO
+            isOpen={isEditModalOpen}
+            onClose={() => setIsEditModalOpen(false)}
+            profile={profileBio}
+            phone={phoneNum}
+            city={city}
+            country={country}
+            fetchPetOwnerProfile={fetchPetOwnerProfile}
+          />
         </Grid>
       </Grid>
     </Grid>
