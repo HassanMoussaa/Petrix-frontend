@@ -54,12 +54,15 @@ function DoctorSignupForm(props: SignupFormProps) {
     const {
       target: { value },
     } = event;
-    if (selectedSpeciality?.length <= 4) {
-      setSelectedSpeciality(
-        typeof value === "string" ? value.split(",") : value
-      );
+    const specialities =
+      typeof value === "string"
+        ? value.split(",").filter((sp) => sp !== "")
+        : value.filter((sp) => sp !== "");
+
+    if (specialities.length > 4) {
+      console.error("Please select only 4 specialties");
     } else {
-      // TODO: add a toast message: Please select only
+      setSelectedSpeciality(specialities);
     }
   };
 
