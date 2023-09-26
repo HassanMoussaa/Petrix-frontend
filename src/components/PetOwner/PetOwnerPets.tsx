@@ -1,5 +1,12 @@
 import React from "react";
-import { Grid, Paper, Typography, List, IconButton } from "@mui/material";
+import {
+  Grid,
+  Paper,
+  Typography,
+  List,
+  IconButton,
+  Avatar,
+} from "@mui/material";
 import {
   FavoriteBorderOutlined,
   ChatBubbleOutlineOutlined,
@@ -23,65 +30,51 @@ interface DoctorToggleSection {
 function PetOwnerPets(props: DoctorToggleSection) {
   const { petList } = props;
   const navigate = useNavigate();
-  // const handleButtonClick = (postId: number) => {
-  //   navigate(`/post`, { state: { postId } });
-  // };
+
   return (
-    <Grid
-      container
-      sx={{
-        display: { xs: "flex" },
-        flexDirection: { xs: "column" },
-        backgroundColor: "white",
+    <div
+      style={{
+        overflowY: "auto",
+        maxHeight: "500px", // Set a maximum height for the container
       }}
     >
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          display: { xs: "flex" },
-          flexDirection: { xs: "column" },
-          backgroundColor: "white",
-          p: 2,
-          gap: 2,
-        }}
-      >
-        <Paper style={{ maxHeight: 500, overflow: "auto", width: "100%" }}>
-          <List
-            sx={{
-              display: { xs: "flex" },
-              flexDirection: { xs: "column" },
-              backgroundColor: "white",
-              gap: 2,
+      {petList.map((pet, index) => (
+        <div
+          key={pet.id}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "16px",
+            padding: "8px", // Add some padding to create space between pets
+            borderBottom:
+              index < petList.length - 1 ? "1px solid #ccc" : "none", // Add a bottom border to separate pets
+          }}
+        >
+          <Avatar
+            alt={pet.name}
+            src={pet.photo_url || undefined}
+            sx={{ width: 64, height: 64 }}
+          />
+          <div>
+            <Typography variant="h6">{pet.name}</Typography>
+            <Typography variant="body2">{pet.breed}</Typography>
+            {/* <Typography variant="caption">{pet.createdAt}</Typography> */}
+          </div>
+          <div
+            style={{
+              marginTop: "auto",
+              display: "flex",
+              gap: 1,
             }}
           >
-            {petList.map((pet) => (
-              <Grid item key={pet.id} xs={12}>
-                <Paper
-                  elevation={3}
-                  sx={{ p: 2, display: "flex", flexDirection: "column" }}
-                >
-                  <Typography variant="h6">{pet.name}</Typography>
-                  <Typography>{pet.breed}</Typography>
-                  <Typography variant="caption">{pet.createdAt}</Typography>
-                  <div
-                    style={{
-                      marginTop: "auto",
-                      display: "flex",
-                      gap: 1,
-                    }}
-                  >
-                    {/* <IconButton onClick={() => handleButtonClick(pet.id)}>
-                      <ChatBubbleOutlineOutlined />
-                    </IconButton> */}
-                  </div>
-                </Paper>
-              </Grid>
-            ))}
-          </List>
-        </Paper>
-      </Grid>
-    </Grid>
+            {/* <IconButton onClick={() => handleButtonClick(pet.id)}>
+              <ChatBubbleOutlineOutlined />
+            </IconButton> */}
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 

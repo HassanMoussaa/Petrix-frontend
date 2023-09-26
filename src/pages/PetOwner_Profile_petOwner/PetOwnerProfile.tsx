@@ -167,8 +167,8 @@ function PetOwnerProfile() {
                 aria-label="basic tabs example"
               >
                 <Tab label="My Animals" {...a11yProps(0)} />
-                <Tab label="Reviews" {...a11yProps(1)} />
-                <Tab label="Location" {...a11yProps(2)} />
+                {/* <Tab label="Reviews" {...a11yProps(1)} />
+                <Tab label="Location" {...a11yProps(2)} /> */}
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
