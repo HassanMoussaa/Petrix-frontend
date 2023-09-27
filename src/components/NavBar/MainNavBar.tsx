@@ -25,7 +25,10 @@ interface ResponsiveAppBarProps {
 function ResponsiveAppBar(props: ResponsiveAppBarProps) {
   const { imageUrl, firstName, lastName } = props;
   const navigate = useNavigate();
-  const login_status = JSON.parse(localStorage.getItem("login") || "{}");
+  const login_status = localStorage.getItem("login")
+    ? JSON.parse(localStorage.getItem("login") || "")
+    : "";
+
   const user_type = login_status?.user_type ?? null;
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(

@@ -25,8 +25,10 @@ export default function BasicCard(props: BasicCardProps) {
       onClick();
     }
 
-    let login_status = {};
-    if ((login_status = JSON.parse(localStorage.getItem("login") || ""))) {
+    let login_status = localStorage.getItem("login")
+      ? JSON.parse(localStorage.getItem("login") || "")
+      : "";
+    if (login_status) {
       navigate(`/profile/${id}`);
     } else navigate("/login");
   };
