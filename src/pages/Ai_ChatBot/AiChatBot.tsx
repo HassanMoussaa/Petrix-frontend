@@ -6,7 +6,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./AiChatBot.css";
-
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 interface Specialty {
   id: number;
   speciality: string;
@@ -166,8 +167,14 @@ function AiChatBot() {
       <div className="chatbot-container">
         <div className="chat-history">
           {chatHistory.map((message, index) => (
-            <div key={index} className={`message ${message.role}`}>
-              {message.text}
+            <div className={`bubb-${message.role}`}>
+              {message.role === "bot" && (
+                <ChevronLeftIcon fontSize="small" color="primary" />
+              )}
+              <div key={index} className={`message ${message.role}`}>
+                {message.text}
+              </div>
+              {message.role === "user" && <ChevronRightIcon fontSize="small" />}
             </div>
           ))}
         </div>
