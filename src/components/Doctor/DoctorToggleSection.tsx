@@ -110,8 +110,8 @@ function DoctorToggleSection(props: DoctorToggleSection) {
       >
         <List sx={{ gap: 2 }}>
           {postList.map((post) => (
-            <Grid item key={post.id}>
-              <div>
+            <Grid item key={post.id} className="post-item" width={"100%"}>
+              <div className="post-div">
                 <Box sx={{ display: "flex", flexDirection: "column" }}>
                   <Typography variant="h6" sx={{ fontSize: "30px" }}>
                     {post.title}
