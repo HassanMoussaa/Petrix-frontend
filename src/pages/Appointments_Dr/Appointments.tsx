@@ -184,7 +184,6 @@ function Appointments() {
             >
               <Tab label="Pending" {...a11yProps(0)} />
               <Tab label="Accepetd" {...a11yProps(1)} />
-              <Tab label="Declined" {...a11yProps(2)} />
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
@@ -202,9 +201,6 @@ function Appointments() {
               removeAppointment={removeAppointment}
               fetchPendingAppointments={fetchPendingAppointments}
             />
-          </CustomTabPanel>
-          <CustomTabPanel value={value} index={2}>
-            Item Three
           </CustomTabPanel>
         </Box>
       </Grid>
