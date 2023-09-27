@@ -1,0 +1,7 @@
+.noDrs {
+  display: flex;
+  justify-content: center;
+  margin-top: 20%;
+  color: grey;
+  font-size: 40px;
+}

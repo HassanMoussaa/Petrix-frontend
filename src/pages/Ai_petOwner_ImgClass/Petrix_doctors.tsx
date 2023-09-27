@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
+import "./petrix_doctors.css";
 
 import {
   Box,
@@ -114,13 +115,17 @@ function Petrix_doctors() {
         />
       )}
       <Container>
-        <Grid container spacing={2} mt={10} ml={4}>
-          {searchResults.map((doctor) => (
-            <Grid item xs={12} md={10} key={doctor.id}>
-              <DoctorCard doctor={doctor} />
+        {searchResults.length === 0 ? (
+          <div className="noDrs">No recommended doctors</div>
+        ) : (
+          searchResults.map((doctor) => (
+            <Grid container spacing={2} mt={10} ml={4}>
+              <Grid item xs={12} md={10} key={doctor.id}>
+                <DoctorCard doctor={doctor} />
+              </Grid>
             </Grid>
-          ))}
-        </Grid>
+          ))
+        )}
       </Container>
     </div>
   );
