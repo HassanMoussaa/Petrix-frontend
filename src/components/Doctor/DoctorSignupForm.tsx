@@ -104,7 +104,7 @@ function DoctorSignupForm(props: SignupFormProps) {
         required
         id="firstName"
         name="firstName"
-        label="firstName"
+        label="First name"
         placeholder="firstName"
         inputProps={{
           minLength: 2,
@@ -116,7 +116,7 @@ function DoctorSignupForm(props: SignupFormProps) {
         required
         id="lastName"
         name="lastName"
-        label="lastName"
+        label="Last name"
         placeholder="lastName"
         inputProps={{
           minLength: 2,

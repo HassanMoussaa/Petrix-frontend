@@ -56,7 +56,7 @@ function PetSignupForm(props: SignupFormProps) {
         required
         id="firstName"
         name="firstName"
-        label="firstName"
+        label="First name"
         placeholder="firstName"
         className="input_signup_field"
         inputProps={{
@@ -68,7 +68,7 @@ function PetSignupForm(props: SignupFormProps) {
         required
         id="lastName"
         name="lastName"
-        label="lastName"
+        label="Last name"
         placeholder="lastName"
         className="input_signup_field"
         inputProps={{
