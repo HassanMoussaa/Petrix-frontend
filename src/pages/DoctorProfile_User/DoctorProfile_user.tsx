@@ -186,7 +186,6 @@ function DoctorProfile_user() {
 
   // section for review edits
   const updateReviews = (newReview: Review) => {
-    console.log("hi");
     setReviews([...reviews, newReview]);
   };
 

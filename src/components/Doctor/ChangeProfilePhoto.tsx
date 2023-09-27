@@ -60,7 +60,6 @@ function ChangeProfilePhoto(props: ChangeProfilePhotoProps) {
           formData,
           config
         );
-        console.log("r", response);
 
         setNewImageUrl(response.data);
         handleClose();

@@ -132,7 +132,6 @@ function Ai_imageClassification_Main() {
       model: "microsoft/resnet-50",
     });
     setLoading(false);
-    console.log("RES:: ", res);
     navigate("/ai_results", {
       state: {
         selectedImage,

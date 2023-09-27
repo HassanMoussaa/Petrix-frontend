@@ -20,13 +20,9 @@ export const fetchToken = (saveNotificationToken) => {
   })
     .then((currentToken) => {
       if (currentToken) {
-        // setTokenFound(true);
         saveNotificationToken(currentToken);
-        // console.log("not", currentToken);
       } else {
         console.log("no token found");
-        // setTokenFound(false);
-        // setFcmToken("");
       }
     })
     .catch((err) => {

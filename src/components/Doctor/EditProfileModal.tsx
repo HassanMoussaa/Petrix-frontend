@@ -241,7 +241,6 @@ function EditProfileModal(props: EditProfileModalProps) {
               value={startTime}
               onChange={(newTime) => {
                 if (newTime !== null) {
-                  console.log("new", newTime);
                   setStartTime(newTime);
                 } else {
                   setStartTime(dayjs("09:00", "HH:mm"));
@@ -257,8 +256,6 @@ function EditProfileModal(props: EditProfileModalProps) {
               value={endTime}
               onChange={(newTime) => {
                 if (newTime !== null) {
-                  console.log("new", newTime);
-
                   setEndTime(newTime);
                 } else {
                   setEndTime(dayjs("18:00", "HH:mm"));

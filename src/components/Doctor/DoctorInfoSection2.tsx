@@ -41,7 +41,6 @@ interface DoctorInfoSection2 {
 
 function DoctorInfoSection2(props: DoctorInfoSection2) {
   const { phoneNum, profileBio, drEmail, specialityList } = props;
-  console.log(drEmail);
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,

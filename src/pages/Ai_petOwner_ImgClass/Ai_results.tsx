@@ -76,7 +76,6 @@ function Ai_results() {
 
   const petLabel = classificationResults[0].label;
   const arr = petLabel.split(" ");
-  // console.log(selectedImage);
   const breed = arr[arr.length - 1];
   const handlePetrixDoctorsClick = () => {
     setShowAnimalNameDialog(true);

@@ -33,8 +33,6 @@ const DoctorLocations = () => {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           });
-          console.log("lat", position.coords.latitude);
-          console.log("lng", position.coords.longitude);
           getDocotrNearYou([
             position.coords.latitude,
             position.coords.longitude,
@@ -51,8 +49,6 @@ const DoctorLocations = () => {
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
-    console.log("goo", location);
-    console.log("mm", mapRef.current);
     if (map) {
       map.panTo({ lat: location.lat, lng: location.lng });
       map.setZoom(15);
@@ -60,12 +56,9 @@ const DoctorLocations = () => {
   };
 
   const getDocotrNearYou = async (userLocation) => {
-    console.log("jey", userLocation);
     if (userLocation) {
       const lat = userLocation[0];
       const lng = userLocation[1];
-      console.log(lat, lng);
-
       try {
         const response = await axios.get(
           getAPIBaseURL() + "/users/doctors_near_you",

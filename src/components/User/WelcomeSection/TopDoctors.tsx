@@ -23,8 +23,6 @@ function TopDoctors() {
       try {
         const response = await axios.get(getAPIBaseURL() + "/users/topDoctors");
         setTopDoctors(response.data);
-        console.log(response.data);
-        console.log(topDoctors);
       } catch (error: any) {
         setError(error);
         console.error("Error fetching top doctors:", error);

@@ -78,8 +78,6 @@ function Petrix_doctors() {
 
   const fetchSearchResults = async () => {
     try {
-      console.log("Gojo", breed);
-
       const response = await axios.get(
         getAPIBaseURL() + `/users/search/${keyword}`,
         {

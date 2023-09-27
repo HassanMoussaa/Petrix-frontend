@@ -33,7 +33,6 @@ const GoogleMaps = ({ location, setLocation }) => {
   const handleCurrentLocation = async () => {
     const res = await getCurrentLocation();
     saveClinicLocation(res[0], res[1]);
-    console.log(res);
   };
 
   //function to save clinic Coordinates
@@ -46,8 +45,6 @@ const GoogleMaps = ({ location, setLocation }) => {
 
   const saveClinicLocation = async (latitude, longitude) => {
     try {
-      console.log("SAVE:: ", latitude, longitude);
-
       const response = await axios.post(
         getAPIBaseURL() + "/doctors/location",
         {
