@@ -56,7 +56,7 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
       md={2.5}
       sx={{
         display: { xs: "flex" },
-        ml: 10,
+        ml: 8,
         mt: 5,
         flexDirection: { xs: "column" },
       }}

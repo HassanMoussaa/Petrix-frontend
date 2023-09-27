@@ -132,7 +132,11 @@ function DoctorInfoSection(props: DoctorInfoSection) {
   };
 
   return (
-    <Grid container sx={{ display: { xs: "flex" }, ml: 10, mt: 10, gap: 5 }}>
+    <Grid
+      container
+      sx={{ display: { xs: "flex" }, ml: 10, mt: 10, gap: 3, width: "90%" }}
+      className="infoSection1"
+    >
       <Grid md={3} sx={{ display: { md: "flex" } }}>
         <div>
           {isOwnProfile ? (
