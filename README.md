@@ -20,4 +20,3 @@ Petrix connects you with nearby veterinary clinics when needed. No more searchin
 Scheduling appointments with veterinary clinics is a breeze with Petrix. You can book appointments directly from the platform, saving you time and eliminating the hassle of contacting multiple clinics to secure a convenient time slot.
 
 
-<img src="https://github.com/HassanMoussaa/Petrix-frontend/blob/163cc0cf52d9ad03170dd77e680614e65bea3aab/petOwnerVid.webp" width="250">   
