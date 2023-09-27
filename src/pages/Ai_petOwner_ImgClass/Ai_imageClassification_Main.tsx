@@ -200,17 +200,18 @@ function Ai_imageClassification_Main() {
           </Grid>
 
           <Grid item xs={6} textAlign="center">
-            {!loading ? (
-              <Button
-                variant="outlined"
-                sx={{ color: "#212121" }}
-                onClick={classifyImage}
-              >
-                Classify Image
-              </Button>
-            ) : (
-              <CircularProgress size={24} />
-            )}
+            {selectedImageFile &&
+              (!loading ? (
+                <Button
+                  variant="outlined"
+                  sx={{ color: "#212121" }}
+                  onClick={classifyImage}
+                >
+                  Classify Image
+                </Button>
+              ) : (
+                <CircularProgress size={24} />
+              ))}
           </Grid>
         </Grid>
       </Container>
