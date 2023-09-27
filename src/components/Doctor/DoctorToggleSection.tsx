@@ -108,7 +108,7 @@ function DoctorToggleSection(props: DoctorToggleSection) {
         }}
         className="scrollable-content"
       >
-        <List sx={{ gap: 2 }}>
+        <List sx={{ gap: 2, width: "100%" }}>
           {postList.map((post) => (
             <Grid item key={post.id} className="post-item" width={"100%"}>
               <div className="post-div">
