@@ -77,9 +77,9 @@ export default function BasicCard(props: BasicCardProps) {
           <Rating name="read-only" value={rate} precision={0.5} readOnly />
 
           <Typography align="center" fontSize={10} color={"#A4A1A1"}>
-            {" "}
-            # Appointments:
-            {appointmentCount}
+            {appointmentCount === 0
+              ? "No Appointments"
+              : `Appointments: ${appointmentCount}`}
           </Typography>
         </Grid>
       </CardContent>
