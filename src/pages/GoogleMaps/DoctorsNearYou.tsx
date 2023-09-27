@@ -15,6 +15,7 @@ import {
 import { useLocation } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import DoctorLocations from "../../components/GoogleMaps/DoctorLocations";
+import "./doctorsNearYou.css";
 interface UserType {
   id: number;
   type: string;
