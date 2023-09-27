@@ -153,10 +153,15 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
                 gap: 1,
               }}
             >
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <LocalPhoneOutlinedIcon sx={{ fontSize: 20, marginRight: 1 }} />
-                <Typography sx={{ fontSize: 20 }}>{phoneNum}</Typography>
-              </Box>
+              {phoneNum && (
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <LocalPhoneOutlinedIcon
+                    sx={{ fontSize: 20, marginRight: 1 }}
+                  />
+                  <Typography sx={{ fontSize: 20 }}>{phoneNum}</Typography>
+                </Box>
+              )}
+
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <EmailOutlinedIcon sx={{ fontSize: 20, marginRight: 1 }} />
                 <Typography sx={{ fontSize: 20 }}>{drEmail}</Typography>
