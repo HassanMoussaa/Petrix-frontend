@@ -190,7 +190,7 @@ function PetOwnerProfile() {
                 <AddIcon />
               </Fab>
             </Zoom> */}
-            <CreatePostModal open={isModalOpen} setOpen={setIsModalOpen} />
+            {/* <CreatePostModal open={isModalOpen} setOpen={setIsModalOpen} /> */}
           </Box>
         </Grid>
       </Grid>
