@@ -215,7 +215,7 @@ function DoctorProfile() {
         )}
         <Grid
           container
-          ml={23}
+          ml={19}
           sx={{
             display: { xs: "flex" },
             flexDirection: { xs: "column" },
