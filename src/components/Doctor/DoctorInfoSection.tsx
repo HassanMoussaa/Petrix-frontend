@@ -176,6 +176,7 @@ function DoctorInfoSection(props: DoctorInfoSection) {
           display: { xs: "flex" },
           flexDirection: { xs: "column" },
           gap: 5,
+          ml: 3,
         }}
       >
         <Grid
@@ -272,7 +273,11 @@ function DoctorInfoSection(props: DoctorInfoSection) {
                   Unfollow
                 </Button>
               ) : (
-                <Button onClick={followUser} variant="contained" color="error">
+                <Button
+                  onClick={followUser}
+                  variant="contained"
+                  sx={{ backgroundColor: "#16A4C3" }}
+                >
                   Follow
                 </Button>
               )}
