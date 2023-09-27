@@ -44,6 +44,8 @@ function CreateReviewModal(props: CreateReviewModalProps) {
 
   const handleClose = () => {
     setOpen(false);
+    setBody("");
+    setRate(0);
   };
 
   const handleCreateRate = async () => {
@@ -58,6 +60,8 @@ function CreateReviewModal(props: CreateReviewModalProps) {
 
       console.log("Created Post:", response.data);
       setOpen(false);
+      setBody("");
+      setRate(0);
       updateReviews(response.data.review);
     } catch (error: any) {
       console.error("Error creating post:", error);
