@@ -14,7 +14,8 @@ import {
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import BackButton from "../../components/BackButton";
-
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 interface UserType {
   id: number;
   type: string;
@@ -71,6 +72,25 @@ function DoctorPost() {
   const [currentPage, setCurrentPage] = useState(1);
   const commentsPerPage = 5; //
   const [commentsExpanded, setCommentsExpanded] = useState(false);
+
+  // work for time calc
+  dayjs.extend(relativeTime);
+
+  function formatTimestamp(timestamp: string) {
+    const now = dayjs();
+    const commentTime = dayjs(timestamp);
+    const diffInMinutes = now.diff(commentTime, "minutes");
+
+    if (diffInMinutes < 60) {
+      return `${diffInMinutes} minutes ago`;
+    } else if (diffInMinutes < 1440) {
+      const diffInHours = now.diff(commentTime, "hours");
+      return `${diffInHours} hours ago`;
+    } else {
+      const diffInDays = now.diff(commentTime, "days");
+      return `${diffInDays} days ago`;
+    }
+  }
   useEffect(() => {
     async function fetchDoctorProfile() {
       try {
@@ -235,7 +255,9 @@ function DoctorPost() {
                           {comment.user.firstName} {comment.user.lastName}
                         </Typography>
                         <Typography variant="caption">
-                          {comment.createdAt}
+                          <Typography variant="caption">
+                            {formatTimestamp(comment.createdAt)}
+                          </Typography>
                         </Typography>
                       </Grid>
                     </Grid>
