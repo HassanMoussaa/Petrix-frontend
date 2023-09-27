@@ -151,9 +151,9 @@ function Ai_results() {
                 }}
               >
                 <Typography variant="h5" textAlign="center">
-                  Breed
+                  Your Pet's Breed Is
                 </Typography>
-                <Typography textAlign="center" variant="body1">
+                <Typography textAlign="center" variant="body1" fontSize={40}>
                   {classificationResults[0].label}
                 </Typography>
                 <Box
@@ -210,6 +210,7 @@ function Ai_results() {
         open={showAnimalNameDialog}
         onClose={() => setShowAnimalNameDialog(false)}
         onNameSubmit={handleNameSubmit}
+        breed={classificationResults[0].label}
       />
     </div>
   );
