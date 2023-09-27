@@ -50,7 +50,7 @@ input.chat-input[type="text"] {
   margin-bottom: 20px;
 }
 
-button {
+.chat-button {
   padding: 10px 15px;
   margin-left: 10px;
   background-color: #3498db;
@@ -62,6 +62,6 @@ button {
   margin-bottom: 20px;
 }
 
-button:hover {
+.chat-button :hover {
   background-color: #2980b9;
 }

@@ -182,7 +182,9 @@ function AiChatBot() {
           {isLoading ? (
             <CircularProgress size={24} />
           ) : (
-            <button onClick={handleSubmit}>Send</button>
+            <button className="chat-button" onClick={handleSubmit}>
+              Send
+            </button>
           )}
         </div>
       </div>
