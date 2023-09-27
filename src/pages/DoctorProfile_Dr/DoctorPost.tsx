@@ -220,9 +220,9 @@ function DoctorPost() {
             />
             <Button
               variant="contained"
-              color="primary"
+              // color="primary"
               onClick={handleAddComment}
-              sx={{ mt: 2 }}
+              sx={{ mt: 2, background: "#16A4C3" }}
             >
               Add Comment
             </Button>
@@ -270,7 +270,7 @@ function DoctorPost() {
             <Button
               variant="outlined"
               onClick={handleShowMoreComments}
-              sx={{ mt: 2 }}
+              sx={{ mt: 2, borderColor: "#16A4C3", color: "#16A4C3" }}
             >
               {commentsExpanded ? "Hide Comments" : "Show More"}
             </Button>
