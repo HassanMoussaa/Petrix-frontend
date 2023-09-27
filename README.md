@@ -50,18 +50,16 @@ As a Doctor, I want:
 
 > Using the wireframes and mockups as a guide, we implemented the Coffee Express app with the following features:
 
-### User Screens (Mobile)
-| Login screen  | Register screen | Landing screen | Loading screen |
-| ---| ---| ---| ---|
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
-| Home screen  | Menu Screen | Order Screen | Checkout Screen |
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+### Pet Owner Screens (Web)
+| Register  | AI Classification |  AI Assistant |
+| ---| ---| ---|
+| ![Register](./readme/demo/signin.gif) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
 
-### Admin Screens (Web)
+
+
+### Doctor Screens (Web)
 | Login screen  | Register screen |  Landing screen |
 | ---| ---| ---|
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
-| Home screen  | Menu Screen | Order Screen |
 | ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
 
 <br><br>
