@@ -48,7 +48,7 @@ As a Doctor, I want to:
 <!-- Implementation -->
 <img src="./readme/title4.svg"/>
 
-> Using the wireframes and mockups as a guide, we implemented the Coffee Express app with the following features:
+> Using the wireframes and mockups as a guide, we implemented the PETRIX app with the following features:
 
 ### Pet Owner Screens (Web)
 | AI Classification |  AI Assistant |
@@ -111,6 +111,7 @@ As a Doctor, I want to:
    ```sh
    git clone https://github.com/HassanMoussaa/Petrix-server.git
    ```
+Backend repository: <a href="https://github.com/HassanMoussaa/Petrix-server">github.com/HassanMoussaa/Petrix-server</a>
 
 
 3) Install NPM packages
