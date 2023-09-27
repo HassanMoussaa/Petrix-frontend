@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
-
+import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./AiChatBot.css";
@@ -79,6 +79,7 @@ function AiChatBot() {
   const [chatHistory, setChatHistory] = useState<
     { text: string; role: "user" | "bot" }[]
   >([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   let config = {};
@@ -116,6 +117,7 @@ function AiChatBot() {
 
   const handleSubmit = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.post(
         getAPIBaseURL() + "/chat/chatgpt/",
         { prompt: userMessage },
@@ -124,7 +126,6 @@ function AiChatBot() {
 
       const message = response.data.message;
       if (!message) {
-        // Access 'data' property here
         throw new Error("Network response was not ok");
       }
       setChatHistory([
@@ -136,6 +137,8 @@ function AiChatBot() {
       setUserMessage("");
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -174,8 +177,13 @@ function AiChatBot() {
             placeholder="Type your message..."
             value={userMessage}
             onChange={handleUserMessageChange}
+            className="chat-input"
           />
-          <button onClick={handleSubmit}>Send</button>
+          {isLoading ? (
+            <CircularProgress size={24} />
+          ) : (
+            <button onClick={handleSubmit}>Send</button>
+          )}
         </div>
       </div>
     </div>
