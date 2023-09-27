@@ -16,3 +16,13 @@
 .selectedImage_profile {
   padding-top: 5%;
 }
+
+.post-item {
+  border-bottom: 1px solid #ccc;
+  /* padding-bottom: 10px; */
+  /* margin-bottom: 20px;  */
+}
+
+.post-div {
+  width: 100%;
+}
