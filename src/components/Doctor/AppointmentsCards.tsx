@@ -16,7 +16,7 @@ interface Appointment {
 
 interface AppointmentsCardsProps {
   appointments: Appointment[];
-  appointmentType: "accepted" | "rejected" | "pending";
+  appointmentType: "accepted" | "pending";
   removeAppointment: (appointmentId: number) => void;
   fetchPendingAppointments: () => void;
 }
@@ -80,7 +80,11 @@ function AppointmentsCards(props: AppointmentsCardsProps) {
             }}
           >
             <Grid>
-              <Typography variant="subtitle1">Notification-Type</Typography>
+              <Typography variant="subtitle1">
+                {appointmentType == "accepted"
+                  ? "Upcoming appointmen!t"
+                  : "New appointment request!"}
+              </Typography>
               <Typography variant="body2">
                 You have an upcoming appointment with{" "}
                 {`${appointment.petOwner.firstName} ${appointment.petOwner.lastName}`}
