@@ -5,7 +5,7 @@ import getAPIBaseURL from "../../APIBaseURL";
 import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
 import DoctorInfoSection2 from "../../components/Doctor/DoctorInfoSection2";
 import "./doctorProfile.css";
-import { Grid, Box, Tabs, Tab, Zoom } from "@mui/material";
+import { Grid, Box, Tabs, Tab, Zoom, Typography, Badge } from "@mui/material";
 import DoctorToggleSection from "../../components/Doctor/DoctorToggleSection";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -229,8 +229,44 @@ function DoctorProfile() {
                 onChange={handleChange}
                 aria-label="basic tabs example"
               >
-                <Tab label="Blog" {...a11yProps(0)} />
-                <Tab label="Reviews" {...a11yProps(1)} />
+                <Tab
+                  label={
+                    <div>
+                      <Typography sx={{ mr: 2 }} display="inline">
+                        Blogs
+                      </Typography>
+                      <Badge
+                        badgeContent={doctorInfo?.posts.length || 0}
+                        color="primary"
+                        showZero
+                        anchorOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                      ></Badge>
+                    </div>
+                  }
+                  {...a11yProps(0)}
+                />
+                <Tab
+                  label={
+                    <div>
+                      <Typography sx={{ mr: 2 }} display="inline">
+                        Reviews
+                      </Typography>
+                      <Badge
+                        badgeContent={doctorInfo?.doctorReviews.length || 0}
+                        color="primary"
+                        showZero
+                        anchorOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                      ></Badge>
+                    </div>
+                  }
+                  {...a11yProps(1)}
+                />
                 <Tab label="Location" {...a11yProps(2)} />
               </Tabs>
             </Box>

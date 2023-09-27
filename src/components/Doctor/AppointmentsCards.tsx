@@ -19,6 +19,7 @@ interface AppointmentsCardsProps {
   appointmentType: "accepted" | "pending";
   removeAppointment: (appointmentId: number) => void;
   fetchPendingAppointments: () => void;
+  fetchAcceptedAppointments: () => void;
 }
 
 function AppointmentsCards(props: AppointmentsCardsProps) {
@@ -27,6 +28,7 @@ function AppointmentsCards(props: AppointmentsCardsProps) {
     appointmentType,
     removeAppointment,
     fetchPendingAppointments,
+    fetchAcceptedAppointments,
   } = props;
 
   let config = {};
@@ -45,6 +47,7 @@ function AppointmentsCards(props: AppointmentsCardsProps) {
       console.log(response.data.message);
       removeAppointment(appointmentId);
       fetchPendingAppointments();
+      fetchAcceptedAppointments();
     } catch (error) {
       console.error("Error accepting appointment:", error);
     }

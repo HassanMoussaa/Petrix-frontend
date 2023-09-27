@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
-import { Grid, Box, Tabs, Tab } from "@mui/material";
+import { Grid, Box, Tabs, Tab, Typography, Badge } from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import "./appointments.css";
@@ -121,7 +121,6 @@ function Appointments() {
         getAPIBaseURL() + "/doctors/appointments",
         config
       );
-
       setPendingAppointments(response.data);
     } catch (error) {
       console.error("Error fetching pending appointments:", error);
@@ -134,7 +133,6 @@ function Appointments() {
         getAPIBaseURL() + "/doctors/acceptedAppointments",
         config
       );
-
       setAcceptedAppointments(response.data);
     } catch (error) {
       console.error("Error fetching accepted appointments:", error);
@@ -182,8 +180,44 @@ function Appointments() {
               onChange={handleChange}
               aria-label="basic tabs example"
             >
-              <Tab label="Pending" {...a11yProps(0)} />
-              <Tab label="Accepetd" {...a11yProps(1)} />
+              <Tab
+                label={
+                  <div>
+                    <Typography sx={{ mr: 2 }} display="inline">
+                      Pending
+                    </Typography>
+                    <Badge
+                      badgeContent={pendingAppointments.length}
+                      color="primary"
+                      showZero
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                    ></Badge>
+                  </div>
+                }
+                {...a11yProps(0)}
+              />
+              <Tab
+                label={
+                  <div>
+                    <Typography sx={{ mr: 2 }} display="inline">
+                      Accepted
+                    </Typography>
+                    <Badge
+                      badgeContent={acceptedAppointments.length}
+                      color="primary"
+                      showZero
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                    ></Badge>
+                  </div>
+                }
+                {...a11yProps(1)}
+              />
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
@@ -192,6 +226,7 @@ function Appointments() {
               appointmentType="pending"
               removeAppointment={removeAppointment}
               fetchPendingAppointments={fetchPendingAppointments}
+              fetchAcceptedAppointments={fetchAcceptedAppointments}
             />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
@@ -200,6 +235,7 @@ function Appointments() {
               appointmentType="accepted"
               removeAppointment={removeAppointment}
               fetchPendingAppointments={fetchPendingAppointments}
+              fetchAcceptedAppointments={fetchAcceptedAppointments}
             />
           </CustomTabPanel>
         </Box>
