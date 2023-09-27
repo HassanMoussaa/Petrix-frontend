@@ -11,10 +11,11 @@ interface AnimalNameDialogProps {
   open: boolean;
   onClose: () => void;
   onNameSubmit: (name: string) => void;
+  breed: string;
 }
 
 function AnimalNameForm(props: AnimalNameDialogProps) {
-  const { open, onClose, onNameSubmit } = props;
+  const { open, onClose, onNameSubmit, breed } = props;
   const [animalName, setAnimalName] = useState("");
 
   const handleNameSubmit = () => {
@@ -25,14 +26,18 @@ function AnimalNameForm(props: AnimalNameDialogProps) {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Enter Animal Name</DialogTitle>
+      <DialogTitle>
+        Set a Name for your <br />
+        {breed}
+      </DialogTitle>
       <DialogContent>
         <TextField
-          label="Animal Name"
+          label="Pet Name"
           fullWidth
           value={animalName}
           required
           onChange={(e) => setAnimalName(e.target.value)}
+          sx={{ mt: 1 }}
         />
       </DialogContent>
       <Button onClick={handleNameSubmit} color="primary">
