@@ -36,7 +36,17 @@ function DoctorReviewSection(props: DoctorReviewSectionProps) {
     >
       <Grid container spacing={2}>
         {reviewList.map((review) => (
-          <Grid item key={review.id} xs={12} sx={{ mb: 1 }}>
+          <Grid
+            item
+            key={review.id}
+            xs={12}
+            sx={{
+              mb: 1,
+              borderBottom: 0.5,
+              paddingBottom: 1,
+              borderColor: "#DBDBDB",
+            }}
+          >
             <Box display="flex" alignItems="center">
               <img
                 src={
