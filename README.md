@@ -5,31 +5,43 @@
 <!-- project philosophy -->
 <img src="./readme/title2.svg"/>
 
-> A mobile app for ordering coffee on-the-go, making it easier for coffee lovers to get their favorite beverages without waiting in line.
+> Welcome to Petrix, your go-to AI assistant for all things related to your beloved pets.
 >
-> Coffee Express aims to streamline the coffee-ordering process by providing a user-friendly platform for customers to place orders and pick up their coffee at their convenience. We believe in enhancing the coffee experience by saving time and ensuring customer satisfaction.
+> With Petrix, we go beyond simple image classification to offer a comprehensive pet care solution. Whether you're an experienced pet owner or a novice, Petrix has you covered.
 
-### User Stories
-- As a user, I want to browse the menu, so I can find my favorite coffee drinks.
-- As a user, I want to customize my order, so I can add or remove ingredients according to my preferences.
-- As a user, I want to pay for my order through the app, so I can avoid waiting in line at the store.
+### User Types 
 
-<br><br>
+1. Pet owners 
+2. Doctors
 
+### Features of the App 
+
+As a Pet Owner, I want : 
+
+- To Quickly identify the species and breed of my pet by submitting a photo so that I may learn more about them.
+- A tool to provide me with real-time health and wellness updates for my pet, including weight check, exercises, and nutritional guidelines, so that I can ensure its overall safety.
+- To use my current location to search for local vet clinics and offer a list with important data like the distance, ratings, and contact information, so i can book an appointmen with the best veterinary clinic for the needs of my pet.
+
+As a Doctor, I want: 
+
+- Have a profile page on the site so pet owners can quickly have an exact location of my clinic, opening hours and any other information. 
+- Be notified of appointment requests from pet owners, so i could effectively organize my calendar and provide my clients pets the care they need.
+- Review the comments and ratings of clients, so I can have a better assessment of the care we are providing.
+
+<br><br> 
 <!-- Prototyping -->
 <img src="./readme/title3.svg"/>
 
-> We designed Coffee Express using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
-
-### Wireframes
-| Login screen  | Register screen |  Landing screen |
-| ---| ---| ---|
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+> We designed PETRIX using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
 
 ### Mockups
-| Home screen  | Menu Screen | Order Screen |
+| Login  | Sign up - 1 | Sign up - 2 |
 | ---| ---| ---|
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![Login](./readme/demo/Login.png) | ![ Sign up - 1](./readme/demo/Sign_up_1.png) | ![ Sign up - 2](./readme/demo/Sing_up_2.png) |
+|  AI Classification | AI Assistant | Doctors near you |
+| ![AI Classification](./readme/demo/AI_Classification.png) | ![AI Assistant](./readme/demo/AI_Assistant.png) | ![Doctors near you](./readme/demo/Doctors_Near_Me.png) |
+| Book Appointment | Handle Appointments | Doctor profile |
+| ![Book Appointment](./readme/demo/Booking.png) | ![Handle Appointments](./readme/demo/Handle_Appointment.png) | ![Doctor profile](./readme/demo/Doctor_Profile.png) |
 
 <br><br>
 
