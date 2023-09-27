@@ -137,23 +137,27 @@ const DoctorLocations = () => {
             zIndex: 1000, // Set a higher zIndex
             backgroundColor: "rgba(255, 255, 255, 0.9)", // Semi-transparent white
             padding: "16px",
+            maxHeight: "300px",
+            overflowY: "auto",
           }}
         >
           <h2 className="LocationsHead">Locations</h2>
           <List>
             {doctorsNearUser.map((doctor) => (
-              <li
-                key={doctor.id}
-                onClick={() =>
-                  handleLocationClick({
-                    lat: parseFloat(doctor.latitude),
-                    lng: parseFloat(doctor.longitude),
-                  })
-                }
-                style={{ cursor: "pointer" }}
-              >
-                {doctor.doctor.firstName} {doctor.doctor.lastName}
-              </li>
+              <ul>
+                <li
+                  key={doctor.id}
+                  onClick={() =>
+                    handleLocationClick({
+                      lat: parseFloat(doctor.latitude),
+                      lng: parseFloat(doctor.longitude),
+                    })
+                  }
+                  style={{ cursor: "pointer" }}
+                >
+                  {doctor.doctor.firstName} {doctor.doctor.lastName}
+                </li>
+              </ul>
             ))}
           </List>
         </Paper>
