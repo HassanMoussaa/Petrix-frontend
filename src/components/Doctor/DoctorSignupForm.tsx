@@ -42,7 +42,9 @@ function DoctorSignupForm(props: SignupFormProps) {
   } = props;
 
   const [selectedCountry, setSelectedCountry] = useState<string>("");
-  const [selectedSpeciality, setSelectedSpeciality] = useState<string[]>([""]);
+  const [selectedSpeciality, setSelectedSpeciality] = useState<string[] | null>(
+    null
+  );
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     setSelectedCountry(event.target.value);
@@ -169,21 +171,33 @@ function DoctorSignupForm(props: SignupFormProps) {
       )}
 
       <FormControl
-        variant="standard"
-        sx={{ m: 1, width: "70%", maxHeight: 50 }}
+        sx={{
+          width: "70%",
+          // border: 1,
+          mt: 0,
+          mb: "13px",
+          position: "relative",
+        }}
       >
-        <InputLabel id="demo-simple-select-standard-label" sx={{ zIndex: 3 }}>
+        {/* <InputLabel
+          id="demo-simple-select-standard-label"
+          sx={{ zIndex: 3, alignSelf: "center", position: "absolute" }}
+        >
           Country
-        </InputLabel>
+        </InputLabel> */}
+        <InputLabel id="demo-simple-select-standard-label">Country*</InputLabel>
+
         <Select
           name="country"
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
           value={selectedCountry}
           onChange={handleChange}
-          label="country"
+          label="Country"
           required={true}
-          sx={{ backgroundColor: "white" }}
+          sx={{
+            backgroundColor: "white",
+          }}
         >
           {countries.map((country) => (
             <MenuItem key={country.label} value={country.label}>
@@ -197,50 +211,30 @@ function DoctorSignupForm(props: SignupFormProps) {
         required
         fullWidth
         name="city"
-        label="city"
+        label="City"
         type="city"
         id="city"
         autoComplete="city"
-        sx={{ mb: 3 }}
+        sx={{ mb: "13px" }}
         className="input_signup_field"
       />
 
-      {/* <InputLabel id="speciality-select-label">Speciality</InputLabel>
-      <Select
-        className="input_signup_field"
-        labelId="speciality-select-label"
-        id="speciality"
-        multiple
-        value={selectedSpeciality}
-        onChange={handleChangeSpeciality}
-        required
-        sx={{ mb: 3 }}
-        input={<OutlinedInput label="Speciality" />}
-      >
-        {petSpecialties.map((specialty) => (
-          <MenuItem key={specialty} value={specialty}>
-            {specialty}
-          </MenuItem>
-        ))}
-      </Select> */}
-
-      <FormControl
-        variant="standard"
-        sx={{ m: 1, width: "70%", maxHeight: 50 }}
-      >
+      <FormControl sx={{ mb: "13px", width: "70%" }}>
         <InputLabel id="demo-simple-select-standard-label" sx={{ zIndex: 3 }}>
-          Speciality
+          Speciality*
         </InputLabel>
         <Select
           name="speciality"
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
           multiple
-          value={selectedSpeciality}
+          value={selectedSpeciality || []}
           onChange={handleChangeSpeciality}
           label="Speciality"
           required={true}
-          sx={{ backgroundColor: "white" }}
+          sx={{
+            backgroundColor: "white",
+          }}
         >
           {petSpecialties.map((specialty) => (
             <MenuItem key={specialty} value={specialty}>

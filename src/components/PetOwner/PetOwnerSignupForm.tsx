@@ -121,62 +121,47 @@ function PetSignupForm(props: SignupFormProps) {
       {!passwordMatch && (
         <Typography sx={{ mb: 2 }}>Passwords didn't match!</Typography>
       )}
-      <Grid sx={{ display: "flex", justifyContent: "center" }}>
-        {/* <div className="country_city_group"> */}
-        {/* <Select
+      <FormControl sx={{ width: "70%", marginBottom: "13px", maxHeight: 50 }}>
+        <InputLabel id="demo-simple-select-standard-label" sx={{ zIndex: 3 }}>
+          Country*
+        </InputLabel>
+        <Select
           name="country"
-          labelId="country"
-          id="country"
-          className="input_signup_field_updated"
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
           value={selectedCountry}
           onChange={handleChange}
-          required
-          sx={{ mb: 3 }}
+          label="country"
+          required={true}
+          sx={{
+            backgroundColor: "white",
+            borderBottom: 0,
+            border: "20px",
+          }}
         >
           {countries.map((country) => (
             <MenuItem key={country.label} value={country.label}>
               {country.label}
             </MenuItem>
           ))}
-        </Select> */}
-        <FormControl
-          variant="standard"
-          sx={{ m: 1, width: "100%", maxHeight: 50 }}
-        >
-          <InputLabel id="demo-simple-select-standard-label" sx={{ zIndex: 3 }}>
-            Country
-          </InputLabel>
-          <Select
-            name="country"
-            labelId="demo-simple-select-standard-label"
-            id="demo-simple-select-standard"
-            value={selectedCountry}
-            onChange={handleChange}
-            label="country"
-            required={true}
-            sx={{ backgroundColor: "white" }}
-          >
-            {countries.map((country) => (
-              <MenuItem key={country.label} value={country.label}>
-                {country.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
+        </Select>
+      </FormControl>
+      <FormControl variant="filled" sx={{ m: 1, width: "70%", maxHeight: 50 }}>
         <TextField
           required
           fullWidth
           name="city"
-          label="city"
+          label="City"
           type="city"
           id="city"
           className="input_signup_field_updated_city"
           autoComplete="city"
           sx={{ mb: 3 }}
         />
-        {/* </div> */}
-      </Grid>
+      </FormControl>
+
+      {/* </div> */}
+      {/* </Grid> */}
 
       <Button
         type="submit"
