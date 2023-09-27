@@ -172,6 +172,7 @@ function EditProfileModal(props: EditProfileModalProps) {
           value={updatedProfile}
           onChange={(e) => setUpdatedProfile(e.target.value)}
           sx={{ mt: 1 }}
+          inputProps={{ maxLength: 150 }}
         />
         <TextField
           label="Phone Number"

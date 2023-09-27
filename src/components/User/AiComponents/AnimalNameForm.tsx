@@ -27,8 +27,10 @@ function AnimalNameForm(props: AnimalNameDialogProps) {
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>
-        Set a Name for your <br />
-        {breed}
+        Set a Name for your{" "}
+        <i>
+          <b>{breed}</b>
+        </i>
       </DialogTitle>
       <DialogContent>
         <TextField

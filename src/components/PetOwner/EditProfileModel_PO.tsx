@@ -90,6 +90,7 @@ function EditProfileModel_PO(props: EditProfileModalProps) {
           value={updatedProfile}
           onChange={(e) => setUpdatedProfile(e.target.value)}
           margin="normal"
+          inputProps={{ maxLength: 150 }}
         />
         <TextField
           label="Phone Number"
@@ -141,8 +142,8 @@ function EditProfileModel_PO(props: EditProfileModalProps) {
           </Grid>
           <Grid item xs={6}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              // color="secondary"
               onClick={onClose}
               fullWidth
             >
