@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
+import Paper from "@mui/material/Paper";
+import List from "@mui/material/List";
 
 const DoctorLocations = () => {
   const apiKey = "AIzaSyDTfjTU0uNZK4EMSuWd5vUiMi4ShwgTlFw";
@@ -125,19 +127,20 @@ const DoctorLocations = () => {
             />
           )}
         </GoogleMap>
-        <div
+        <Paper
+          elevation={4}
           style={{
-            flex: 1,
-            padding: "16px",
-            overflowY: "auto",
             position: "absolute",
-            top: 100,
-            left: 0,
-            zIndex: 100,
+            top: "150px",
+            left: "16px",
+            width: "130px",
+            zIndex: 1000, // Set a higher zIndex
+            backgroundColor: "rgba(255, 255, 255, 0.9)", // Semi-transparent white
+            padding: "16px",
           }}
         >
-          <h2>Locations</h2>
-          <ul>
+          <h2 className="LocationsHead">Locations</h2>
+          <List>
             {doctorsNearUser.map((doctor) => (
               <li
                 key={doctor.id}
@@ -152,8 +155,8 @@ const DoctorLocations = () => {
                 {doctor.doctor.firstName} {doctor.doctor.lastName}
               </li>
             ))}
-          </ul>
-        </div>
+          </List>
+        </Paper>
       </div>
     </LoadScript>
   );
