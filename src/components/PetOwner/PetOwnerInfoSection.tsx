@@ -67,7 +67,10 @@ function PetOwnerInfoSection(props: PetOwnerInfoSectionProps) {
   };
 
   return (
-    <Grid container sx={{ display: { xs: "flex" }, ml: 10, mt: 10, gap: 5 }}>
+    <Grid
+      container
+      sx={{ display: { xs: "flex" }, ml: 10, mt: 10, gap: 13, width: "80%" }}
+    >
       <Grid md={3} sx={{ display: { md: "flex" } }}>
         <div>
           <Badge
