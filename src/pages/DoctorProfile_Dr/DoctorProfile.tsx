@@ -263,7 +263,11 @@ function DoctorProfile() {
                 <AddIcon />
               </Fab>
             </Zoom>
-            <CreatePostModal open={isModalOpen} setOpen={setIsModalOpen} />
+            <CreatePostModal
+              open={isModalOpen}
+              setOpen={setIsModalOpen}
+              fetchDoctorProfile={fetchDoctorProfile}
+            />
           </Box>
         </Grid>
       </Grid>
