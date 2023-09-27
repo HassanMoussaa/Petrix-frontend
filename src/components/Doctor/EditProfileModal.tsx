@@ -3,7 +3,10 @@ import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
 import { petSpecialties } from "../../utils/petSpecialties";
 import { SelectChangeEvent } from "@mui/material/Select";
-
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DigitalClock } from "@mui/x-date-pickers/DigitalClock";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import {
   Dialog,
   DialogTitle,
@@ -18,6 +21,7 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
+import dayjs, { Dayjs } from "dayjs";
 
 const daysOfWeek = [
   { id: 1, label: "Monday" },
@@ -84,11 +88,17 @@ function EditProfileModal(props: EditProfileModalProps) {
     availability.map((availability) => availability.day)
   );
 
-  // const [updatedAvailability, setUpdatedAvailability] = useState(availability);
-  const [startTime, setStartTime] = useState<string>(
-    availability[0]?.start_time || ""
+  const [startTime, setStartTime] = useState<Dayjs>(
+    availability[0]
+      ? dayjs(availability[0].start_time, "HH:mm:ss")
+      : dayjs("09:00", "HH:mm")
   );
-  const [endTime, setEndTime] = useState<string>(availability[0].end_time);
+
+  const [endTime, setEndTime] = useState<Dayjs>(
+    availability[0]
+      ? dayjs(availability[0].end_time, "HH:mm:ss")
+      : dayjs("18:00", "HH:mm")
+  );
 
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
@@ -106,8 +116,8 @@ function EditProfileModal(props: EditProfileModalProps) {
           specialties: selectedSpeciality,
           availability: {
             days: selectedAvailability,
-            start_time: startTime,
-            end_time: endTime,
+            start_time: startTime.format("HH:mm:ss"),
+            end_time: endTime.format("HH:mm:ss"),
           },
         },
         config
@@ -210,7 +220,7 @@ function EditProfileModal(props: EditProfileModalProps) {
             </Grid>
           ))}
         </Grid>
-        <TextField
+        {/* <TextField
           label="Start Time"
           fullWidth
           value={startTime}
@@ -221,7 +231,42 @@ function EditProfileModal(props: EditProfileModalProps) {
           fullWidth
           value={endTime}
           onChange={(e) => setEndTime(e.target.value)}
-        />
+        /> */}
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoItem label="Start Time">
+            <DigitalClock
+              ampm={false}
+              timeStep={60}
+              value={startTime}
+              onChange={(newTime) => {
+                if (newTime !== null) {
+                  console.log("new", newTime);
+                  setStartTime(newTime);
+                } else {
+                  setStartTime(dayjs("09:00", "HH:mm"));
+                }
+              }}
+            />
+          </DemoItem>
+
+          <DemoItem label="End Time">
+            <DigitalClock
+              ampm={false}
+              timeStep={60}
+              value={endTime}
+              onChange={(newTime) => {
+                if (newTime !== null) {
+                  console.log("new", newTime);
+
+                  setEndTime(newTime);
+                } else {
+                  setEndTime(dayjs("18:00", "HH:mm"));
+                }
+              }}
+            />
+          </DemoItem>
+        </LocalizationProvider>
+
         <Button onClick={handleSave} variant="contained" color="primary">
           Save
         </Button>
