@@ -14,10 +14,10 @@ import getAPIBaseURL from "../../APIBaseURL";
 interface BasicModalProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchDoctorProfile: () => void;
 }
-
 function BasicModal(props: BasicModalProps) {
-  const { open, setOpen } = props;
+  const { open, setOpen, fetchDoctorProfile } = props;
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
@@ -43,6 +43,7 @@ function BasicModal(props: BasicModalProps) {
 
       console.log("Created Post:", response.data);
       setOpen(false);
+      fetchDoctorProfile();
     } catch (error) {
       console.error("Error creating post:", error);
     }
@@ -74,6 +75,7 @@ function BasicModal(props: BasicModalProps) {
               value={title}
               onChange={handleTitleChange}
               required
+              sx={{ mt: 1 }}
             />
             <TextField
               label="Body"
