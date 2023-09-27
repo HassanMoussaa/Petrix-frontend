@@ -16,6 +16,8 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { HfInference } from "@huggingface/inference";
 import BackButton from "../../components/BackButton";
+import CircularProgress from "@mui/material/CircularProgress";
+
 interface UserType {
   id: number;
   type: string;
@@ -207,7 +209,7 @@ function Ai_imageClassification_Main() {
                 Classify Image
               </Button>
             ) : (
-              <p>Loading...</p>
+              <CircularProgress size={24} />
             )}
           </Grid>
         </Grid>
