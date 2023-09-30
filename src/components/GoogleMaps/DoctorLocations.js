@@ -4,6 +4,9 @@ import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
 import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { Grid } from "@mui/material";
 
 const DoctorLocations = () => {
   const apiKey = "AIzaSyDTfjTU0uNZK4EMSuWd5vUiMi4ShwgTlFw";
@@ -120,40 +123,54 @@ const DoctorLocations = () => {
             />
           )}
         </GoogleMap>
-        <Paper
+        <Grid
           elevation={4}
           style={{
             position: "absolute",
             top: "150px",
             left: "16px",
-            width: "130px",
-            zIndex: 1000, // Set a higher zIndex
-            backgroundColor: "rgba(255, 255, 255, 0.9)", // Semi-transparent white
+            width: "250px",
+            zIndex: 1000,
+            backgroundColor: "rgba(255, 255, 255, 0)",
             padding: "16px",
             maxHeight: "300px",
             overflowY: "auto",
           }}
         >
-          <h2 className="LocationsHead">Locations</h2>
+          {/* <h2 className="LocationsHead">Locations</h2> */}
           <List>
             {doctorsNearUser.map((doctor) => (
-              <ul>
-                <li
-                  key={doctor.id}
-                  onClick={() =>
-                    handleLocationClick({
-                      lat: parseFloat(doctor.latitude),
-                      lng: parseFloat(doctor.longitude),
-                    })
-                  }
-                  style={{ cursor: "pointer" }}
+              <Card
+                key={doctor.id}
+                onClick={() =>
+                  handleLocationClick({
+                    lat: parseFloat(doctor.latitude),
+                    lng: parseFloat(doctor.longitude),
+                  })
+                }
+                style={{ cursor: "pointer", marginBottom: "8px" }}
+                sx={{ width: "200px" }}
+              >
+                <CardContent
+                  sx={{ display: "flex", gap: 1, alignItems: "center" }}
                 >
-                  {doctor.doctor.firstName} {doctor.doctor.lastName}
-                </li>
-              </ul>
+                  <img
+                    src={doctor.doctor.photoUrl}
+                    alt={`${doctor.doctor.firstName} ${doctor.doctor.lastName}`}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                  <div>
+                    {doctor.doctor.firstName} {doctor.doctor.lastName}
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </List>
-        </Paper>
+        </Grid>
       </div>
     </LoadScript>
   );
