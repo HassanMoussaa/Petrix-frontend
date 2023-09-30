@@ -81,7 +81,9 @@ function DoctorPost() {
     const commentTime = dayjs(timestamp);
     const diffInMinutes = now.diff(commentTime, "minutes");
 
-    if (diffInMinutes < 60) {
+    if (diffInMinutes < 0.5) {
+      return `Just now`;
+    } else if (diffInMinutes < 60) {
       return `${diffInMinutes} minutes ago`;
     } else if (diffInMinutes < 1440) {
       const diffInHours = now.diff(commentTime, "hours");
@@ -191,14 +193,16 @@ function DoctorPost() {
           <Grid item xs={12} md={8}>
             <Paper
               sx={{
-                p: 2,
+                p: 3,
                 backgroundColor: "white",
                 border: 1,
                 borderRadius: "8px",
                 borderColor: "#A7A7A7",
               }}
             >
-              <Typography variant="h4">{selectedPost.title}</Typography>
+              <Typography variant="h4" sx={{ paddingBottom: 2 }}>
+                {selectedPost.title}
+              </Typography>
               <Typography variant="body1">{selectedPost.body}</Typography>
             </Paper>
           </Grid>
@@ -208,24 +212,32 @@ function DoctorPost() {
         <Grid container justifyContent="center" mt={3}>
           <Grid item xs={12} md={8}>
             <Typography variant="h5">Add a Comment</Typography>
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Add a Comment"
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              multiline
-              rows={1}
-              sx={{ mt: 2 }}
-            />
-            <Button
-              variant="contained"
-              // color="primary"
-              onClick={handleAddComment}
-              sx={{ mt: 2, background: "#16A4C3" }}
-            >
-              Add Comment
-            </Button>
+            <Grid sx={{ display: "flex", gap: 1 }}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                label="Add a Comment"
+                multiline
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                rows={4}
+                sx={{ mt: 2 }}
+              />
+              <Button
+                variant="contained"
+                // color="primary"
+                onClick={handleAddComment}
+                sx={{
+                  mt: 2,
+                  background: "#16A4C3",
+                  width: "200px",
+                  height: "50px",
+                  alignSelf: "center",
+                }}
+              >
+                Add Comment
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       )}
