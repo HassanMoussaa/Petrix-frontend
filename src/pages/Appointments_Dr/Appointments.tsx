@@ -46,10 +46,10 @@ interface DoctorInfo {
 }
 
 interface Appointment {
-  date: number;
+  date: string;
   id: number;
   petOwnerId: number;
-  start_time: number;
+  start_time: string;
   petOwner: {
     firstName: string;
     lastName: string;
@@ -171,6 +171,7 @@ function Appointments() {
           display: { xs: "flex" },
           flexDirection: { xs: "column" },
           mt: 5,
+          width: "88%",
         }}
       >
         <Box sx={{ width: "100%" }}>
