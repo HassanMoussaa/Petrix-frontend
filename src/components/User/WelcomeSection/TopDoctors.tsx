@@ -78,7 +78,7 @@ function TopDoctors() {
                     imageUrl={doctor.photoUrl}
                     rate={doctor.averageRate}
                     appointmentCount={doctor.appointmentCount}
-                    title={doctor.firstName + doctor.lastName}
+                    title={doctor.firstName + " " + doctor.lastName}
                     id={doctor.id}
                   />
                 </div>
