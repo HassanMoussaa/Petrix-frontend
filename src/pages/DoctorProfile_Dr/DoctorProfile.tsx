@@ -5,7 +5,18 @@ import getAPIBaseURL from "../../APIBaseURL";
 import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
 import DoctorInfoSection2 from "../../components/Doctor/DoctorInfoSection2";
 import "./doctorProfile.css";
-import { Grid, Box, Tabs, Tab, Zoom, Typography, Badge } from "@mui/material";
+import ChangeProfilePhoto from "../../components/Doctor/ChangeProfilePhoto";
+
+import {
+  Grid,
+  Box,
+  Tabs,
+  Tab,
+  Zoom,
+  Typography,
+  Badge,
+  Avatar,
+} from "@mui/material";
 import DoctorToggleSection from "../../components/Doctor/DoctorToggleSection";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -98,7 +109,7 @@ function DoctorProfile() {
 
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
-
+  let isOwnProfile = true;
   // For toggle section
 
   function a11yProps(index: number) {
@@ -180,131 +191,176 @@ function DoctorProfile() {
         />
       )}
       <BackButton />
-      {doctorInfo && (
-        <DoctorInfoSection
-          imageUrl={newImageUrl}
-          setNewImageUrl={setNewImageUrl}
-          firstName={doctorInfo.firstName}
-          lastName={doctorInfo.lastName}
-          averageRate={doctorInfo.averageRate}
-          isOwnProfile={true}
-          docId={doctorInfo.id}
-          check_if_followed={doctorInfo.check_if_followed}
-          followerCount={doctorInfo.followerCount}
-          phoneNum={doctorInfo.phone || ""}
-          profileBio={doctorInfo.profile}
-          specialityList={doctorInfo.specialties}
-          availabilityList={doctorInfo.availabilities}
-          fetchDoctorProfile={fetchDoctorProfile}
-        />
-      )}
-      <Grid
-        container
-        sx={{
-          display: { xs: "flex" },
-          flexWrap: { xs: "inherit" },
-        }}
-      >
-        {doctorInfo && (
-          <DoctorInfoSection2
-            phoneNum={doctorInfo.phone || ""}
-            profileBio={doctorInfo.profile}
-            drEmail={doctorInfo.email}
-            specialityList={doctorInfo.specialties}
-          />
-        )}
+      <Grid sx={{ display: "flex", gap: 13 }}>
+        <Grid sx={{ display: "flex", flexDirection: "column", mt: 11 }} md={6}>
+          {doctorInfo && (
+            <Grid sx={{ display: { md: "flex" }, ml: 8 }}>
+              <div>
+                {isOwnProfile ? (
+                  <Badge
+                    badgeContent={
+                      <ChangeProfilePhoto setNewImageUrl={setNewImageUrl} />
+                    }
+                    color="primary"
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
+                    }}
+                  >
+                    <Avatar
+                      alt="user_profile_picture"
+                      src={newImageUrl}
+                      sx={{
+                        height: "300px !important",
+                        width: "300px !important",
+                      }}
+                      variant="square"
+                    />
+                  </Badge>
+                ) : (
+                  <Avatar
+                    alt="user_profile_picture"
+                    src={newImageUrl}
+                    sx={{
+                      height: "300px !important",
+                      width: "300px !important",
+                    }}
+                    variant="square"
+                  />
+                )}
+              </div>
+            </Grid>
+          )}
+
+          {doctorInfo && (
+            <DoctorInfoSection2
+              phoneNum={doctorInfo.phone || ""}
+              profileBio={doctorInfo.profile}
+              drEmail={doctorInfo.email}
+              specialityList={doctorInfo.specialties}
+            />
+          )}
+        </Grid>
+
         <Grid
           container
-          ml={19}
           sx={{
             display: { xs: "flex" },
-            flexDirection: { xs: "column" },
-            position: "relative",
+            flexWrap: { xs: "inherit" },
           }}
         >
-          <Box sx={{ width: "100%" }}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                aria-label="basic tabs example"
-              >
-                <Tab
-                  label={
-                    <div>
-                      <Typography sx={{ mr: 2 }} display="inline">
-                        Blogs
-                      </Typography>
-                      <Badge
-                        badgeContent={doctorInfo?.posts.length || 0}
-                        color="primary"
-                        showZero
-                        anchorOrigin={{
-                          vertical: "top",
-                          horizontal: "right",
-                        }}
-                      ></Badge>
-                    </div>
+          <Grid
+            container
+            sx={{
+              display: { xs: "flex" },
+              flexDirection: { xs: "column" },
+              position: "relative",
+              gap: 5,
+            }}
+          >
+            {doctorInfo && (
+              <DoctorInfoSection
+                imageUrl={newImageUrl}
+                setNewImageUrl={setNewImageUrl}
+                firstName={doctorInfo.firstName}
+                lastName={doctorInfo.lastName}
+                averageRate={doctorInfo.averageRate}
+                isOwnProfile={true}
+                docId={doctorInfo.id}
+                check_if_followed={doctorInfo.check_if_followed}
+                followerCount={doctorInfo.followerCount}
+                phoneNum={doctorInfo.phone || ""}
+                profileBio={doctorInfo.profile}
+                specialityList={doctorInfo.specialties}
+                availabilityList={doctorInfo.availabilities}
+                fetchDoctorProfile={fetchDoctorProfile}
+              />
+            )}
+
+            <Box sx={{ width: "100%" }}>
+              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  aria-label="basic tabs example"
+                >
+                  <Tab
+                    label={
+                      <div>
+                        <Typography sx={{ mr: 2 }} display="inline">
+                          Blogs
+                        </Typography>
+                        <Badge
+                          badgeContent={doctorInfo?.posts.length || 0}
+                          color="primary"
+                          showZero
+                          anchorOrigin={{
+                            vertical: "top",
+                            horizontal: "right",
+                          }}
+                        ></Badge>
+                      </div>
+                    }
+                    {...a11yProps(0)}
+                  />
+                  <Tab
+                    label={
+                      <div>
+                        <Typography sx={{ mr: 2 }} display="inline">
+                          Reviews
+                        </Typography>
+                        <Badge
+                          badgeContent={doctorInfo?.doctorReviews.length || 0}
+                          color="primary"
+                          showZero
+                          anchorOrigin={{
+                            vertical: "top",
+                            horizontal: "right",
+                          }}
+                        ></Badge>
+                      </div>
+                    }
+                    {...a11yProps(1)}
+                  />
+                  <Tab label="Location" {...a11yProps(2)} />
+                </Tabs>
+              </Box>
+              <CustomTabPanel value={value} index={0}>
+                {doctorInfo && (
+                  <DoctorToggleSection postList={doctorInfo.posts} />
+                )}
+              </CustomTabPanel>
+              <CustomTabPanel value={value} index={1}>
+                {doctorInfo && (
+                  <DoctorReviewSection reviewList={doctorInfo.doctorReviews} />
+                )}
+              </CustomTabPanel>
+              <CustomTabPanel value={value} index={2}>
+                <GoogleMaps location={location} setLocation={setLocation} />
+              </CustomTabPanel>
+              <Zoom key="primary" in={value === 0} unmountOnExit>
+                <Fab
+                  sx={
+                    {
+                      position: "absolute",
+                      bottom: 16,
+                      right: 16,
+                    } as SxProps
                   }
-                  {...a11yProps(0)}
-                />
-                <Tab
-                  label={
-                    <div>
-                      <Typography sx={{ mr: 2 }} display="inline">
-                        Reviews
-                      </Typography>
-                      <Badge
-                        badgeContent={doctorInfo?.doctorReviews.length || 0}
-                        color="primary"
-                        showZero
-                        anchorOrigin={{
-                          vertical: "top",
-                          horizontal: "right",
-                        }}
-                      ></Badge>
-                    </div>
-                  }
-                  {...a11yProps(1)}
-                />
-                <Tab label="Location" {...a11yProps(2)} />
-              </Tabs>
+                  aria-label="Create post"
+                  color="primary"
+                  onClick={handleOpenModal}
+                >
+                  <AddIcon />
+                </Fab>
+              </Zoom>
+              <CreatePostModal
+                open={isModalOpen}
+                setOpen={setIsModalOpen}
+                fetchDoctorProfile={fetchDoctorProfile}
+              />
             </Box>
-            <CustomTabPanel value={value} index={0}>
-              {doctorInfo && (
-                <DoctorToggleSection postList={doctorInfo.posts} />
-              )}
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
-              {doctorInfo && (
-                <DoctorReviewSection reviewList={doctorInfo.doctorReviews} />
-              )}
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={2}>
-              <GoogleMaps location={location} setLocation={setLocation} />
-            </CustomTabPanel>
-            <Zoom key="primary" in={value === 0} unmountOnExit>
-              <Fab
-                sx={
-                  {
-                    position: "absolute",
-                    bottom: 16,
-                    right: 16,
-                  } as SxProps
-                }
-                aria-label="Create post"
-                color="primary"
-                onClick={handleOpenModal}
-              >
-                <AddIcon />
-              </Fab>
-            </Zoom>
-            <CreatePostModal
-              open={isModalOpen}
-              setOpen={setIsModalOpen}
-              fetchDoctorProfile={fetchDoctorProfile}
-            />
-          </Box>
+          </Grid>
         </Grid>
       </Grid>
     </div>
