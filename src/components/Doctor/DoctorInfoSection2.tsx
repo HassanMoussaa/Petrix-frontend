@@ -52,7 +52,7 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
   return (
     <Grid
       container
-      md={2.5}
+      md={10}
       sx={{
         display: { xs: "flex" },
         ml: 8,
@@ -80,6 +80,7 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
               // fontWeight: "bold",
               color: "#16A4C3",
               fontSize: 20,
+              fontWeight: "bold",
             }}
           >
             Speciality
@@ -87,22 +88,22 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
 
           <Box sx={{ flexGrow: 1, mt: 1 }}>
             <Grid container spacing={2}>
-              <Grid item xs={7}>
+              <Grid item xs={6}>
                 {specialityList[0] && (
                   <Item>{specialityList[0].speciality}</Item>
                 )}
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs={6}>
                 {specialityList[1] && (
                   <Item>{specialityList[1].speciality}</Item>
                 )}
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs={6}>
                 {specialityList[2] && (
                   <Item>{specialityList[2].speciality}</Item>
                 )}
               </Grid>
-              <Grid item xs={7}>
+              <Grid item xs={6}>
                 {specialityList[3] && (
                   <Item>{specialityList[3].speciality}</Item>
                 )}
@@ -138,6 +139,7 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
                 sx={{
                   fontSize: 20,
                   color: "#16A4C3",
+                  fontWeight: "bold",
                 }}
               >
                 Contact Info
@@ -157,13 +159,13 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
                   <LocalPhoneOutlinedIcon
                     sx={{ fontSize: 20, marginRight: 1 }}
                   />
-                  <Typography sx={{ fontSize: 20 }}>{phoneNum}</Typography>
+                  <Typography sx={{ fontSize: 15 }}>{phoneNum}</Typography>
                 </Box>
               )}
 
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <EmailOutlinedIcon sx={{ fontSize: 20, marginRight: 1 }} />
-                <Typography sx={{ fontSize: 20 }}>{drEmail}</Typography>
+                <Typography sx={{ fontSize: 15 }}>{drEmail}</Typography>
               </Box>
             </Grid>
           </Grid>
@@ -180,11 +182,18 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
                 // fontWeight: "bold",
                 color: "#16A4C3",
                 fontSize: 20,
+                fontWeight: "bold",
               }}
             >
               Profile Bio
             </Typography>
-            <Typography>{profileBio}</Typography>
+            <Typography
+              sx={{
+                fontSize: 15,
+              }}
+            >
+              {profileBio}
+            </Typography>
           </Grid>
         </Grid>
       </Grid>
