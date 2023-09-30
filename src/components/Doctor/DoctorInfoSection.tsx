@@ -134,126 +134,136 @@ function DoctorInfoSection(props: DoctorInfoSection) {
   return (
     <Grid
       container
-      sx={{ display: { xs: "flex" }, ml: 10, mt: 10, gap: 3, width: "90%" }}
+      sx={{
+        display: { xs: "flex" },
+        mt: 10,
+        width: "90%",
+        justifyContent: "space-between",
+      }}
       className="infoSection1"
     >
-      <Grid md={3} sx={{ display: { md: "flex" } }}>
-        <div>
-          {isOwnProfile ? (
-            <Badge
-              badgeContent={
-                <ChangeProfilePhoto setNewImageUrl={setNewImageUrl} />
-              }
-              color="primary"
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-            >
-              <Avatar
-                alt="user_profile_picture"
-                src={imageUrl}
-                sx={{
-                  height: "300px !important",
-                  width: "300px !important",
-                }}
-                variant="square"
-              />
-            </Badge>
-          ) : (
-            <Avatar
-              alt="user_profile_picture"
-              src={imageUrl}
-              sx={{
-                height: "300px !important",
-                width: "300px !important",
-              }}
-              variant="square"
-            />
-          )}
-        </div>
-      </Grid>
-      <Grid
+      {/* <Grid
         container
         md={4}
         sx={{
           display: { xs: "flex" },
-          flexDirection: { xs: "column" },
+          // flexDirection: { xs: "column" },
           gap: 5,
-          ml: 3,
         }}
+      > */}
+      <Grid
+        container
+        sx={{
+          display: { xs: "flex" },
+          flexDirection: { xs: "column" },
+          gap: 2,
+        }}
+        md={6}
       >
-        <Grid
-          container
+        <Typography
           sx={{
-            display: { xs: "flex" },
-            flexDirection: { xs: "column" },
-            gap: 2,
+            fontWeight: "bold",
+            fontSize: 28,
           }}
         >
-          <Typography
-            sx={{
-              fontWeight: "bold",
-              fontSize: 28,
-            }}
-          >
-            Dr {firstName} {lastName}
-          </Typography>
+          Dr {firstName} {lastName}
+        </Typography>
 
-          <Rating
-            name="read-only"
-            value={averageRate}
-            precision={0.5}
-            readOnly
-          />
-        </Grid>
-        <Grid
-          container
-          sx={{
-            display: { xs: "flex" },
-            gap: 2,
-          }}
-        >
-          {isOwnProfile ? (
-            <>
+        <Rating name="read-only" value={averageRate} precision={0.5} readOnly />
+      </Grid>
+      <Grid
+        container
+        sx={{
+          display: {
+            xs: "flex",
+            // justifyContent: "flex-end",
+            alignItems: "center",
+          },
+          gap: 2,
+        }}
+        md={5}
+      >
+        {isOwnProfile ? (
+          <>
+            <Button
+              variant="contained"
+              sx={{
+                bgcolor: "#16A4C3",
+                borderRadius: 3,
+                maxWidth: 100,
+                fontWeight: "bold",
+                height: 50,
+                "&:hover": {
+                  backgroundColor: "#000",
+                },
+              }}
+              size="large"
+              onClick={handleEditClick}
+            >
+              Edit
+            </Button>
+
+            {/* Edit Profile Modal */}
+            <EditProfileModal
+              isOpen={isEditModalOpen}
+              onClose={() => setIsEditModalOpen(false)}
+              firstName={firstName}
+              lastName={lastName}
+              profile={profileBio}
+              phone={phoneNum}
+              specialties={specialityList}
+              availability={availabilityList}
+              fetchDoctorProfile={fetchDoctorProfile}
+            />
+            <Button
+              variant="contained"
+              href="/appointments"
+              sx={{
+                bgcolor: "#000",
+                borderRadius: 3,
+                fontWeight: "bold",
+                maxWidth: 150,
+                height: 50,
+                "&:hover": {
+                  backgroundColor: "#16A4C3",
+                },
+              }}
+              size="large"
+            >
+              Appointments
+            </Button>
+          </>
+        ) : (
+          <>
+            {/* Rendering different buttons for non-own profiles */}
+
+            {isFollowed ? (
               <Button
+                onClick={unFollowUser}
                 variant="contained"
-                sx={{
-                  bgcolor: "#16A4C3",
-                  borderRadius: 3,
-                  maxWidth: 100,
-                  fontWeight: "bold",
-                  height: 50,
-                  "&:hover": {
-                    backgroundColor: "#000",
-                  },
-                }}
-                size="large"
-                onClick={handleEditClick}
+                sx={{ borderRadius: 3, fontWeight: "bold", height: 50 }}
+                color="error"
               >
-                Edit
+                Unfollow
               </Button>
-
-              {/* Edit Profile Modal */}
-              <EditProfileModal
-                isOpen={isEditModalOpen}
-                onClose={() => setIsEditModalOpen(false)}
-                firstName={firstName}
-                lastName={lastName}
-                profile={profileBio}
-                phone={phoneNum}
-                specialties={specialityList}
-                availability={availabilityList}
-                fetchDoctorProfile={fetchDoctorProfile}
-              />
+            ) : (
+              <Button
+                onClick={followUser}
+                variant="contained"
+                sx={{ backgroundColor: "#16A4C3", height: 50, borderRadius: 3 }}
+              >
+                Follow
+              </Button>
+            )}
+            {user_type === 1 && (
               <Button
                 variant="contained"
-                href="/appointments"
+                href={`/book_appointment/${docId}`}
                 sx={{
                   bgcolor: "#000",
-                  borderRadius: 3,
                   fontWeight: "bold",
-                  maxWidth: 150,
+                  borderRadius: 3,
+                  maxWidth: 250,
                   height: 50,
                   "&:hover": {
                     backgroundColor: "#16A4C3",
@@ -261,54 +271,13 @@ function DoctorInfoSection(props: DoctorInfoSection) {
                 }}
                 size="large"
               >
-                Appointments
+                Book Appointment
               </Button>
-            </>
-          ) : (
-            <>
-              {/* Rendering different buttons for non-own profiles */}
-
-              {isFollowed ? (
-                <Button
-                  onClick={unFollowUser}
-                  variant="contained"
-                  color="error"
-                >
-                  Unfollow
-                </Button>
-              ) : (
-                <Button
-                  onClick={followUser}
-                  variant="contained"
-                  sx={{ backgroundColor: "#16A4C3" }}
-                >
-                  Follow
-                </Button>
-              )}
-              {user_type === 1 && (
-                <Button
-                  variant="contained"
-                  href={`/book_appointment/${docId}`}
-                  sx={{
-                    bgcolor: "#000",
-                    fontSize: 12,
-                    fontWeight: "bold",
-                    borderRadius: 3,
-                    maxWidth: 200,
-                    height: 50,
-                    "&:hover": {
-                      backgroundColor: "#16A4C3",
-                    },
-                  }}
-                  size="large"
-                >
-                  Book Appointment
-                </Button>
-              )}
-            </>
-          )}
-        </Grid>
+            )}
+          </>
+        )}
       </Grid>
+      {/* </Grid> */}
     </Grid>
   );
 }
