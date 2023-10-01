@@ -102,6 +102,7 @@ Update or add new data in "Body" in the POST request. Typically, Body data is al
 Step 4: Update the variable
 Variables enable you to store and reuse values in Postman. We have created a variable called base_url with the sample request https://postman-api-learner.glitch.me. Replace it with your API endpoint to customize this collection.
 
+<br><br>
 
 <!-- How to run -->
 <img src="./readme/title6.svg"/>
