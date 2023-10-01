@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "de31f051-3522-404d-b989-7379d13455dc",
+		"name": "PETRIX Server",
+		"description": "## 🔖 **How to use this collection**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these request types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a variable called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28636712"
+	},
+	"item": [
+		{
+			"name": "Get Doctor Profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozODEsInVzZXJfdHlwZSI6MSwiaWF0IjoxNjk2MTcxNjIwfQ.TF7eU--0ztkbBGMrugS8ktOMUOIDDL4rEQmK4Qv8_m4",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"type": "text"
+					},
+					{
+						"key": "If-None-Match",
+						"value": "W/\"18f30-Qpoe3QTr71vkHmq9iqKl148sUkM\"",
+						"type": "text"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:3000/",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.41",
+						"type": "text"
+					}
+				],
+				"url": "{{base_url}}/users/doctorProfile/331"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post Comments",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozODEsInVzZXJfdHlwZSI6MSwiaWF0IjoxNjk2MTcxNjIwfQ.TF7eU--0ztkbBGMrugS8ktOMUOIDDL4rEQmK4Qv8_m4"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "If-None-Match",
+						"value": "W/\"2ad-/dE/vqjDDdgIn+rrIJjwWh1C5PY\""
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000"
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:3000/"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.41"
+					}
+				],
+				"url": "{{base_url}}/users/comments/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Pet Owner Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:3000/",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.41",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"john.smith@gmail.com\",\"password\":\"password123\"}"
+				},
+				"url": "{{base_url}}/users/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Pet Owner Update Profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozODEsInVzZXJfdHlwZSI6MSwiaWF0IjoxNjk2MTcxNjIwfQ.TF7eU--0ztkbBGMrugS8ktOMUOIDDL4rEQmK4Qv8_m4",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:3000/",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.41",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"profile\":\"An awesome pet owner! <3\",\"phone\":\"+961 7455974\",\"city\":\"Beirut\",\"country\":\"Lebanon\"}"
+				},
+				"url": "{{base_url}}/petOwners/update_profile"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozODEsInVzZXJfdHlwZSI6MSwiaWF0IjoxNjk2MTcxNjIwfQ.TF7eU--0ztkbBGMrugS8ktOMUOIDDL4rEQmK4Qv8_m4",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:3000/",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.41",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"rate\":4,\"body\":\"Nice visit, very friendly!\"}"
+				},
+				"url": "{{base_url}}/petOwners/review/331"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Comment to Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozODEsInVzZXJfdHlwZSI6MSwiaWF0IjoxNjk2MTcxNjIwfQ.TF7eU--0ztkbBGMrugS8ktOMUOIDDL4rEQmK4Qv8_m4"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000"
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:3000/"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.41"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"body\":\"Very interesting blog!\",\"postId\":1}"
+				},
+				"url": "{{base_url}}/users/comment"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://54.246.63.155"
+		}
+	]
+}
