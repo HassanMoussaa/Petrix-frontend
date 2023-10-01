@@ -5,19 +5,12 @@ import { useNavigate } from "react-router-dom";
 import getAPIBaseURL from "../../APIBaseURL";
 import {
   Grid,
-  Box,
-  Tabs,
-  Tab,
-  Zoom,
-  Button,
   Container,
   Paper,
   Alert,
   Avatar,
-  TextField,
   Typography,
 } from "@mui/material";
-import { useLocation } from "react-router-dom";
 import "./doctorProfile.css";
 import BookingForm from "../../components/User/BookAppointmentSections/BookingForm";
 
@@ -161,11 +154,6 @@ function BookAppointment() {
                 <Avatar
                   alt={`${doctorInfo?.firstName} ${doctorInfo?.lastName}`}
                   src={doctorInfo?.photoUrl}
-                  // sx={{
-                  //   width: "20%",
-                  //   height: "20%",
-                  //   textAlign: "center",
-                  // }}
                 ></Avatar>
               </div>
               {/* Small box for doctor name */}
@@ -196,7 +184,7 @@ function BookAppointment() {
         </Grid>
         {sucessAlertOpen && (
           <Alert variant="filled" onClose={() => setSucessAlertOpen(false)}>
-            This is a success alert — check it out!
+            Your Booking was succesfull — check it out!
           </Alert>
         )}
       </Container>

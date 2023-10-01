@@ -179,7 +179,6 @@ function DoctorInfoSection2(props: DoctorInfoSection2) {
           >
             <Typography
               sx={{
-                // fontWeight: "bold",
                 color: "#16A4C3",
                 fontSize: 20,
                 fontWeight: "bold",

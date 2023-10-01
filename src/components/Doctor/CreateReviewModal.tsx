@@ -68,10 +68,6 @@ function CreateReviewModal(props: CreateReviewModalProps) {
     }
   };
 
-  // const handleRateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setRate(event.target.value);
-  // };
-
   const handleBodyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBody(event.target.value);
   };

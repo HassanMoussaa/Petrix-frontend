@@ -2,27 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
 
-import {
-  Grid,
-  Rating,
-  Box,
-  Button,
-  Typography,
-  Fab,
-  TextField,
-  Radio,
-  RadioGroup,
-  FormLabel,
-  FormControlLabel,
-  InputLabel,
-  Select,
-  MenuItem,
-  Alert,
-  OutlinedInput,
-  FormControl,
-  Badge,
-  Avatar,
-} from "@mui/material";
+import { Grid, Rating, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import ChangeProfilePhoto from "./ChangeProfilePhoto";
@@ -77,7 +57,6 @@ function DoctorInfoSection(props: DoctorInfoSection) {
     availabilityList,
     fetchDoctorProfile,
   } = props;
-  // const value = 4.5;
 
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");
@@ -142,15 +121,6 @@ function DoctorInfoSection(props: DoctorInfoSection) {
       }}
       className="infoSection1"
     >
-      {/* <Grid
-        container
-        md={4}
-        sx={{
-          display: { xs: "flex" },
-          // flexDirection: { xs: "column" },
-          gap: 5,
-        }}
-      > */}
       <Grid
         container
         sx={{
@@ -176,7 +146,7 @@ function DoctorInfoSection(props: DoctorInfoSection) {
         sx={{
           display: {
             xs: "flex",
-            // justifyContent: "flex-end",
+            justifyContent: "flex-end",
             alignItems: "center",
           },
           gap: 2,
@@ -277,7 +247,6 @@ function DoctorInfoSection(props: DoctorInfoSection) {
           </>
         )}
       </Grid>
-      {/* </Grid> */}
     </Grid>
   );
 }

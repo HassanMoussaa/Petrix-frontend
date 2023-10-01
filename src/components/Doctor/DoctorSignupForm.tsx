@@ -1,18 +1,12 @@
 import {
-  Grid,
   Box,
   Button,
   Typography,
   TextField,
-  Radio,
-  RadioGroup,
-  FormLabel,
-  FormControlLabel,
   InputLabel,
   Select,
   MenuItem,
   Alert,
-  OutlinedInput,
   FormControl,
 } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -21,7 +15,6 @@ import { countries } from "../../utils/countries";
 import { petSpecialties } from "../../utils/petSpecialties";
 import { SelectChangeEvent } from "@mui/material/Select";
 
-// import "../PetOwner/petOwnerSignupForm.css";
 interface SignupFormProps {
   signUpError: boolean;
   handleSubmit: React.FormEventHandler<HTMLFormElement>;

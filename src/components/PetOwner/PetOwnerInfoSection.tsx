@@ -1,32 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import getAPIBaseURL from "../../APIBaseURL";
-
-import {
-  Grid,
-  Rating,
-  Box,
-  Button,
-  Typography,
-  Fab,
-  TextField,
-  Radio,
-  RadioGroup,
-  FormLabel,
-  FormControlLabel,
-  InputLabel,
-  Select,
-  MenuItem,
-  Alert,
-  OutlinedInput,
-  FormControl,
-  Badge,
-  Avatar,
-} from "@mui/material";
-import { Link } from "react-router-dom";
-import EditIcon from "@mui/icons-material/Edit";
+import React, { useState } from "react";
+import { Grid, Button, Typography, Badge, Avatar } from "@mui/material";
 import ChangeProfilePhoto from "../Doctor/ChangeProfilePhoto";
-import { countries } from "../../utils/countries";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import EditProfileModel_PO from "./EditProfileModel_PO";
 interface PetOwnerInfoSectionProps {
@@ -53,7 +27,6 @@ function PetOwnerInfoSection(props: PetOwnerInfoSectionProps) {
     profileBio,
     fetchPetOwnerProfile,
   } = props;
-  // const value = 4.5;
 
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");

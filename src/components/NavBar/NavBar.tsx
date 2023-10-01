@@ -11,7 +11,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
@@ -157,7 +156,6 @@ function ResponsiveAppBar(props: ResponsiveAppBarProps) {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "black", display: "block" }}
-                // TODO: make current page bold
               >
                 {page}
               </Button>

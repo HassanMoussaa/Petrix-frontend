@@ -6,7 +6,7 @@ import { SelectChangeEvent } from "@mui/material/Select";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DigitalClock } from "@mui/x-date-pickers/DigitalClock";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import {
   Dialog,
   DialogTitle,
@@ -156,13 +156,7 @@ function EditProfileModal(props: EditProfileModalProps) {
   };
 
   return (
-    <Dialog
-      open={isOpen}
-      onClose={onClose}
-      maxWidth="sm"
-      fullWidth
-      //   sx={{ display: "flex", flexDirection: "column", gap: 5 }}
-    >
+    <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>Edit Profile</DialogTitle>
       <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
         <TextField
@@ -221,18 +215,7 @@ function EditProfileModal(props: EditProfileModalProps) {
             </Grid>
           ))}
         </Grid>
-        {/* <TextField
-          label="Start Time"
-          fullWidth
-          value={startTime}
-          onChange={(e) => setStartTime(e.target.value)}
-        />
-        <TextField
-          label="End Time"
-          fullWidth
-          value={endTime}
-          onChange={(e) => setEndTime(e.target.value)}
-        /> */}
+
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoItem label="Start Time">
             <DigitalClock

@@ -4,16 +4,7 @@ import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
 import "./petrix_doctors.css";
 
-import {
-  Box,
-  Paper,
-  Typography,
-  Snackbar,
-  Alert,
-  Button,
-  Grid,
-  Container,
-} from "@mui/material";
+import { Grid, Container } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import DoctorCard from "../../components/Doctor/DoctorCard";
@@ -96,7 +87,6 @@ function Petrix_doctors() {
 
   useEffect(() => {
     fetchmyProfile();
-    // fetchDoctorProfile();
 
     fetchSearchResults();
   }, []);

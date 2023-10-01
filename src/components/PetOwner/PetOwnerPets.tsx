@@ -1,18 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  Paper,
-  Typography,
-  List,
-  IconButton,
-  Avatar,
-} from "@mui/material";
-import {
-  FavoriteBorderOutlined,
-  ChatBubbleOutlineOutlined,
-} from "@mui/icons-material";
-import AddIcon from "@mui/icons-material/Add";
-import Fab from "@mui/material/Fab";
+import { Typography, Avatar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 interface Pet {
@@ -35,7 +22,7 @@ function PetOwnerPets(props: DoctorToggleSection) {
     <div
       style={{
         overflowY: "auto",
-        maxHeight: "500px", // Set a maximum height for the container
+        maxHeight: "500px",
       }}
     >
       {petList.map((pet, index) => (
@@ -46,9 +33,9 @@ function PetOwnerPets(props: DoctorToggleSection) {
             flexDirection: "row",
             alignItems: "center",
             gap: "16px",
-            padding: "8px", // Add some padding to create space between pets
+            padding: "8px",
             borderBottom:
-              index < petList.length - 1 ? "1px solid #ccc" : "none", // Add a bottom border to separate pets
+              index < petList.length - 1 ? "1px solid #ccc" : "none",
           }}
         >
           <Avatar
@@ -59,7 +46,6 @@ function PetOwnerPets(props: DoctorToggleSection) {
           <div>
             <Typography variant="h6">{pet.name}</Typography>
             <Typography variant="body2">{pet.breed}</Typography>
-            {/* <Typography variant="caption">{pet.createdAt}</Typography> */}
           </div>
           <div
             style={{
@@ -67,11 +53,7 @@ function PetOwnerPets(props: DoctorToggleSection) {
               display: "flex",
               gap: 1,
             }}
-          >
-            {/* <IconButton onClick={() => handleButtonClick(pet.id)}>
-              <ChatBubbleOutlineOutlined />
-            </IconButton> */}
-          </div>
+          ></div>
         </div>
       ))}
     </div>

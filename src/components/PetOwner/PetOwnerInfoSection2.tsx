@@ -1,26 +1,6 @@
 import React from "react";
-import {
-  Grid,
-  Rating,
-  Box,
-  Paper,
-  Button,
-  Typography,
-  TextField,
-  Radio,
-  RadioGroup,
-  FormLabel,
-  FormControlLabel,
-  InputLabel,
-  Select,
-  MenuItem,
-  Alert,
-  OutlinedInput,
-  FormControl,
-} from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 
 interface Specialty {
   id: number;

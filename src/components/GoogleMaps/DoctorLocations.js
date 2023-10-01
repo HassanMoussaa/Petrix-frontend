@@ -102,13 +102,6 @@ const DoctorLocations = () => {
           )}
 
           {/* Display doctors near the user */}
-          {/* {doctorsNearUser.map((doctor) => (
-            <Marker
-              key={doctor.id}
-              position={{ lat: doctor.latitude, lng: doctor.longitude }}
-              onClick={() => handleLocationClick(doctor)}
-            />
-          ))} */}
 
           {selectedLocation && (
             <Marker
@@ -137,7 +130,6 @@ const DoctorLocations = () => {
             overflowY: "auto",
           }}
         >
-          {/* <h2 className="LocationsHead">Locations</h2> */}
           <List>
             {doctorsNearUser.map((doctor) => (
               <Card

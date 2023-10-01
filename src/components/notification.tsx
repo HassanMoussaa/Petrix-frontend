@@ -1,7 +1,7 @@
 import { onMessageListener } from "../../src/firebase";
 
 import { Alert, AlertTitle } from "@mui/material";
-import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
+import Snackbar from "@mui/material/Snackbar";
 
 import { useState } from "react";
 

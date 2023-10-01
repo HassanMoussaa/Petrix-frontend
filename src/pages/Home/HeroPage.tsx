@@ -74,8 +74,6 @@ const hero_cards: HeroCardMapping = {
 function HeroPage() {
   const navigate = useNavigate();
 
-  // took care of error for if the user is not signed in
-
   const loginData = localStorage.getItem("login")
     ? JSON.parse(localStorage.getItem("login") || "")
     : "";

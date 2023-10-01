@@ -52,24 +52,9 @@ export default function BasicCard(props: BasicCardProps) {
           gap: 0,
         }}
       >
-        {/* <Box
-          component="img"
-          src={process.env.PUBLIC_URL + `/images/${imageUrl}`}
-          alt="logo"
-          sx={{
-            display: {
-              xs: "flex",
-            },
-            margin: "0 auto",
-            width: "40%",
-
-            borderRadius: 100,
-          }}
-        /> */}
         <Avatar
           alt="Remy Sharp"
           src={imageUrl}
-          // sx={{ width: "40%", height: "40%" }}
           sx={{ width: 90, height: 90 }}
         />
         <Typography sx={{ mb: 1.5, mt: 1.5 }} align="center">

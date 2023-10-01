@@ -2,18 +2,10 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
-import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
 import PetOwnerInfoSection2 from "../../components/PetOwner/PetOwnerInfoSection2";
 import "./petOwnerProfile.css";
 import { Grid, Box, Tabs, Tab, Zoom } from "@mui/material";
 import PetOwnerPets from "../../components/PetOwner/PetOwnerPets";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import Fab from "@mui/material/Fab";
-import { SxProps } from "@mui/system";
-import AddIcon from "@mui/icons-material/Add";
-import CreatePostModal from "../../components/Doctor/CreatePostModal";
-import DoctorReviewSection from "../../components/Doctor/DoctorReviewSection";
 import PetOwnerInfoSection from "../../components/PetOwner/PetOwnerInfoSection";
 import BackButton from "../../components/BackButton";
 
@@ -167,30 +159,11 @@ function PetOwnerProfile() {
                 aria-label="basic tabs example"
               >
                 <Tab label="My Animals" {...a11yProps(0)} />
-                {/* <Tab label="Reviews" {...a11yProps(1)} />
-                <Tab label="Location" {...a11yProps(2)} /> */}
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
               {petOwnerInfo && <PetOwnerPets petList={petOwnerInfo.pets} />}
             </CustomTabPanel>
-            {/* <CustomTabPanel value={value} index={1}>
-              item2
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={2}>
-              Item Three
-            </CustomTabPanel> */}
-            {/* <Zoom key="primary" in={value === 0} unmountOnExit>
-              <Fab
-                sx={{ position: "absolute", bottom: 16, right: 16 } as SxProps}
-                aria-label="Create post"
-                color="primary"
-                onClick={handleOpenModal}
-              >
-                <AddIcon />
-              </Fab>
-            </Zoom> */}
-            {/* <CreatePostModal open={isModalOpen} setOpen={setIsModalOpen} /> */}
           </Box>
         </Grid>
       </Grid>

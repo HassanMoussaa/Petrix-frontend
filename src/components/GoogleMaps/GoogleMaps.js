@@ -16,26 +16,10 @@ const GoogleMaps = ({ location, setLocation }) => {
   const lat = parseFloat(location[0]);
   const lng = parseFloat(location[1]);
 
-  // const onLoad = React.useCallback(function callback(map) {
-  //   const bounds = new window.google.maps.LatLngBounds({
-  //     lat,
-  //     lng,
-  //   });
-  //   map.fitBounds(bounds);
-
-  //   setMap(map);
-  // }, []);
-
-  // const onUnmount = React.useCallback(function callback(map) {
-  //   setMap(null);
-  // }, []);
-
   const handleCurrentLocation = async () => {
     const res = await getCurrentLocation();
     saveClinicLocation(res[0], res[1]);
   };
-
-  //function to save clinic Coordinates
 
   let config = {};
   let login_status = JSON.parse(localStorage.getItem("login") || "");

@@ -2,29 +2,16 @@ import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 import getAPIBaseURL from "../../../APIBaseURL";
-import {
-  Grid,
-  Box,
-  Tabs,
-  Tab,
-  Zoom,
-  Button,
-  Container,
-  Paper,
-  Alert,
-  Typography,
-} from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Grid, Box, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import dayjs, { Dayjs } from "dayjs";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import moment from "moment";
 
 interface Pet {
   id: number;
@@ -61,7 +48,6 @@ function BookingForm(props: BookingFormProps) {
 
   const navigate = useNavigate();
   const [date, setDate] = React.useState<Dayjs | null>(dayjs());
-  //   const [age, setAge] = React.useState("");
 
   const [selectedPet, setSelectedPet] = React.useState<string>("");
 
@@ -73,10 +59,6 @@ function BookingForm(props: BookingFormProps) {
 
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
-
-  //   const handleChange = (event: SelectChangeEvent) => {
-  //     setAge(event.target.value);
-  //   };
 
   async function fetchAvailableSlots() {
     try {
@@ -132,6 +114,20 @@ function BookingForm(props: BookingFormProps) {
       console.error("Error booking appointment:", error);
     }
   };
+
+  function formatTime(inputTime: string) {
+    const timeParts = inputTime.split(":");
+    if (timeParts.length === 3) {
+      let hours = parseInt(timeParts[0]);
+      const minutes = parseInt(timeParts[1]);
+      const ampm = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12 || 12;
+      const formattedMinutes = minutes.toString().padStart(2, "0");
+      return `${hours}:${formattedMinutes} ${ampm}`;
+    }
+    return "Invalid Time";
+  }
+
   useEffect(() => {
     fetchAvailableSlots();
   }, [date]);
@@ -140,29 +136,6 @@ function BookingForm(props: BookingFormProps) {
     <div>
       <Box component="form" onSubmit={handleSubmit}>
         <Grid sx={{ display: "flex", flexDirection: "column" }}>
-          {/* Clinics
-          <FormControl
-            variant="standard"
-            sx={{ m: 1, maxWidth: 200, mt: 15, maxHeight: 50 }}
-          >
-            <InputLabel id="demo-simple-select-standard-label">
-              Clinics
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={age}
-              onChange={handleChange}
-              label="Clinics"
-            >
-              {clinicLocationsList.map((clinic) => (
-                <MenuItem key={clinic.id} value={clinic.name}>
-                  {clinic.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl> */}
-
           {/* Pets */}
           <FormControl
             variant="standard"
@@ -220,14 +193,11 @@ function BookingForm(props: BookingFormProps) {
               label="Available Time Slots"
             >
               {availableSlots.length === 0 ? (
-                // <Typography variant="body1" color="textSecondary">
-                //   No available slots found.
-                // </Typography>
                 <MenuItem disabled>No available slots found.</MenuItem>
               ) : (
                 availableSlots.map((slot, index) => (
                   <MenuItem key={index} value={slot.start}>
-                    {slot.start}
+                    {formatTime(slot.start)}
                   </MenuItem>
                 ))
               )}

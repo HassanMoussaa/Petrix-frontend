@@ -12,7 +12,6 @@ import {
   Grid,
   Container,
 } from "@mui/material";
-import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { HfInference } from "@huggingface/inference";
 import BackButton from "../../components/BackButton";
@@ -162,7 +161,6 @@ function Ai_imageClassification_Main() {
 
   useEffect(() => {
     fetchmyProfile();
-    // fetchDoctorProfile();
   }, []);
 
   return (
@@ -185,7 +183,6 @@ function Ai_imageClassification_Main() {
 
           {selectedImage && (
             <Grid item xs={12} textAlign="center" style={{ marginTop: "20px" }}>
-              {/* <Typography variant="h5">Selected Image:</Typography> */}
               <img
                 src={selectedImage}
                 alt="Selected"

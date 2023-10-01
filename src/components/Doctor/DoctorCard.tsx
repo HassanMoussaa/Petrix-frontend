@@ -38,7 +38,6 @@ function DoctorCard({ doctor }: DoctorCardProps) {
           borderRadius: "50%",
           width: "80px",
           height: "80px",
-          // marginTop: "5px",
         }}
         sx={{ mt: 1 }}
       />
@@ -64,11 +63,7 @@ function DoctorCard({ doctor }: DoctorCardProps) {
             variant="contained"
             sx={{ background: "#16A4C3" }}
             onClick={() => {
-              navigate(`/profile/${id}`, {
-                // state: {
-                //   id,
-                // },
-              });
+              navigate(`/profile/${id}`, {});
             }}
           >
             Visit Profile

@@ -164,7 +164,15 @@ function AiChatBot() {
           setNewImageUrl={() => {}}
         />
       )}
+
       <div className="chatbot-container">
+        <div className="chatbot-image-container">
+          <img
+            src={process.env.PUBLIC_URL + `/images/ChatBot.svg`}
+            alt="Chatbot"
+            className="chatbot-image-chat"
+          />
+        </div>
         <div className="chat-history">
           {chatHistory.map((message, index) => (
             <div className={`bubb-${message.role}`}>

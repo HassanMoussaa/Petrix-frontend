@@ -2,20 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
-import {
-  Box,
-  Paper,
-  Typography,
-  Snackbar,
-  Alert,
-  Button,
-  Grid,
-  Container,
-} from "@mui/material";
-import { useLocation } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
 import DoctorLocations from "../../components/GoogleMaps/DoctorLocations";
-import "./doctorsNearYou.css";
 interface UserType {
   id: number;
   type: string;
@@ -35,8 +22,6 @@ interface DoctorInfo {
 }
 function DoctorsNearYou() {
   const [userInfo, setUserInfo] = useState<DoctorInfo>();
-  const [doctorInfo, setDoctorInfo] = useState<DoctorInfo>();
-  const [sucessAlertOpen, setSucessAlertOpen] = useState<boolean>(false);
   const [newImageUrl, setNewImageUrl] = useState(userInfo?.photoUrl);
 
   let config = {};
@@ -45,8 +30,6 @@ function DoctorsNearYou() {
   const token = login_status.token;
   config = { headers: { Authorization: `Bearer ${token}` } };
   const userType = login_status.user_type;
-  const [error, setError] = useState(Boolean);
-  const navigate = useNavigate();
 
   async function fetchmyProfile() {
     try {
@@ -69,7 +52,6 @@ function DoctorsNearYou() {
 
   useEffect(() => {
     fetchmyProfile();
-    // fetchDoctorProfile();
   }, []);
 
   return (

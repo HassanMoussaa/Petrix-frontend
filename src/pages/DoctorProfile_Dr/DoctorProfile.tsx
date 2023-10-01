@@ -6,7 +6,6 @@ import DoctorInfoSection from "../../components/Doctor/DoctorInfoSection";
 import DoctorInfoSection2 from "../../components/Doctor/DoctorInfoSection2";
 import "./doctorProfile.css";
 import ChangeProfilePhoto from "../../components/Doctor/ChangeProfilePhoto";
-
 import {
   Grid,
   Box,

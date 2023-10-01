@@ -1,13 +1,6 @@
 import { Link } from "react-router-dom";
 import "./footer.css";
-import {
-  Grid,
-  Box,
-  Typography,
-  Alert,
-  AlertTitle,
-  Button,
-} from "@mui/material";
+import { Grid, Box } from "@mui/material";
 interface FooterProps {
   userType: "petOwner" | "doctor" | "user";
 }

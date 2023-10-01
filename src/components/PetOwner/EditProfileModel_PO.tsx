@@ -141,12 +141,7 @@ function EditProfileModel_PO(props: EditProfileModalProps) {
             </Button>
           </Grid>
           <Grid item xs={6}>
-            <Button
-              variant="outlined"
-              // color="secondary"
-              onClick={onClose}
-              fullWidth
-            >
+            <Button variant="outlined" onClick={onClose} fullWidth>
               Cancel
             </Button>
           </Grid>

@@ -1,12 +1,13 @@
 .chatbot-container {
   width: 80vw;
-  height: 80vh;
+  height: 70vh;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
 .chat-history {
@@ -77,4 +78,15 @@ input.chat-input[type="text"] {
   display: flex;
   align-items: center;
   justify-content: start;
+}
+
+.chatbot-image-container {
+  position: absolute;
+  margin-left: 30px;
+  top: 0;
+  left: 47%;
+}
+
+.chatbot-image-chat {
+  height: 35px;
 }

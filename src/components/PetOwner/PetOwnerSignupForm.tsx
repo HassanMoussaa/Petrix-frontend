@@ -1,18 +1,12 @@
 import {
-  Grid,
   Box,
   Button,
   Typography,
   TextField,
-  Radio,
-  RadioGroup,
-  FormLabel,
-  FormControlLabel,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  Alert,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -159,9 +153,6 @@ function PetSignupForm(props: SignupFormProps) {
           sx={{ mb: 3 }}
         />
       </FormControl>
-
-      {/* </div> */}
-      {/* </Grid> */}
 
       <Button
         type="submit"

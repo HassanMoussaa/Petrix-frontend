@@ -4,7 +4,6 @@ import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
 import "./doctorProfile.css";
 import {
-  Box,
   Paper,
   Typography,
   TextField,
@@ -225,7 +224,6 @@ function DoctorPost() {
               />
               <Button
                 variant="contained"
-                // color="primary"
                 onClick={handleAddComment}
                 sx={{
                   mt: 2,

@@ -95,7 +95,7 @@ function Ai_results() {
           {
             headers: {
               ...config.headers,
-              "Content-Type": "multipart/form-data", // Set the content type for FormData
+              "Content-Type": "multipart/form-data",
             },
           }
         );
@@ -119,7 +119,6 @@ function Ai_results() {
 
   useEffect(() => {
     fetchmyProfile();
-    // fetchDoctorProfile();
   }, []);
 
   return (

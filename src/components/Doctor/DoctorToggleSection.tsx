@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import getAPIBaseURL from "../../APIBaseURL";
-import dayjs from "dayjs";
-
 import { Grid, Box, Typography, List, IconButton } from "@mui/material";
 import {
   FavoriteBorderOutlined,
   ChatBubbleOutlineOutlined,
 } from "@mui/icons-material";
-import AddIcon from "@mui/icons-material/Add";
-import Fab from "@mui/material/Fab";
 import { useNavigate } from "react-router-dom";
 interface Post {
   id: number;
