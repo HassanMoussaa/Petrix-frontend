@@ -83,6 +83,7 @@ As a Doctor, I want to:
 
 ### Postman Collections
 Collection to import: [PETRIX Postman collection](https://github.com/HassanMoussaa/Petrix-frontend/blob/main/PETRIX%20_Server.postman_collection.json)
+
 🔖 How to use this collection
 
 Step 1: Send requests
