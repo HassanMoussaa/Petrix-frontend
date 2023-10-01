@@ -81,6 +81,28 @@ As a Doctor, I want to:
 
 <br><br>
 
+### Postman Collections
+Collection to import: [PETRIX Postman collection](https://github.com/HassanMoussaa/Petrix-frontend/blob/main/PETRIX%20_Server.postman_collection.json)
+🔖 How to use this collection
+
+Step 1: Send requests
+RESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.
+This collection contains each of these request types. Open each request and click "Send" to see what happens.
+
+Step 2: View responses
+Observe the response tab for status code (200 OK), response time, and size.
+
+Step 3: Send new Body data
+Update or add new data in "Body" in the POST request. Typically, Body data is also used in PUT request.
+
+{
+    "name": "Add your name in the body"
+}
+
+Step 4: Update the variable
+Variables enable you to store and reuse values in Postman. We have created a variable called base_url with the sample request https://postman-api-learner.glitch.me. Replace it with your API endpoint to customize this collection.
+
+
 <!-- How to run -->
 <img src="./readme/title6.svg"/>
 
