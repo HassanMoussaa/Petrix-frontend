@@ -2,9 +2,28 @@
 
 <br><br>
 
+
+<img src="./readme/title7.svg"/> 
+
+
+- [Project Description](#project-description)
+- [User Types](#user-types)
+- [Prototyping](#prototyping)
+- [Demo](#Demo)
+- [Tech Stack](#tech-stack)
+- [Performance](#Performance)
+- [How to Run](#how-to-run)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+
+
+<br><br>  
+
+
+
 <!-- project philosophy -->
 <img src="./readme/title2.svg"/>
-
+<a name="project-description"></a>
 > Welcome to Petrix, your go-to AI assistant for all things related to your beloved pets.
 >
 > With Petrix, we go beyond simple image classification to offer a comprehensive pet care solution. Whether you're an experienced pet owner or a novice, Petrix has you covered.
@@ -33,7 +52,7 @@ As a Doctor, I want to:
 <br><br> 
 <!-- Prototyping -->
 <img src="./readme/title3.svg"/>
-
+<a name="prototyping"></a>
 > We designed PETRIX using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
 
 ### Mockups
@@ -47,9 +66,9 @@ As a Doctor, I want to:
 
 <br><br>
 
-<!-- Implementation -->
+<!-- Implementation/Demo -->
 <img src="./readme/title4_new.svg"/>
-
+<a name="Demo" ></a>
 > Using the wireframes and mockups as a guide, we implemented the PETRIX app with the following features:
 
 ### Pet Owner Screens (Web)
@@ -72,7 +91,7 @@ As a Doctor, I want to:
 
 <!-- Tech stack -->
 <img src="./readme/title5.svg"/>
-
+<a name="tech-stack" ></a>
 ###  PETRIX is built using the following technologies:
 
 - This project uses the [React Library](https://react.dev/) for the frontend development.
@@ -88,7 +107,7 @@ As a Doctor, I want to:
 
 <!-- Preformance -->
 <img src="./readme/title8-1.svg"/>
-
+<a name="Performance" ></a>
 ### Postman Collections
 Collection to import: [PETRIX Postman collection](https://github.com/HassanMoussaa/Petrix-frontend/blob/main/PETRIX%20_Server.postman_collection.json)
 
@@ -131,10 +150,10 @@ These images showcase the successful results of comprehensive API testing on our
 <br><br>
 <!-- How to run -->
 <img src="./readme/title6.svg"/>
-
+<a name="how-to-run" ></a>
 > To set up PETRIX locally, follow these steps:
 
-
+<a name="prerequisites" ></a>
 ### Prerequisites (Windows)
 
 - Node.js & npm
@@ -146,7 +165,7 @@ These images showcase the successful results of comprehensive API testing on our
 
 
 ### Installation (Windows)
-
+<a name="installation" ></a>
 
 1) Clone the frontend repo
 
