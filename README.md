@@ -25,9 +25,9 @@
 <img src="./readme/title2.svg"/>
 <a name="project-description"></a>
 > Welcome to Petrix, your go-to AI assistant for all things related to your beloved pets.
->
+
 > With Petrix, we go beyond simple image classification to offer a comprehensive pet care solution. Whether you're an experienced pet owner or a novice, Petrix has you covered.
-> 
+>
 >Backend repository: <a href="https://github.com/HassanMoussaa/Petrix-server">github.com/HassanMoussaa/Petrix-server</a>
 
 ### User Types 
@@ -92,6 +92,7 @@ As a Doctor, I want to:
 <!-- Tech stack -->
 <img src="./readme/title5.svg"/>
 <a name="tech-stack" ></a>
+
 ###  PETRIX is built using the following technologies:
 
 - This project uses the [React Library](https://react.dev/) for the frontend development.
@@ -108,7 +109,9 @@ As a Doctor, I want to:
 <!-- Preformance -->
 <img src="./readme/title8-1.svg"/>
 <a name="Performance" ></a>
+
 ### Postman Collections
+
 Collection to import: [PETRIX Postman collection](https://github.com/HassanMoussaa/Petrix-frontend/blob/main/PETRIX%20_Server.postman_collection.json)
 
 🔖 How to use this collection
