@@ -37,7 +37,7 @@
 
 ### Features of the App 
 
-As a Pet Owner, I want : 
+As a Pet Owner, I want: 
 
 - To Quickly identify the species and breed of my pet by submitting a photo so that I may learn more about them.
 - A tool to provide me with real-time health and wellness updates for my pet, including weight check, exercises, and nutritional guidelines, so that I can ensure its overall safety.
@@ -98,7 +98,7 @@ As a Doctor, I want to:
 - This project uses the [React Library](https://react.dev/) for the frontend development.
 - [Express.js Framework](https://expressjs.com/) on [Node.js](https://nodejs.org/en) runtime environment for the backend server.
 - [MySQL](https://www.mysql.com/) for the database. It is an open-source relational database management system.
-- For the pet classificaiton, the app usese [Hugging Face Image Classification](https://huggingface.co/tasks/image-classification).
+- For the pet classificaiton, the app uses [Hugging Face Image Classification](https://huggingface.co/tasks/image-classification).
 - [OpenAI](https://platform.openai.com/docs/libraries) was used to implement the AI Assistant.
 - Google maps API was used for maps and clinic locations.
 - To send local push notifications, the app uses the [Firebase cloud messaging](https://firebase.google.com/docs/cloud-messaging) which is a cross-platform cloud service for messages and notifications for Android, iOS, and web applications,
@@ -132,7 +132,7 @@ Update or add new data in "Body" in the POST request. Typically, Body data is al
 
 
 Step 4: Update the variable
-Variables enable you to store and reuse values in Postman. We have created a variable called base_url with the sample request https://postman-api-learner.glitch.me. Replace it with your API endpoint to customize this collection.
+Variables enable you to store and reuse values in Postman. We have created a variable called base_url with the sample request http://54.246.63.155. Replace it with your API endpoint to customize this collection.
 
 
 
@@ -181,7 +181,7 @@ These images showcase the successful results of comprehensive API testing on our
    ```sh
    git clone https://github.com/HassanMoussaa/Petrix-server.git
    ```
-Backend repository: <a href="https://github.com/HassanMoussaa/Petrix-server">github.com/HassanMoussaa/Petrix-server</a>
+
 
 
 3) Install NPM packages
