@@ -48,7 +48,7 @@ As a Doctor, I want to:
 <br><br>
 
 <!-- Implementation -->
-<img src="./readme/title4.svg"/>
+<img src="./readme/title4_new.svg"/>
 
 > Using the wireframes and mockups as a guide, we implemented the PETRIX app with the following features:
 
@@ -83,6 +83,10 @@ As a Doctor, I want to:
 
 <br><br>
 
+
+<!-- Preformance -->
+<img src="./readme/title8-1.svg"/>
+
 ### Postman Collections
 Collection to import: [PETRIX Postman collection](https://github.com/HassanMoussaa/Petrix-frontend/blob/main/PETRIX%20_Server.postman_collection.json)
 
@@ -106,7 +110,6 @@ Step 4: Update the variable
 Variables enable you to store and reuse values in Postman. We have created a variable called base_url with the sample request https://postman-api-learner.glitch.me. Replace it with your API endpoint to customize this collection.
 
 <br><br>
-
 <!-- How to run -->
 <img src="./readme/title6.svg"/>
 
