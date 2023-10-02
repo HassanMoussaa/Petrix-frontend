@@ -62,9 +62,9 @@ As a Doctor, I want to:
 
 
 ### Doctor Screens (Web)
-| Register  | Handle Bookings |  Create Blog |
-| ---| ---| ---|
-| ![Register](./readme/demo/signin.gif) | ![fsdaf](./readme/demo/handle_bookings.gif) | ![fsdaf](./readme/demo/create_blog.gif) |
+| Register  | Handle Bookings |  Create Blog | Edit Profile
+| ---| ---| ---| ---|
+| ![Register](./readme/demo/signin.gif) | ![fsdaf](./readme/demo/handle_bookings.gif) | ![fsdaf](./readme/demo/create_blog.gif) | ![fsdaf](./readme/demo/Doctor_Edit_Profile.gif) |
 
 <br><br>
 
