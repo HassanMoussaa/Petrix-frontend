@@ -8,6 +8,8 @@
 > Welcome to Petrix, your go-to AI assistant for all things related to your beloved pets.
 >
 > With Petrix, we go beyond simple image classification to offer a comprehensive pet care solution. Whether you're an experienced pet owner or a novice, Petrix has you covered.
+> 
+>Backend repository: <a href="https://github.com/HassanMoussaa/Petrix-server">github.com/HassanMoussaa/Petrix-server</a>
 
 ### User Types 
 
@@ -78,6 +80,30 @@ As a Doctor, I want to:
 - [OpenAI](https://platform.openai.com/docs/libraries) was used to implement the AI Assistant.
 - Google maps API was used for maps and clinic locations.
 - To send local push notifications, the app uses the [Firebase cloud messaging](https://firebase.google.com/docs/cloud-messaging) which is a cross-platform cloud service for messages and notifications for Android, iOS, and web applications,
+
+<br><br>
+
+### Postman Collections
+Collection to import: [PETRIX Postman collection](https://github.com/HassanMoussaa/Petrix-frontend/blob/main/PETRIX%20_Server.postman_collection.json)
+
+🔖 How to use this collection
+
+Step 1: Send requests
+RESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.
+This collection contains each of these request types. Open each request and click "Send" to see what happens.
+
+Step 2: View responses
+Observe the response tab for status code (200 OK), response time, and size.
+
+Step 3: Send new Body data
+Update or add new data in "Body" in the POST request. Typically, Body data is also used in PUT request.
+
+{
+    "name": "Add your name in the body"
+}
+
+Step 4: Update the variable
+Variables enable you to store and reuse values in Postman. We have created a variable called base_url with the sample request https://postman-api-learner.glitch.me. Replace it with your API endpoint to customize this collection.
 
 <br><br>
 
