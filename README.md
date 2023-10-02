@@ -62,9 +62,11 @@ As a Doctor, I want to:
 
 
 ### Doctor Screens (Web)
-| Register  | Handle Bookings |  Create Blog | Edit Profile
-| ---| ---| ---| ---|
-| ![Register](./readme/demo/signin.gif) | ![fsdaf](./readme/demo/handle_bookings.gif) | ![fsdaf](./readme/demo/create_blog.gif) | ![fsdaf](./readme/demo/Doctor_Edit_Profile.gif) |
+| Register  | Handle Bookings |  
+| ---| ---| 
+| ![Register](./readme/demo/signin.gif) | ![fsdaf](./readme/demo/handle_bookings.gif) | 
+| Create Blog | Edit Profile
+| ![fsdaf](./readme/demo/create_blog.gif) | ![fsdaf](./readme/demo/Doctor_Edit_Profile.gif) |
 
 <br><br>
 
@@ -106,8 +108,25 @@ Update or add new data in "Body" in the POST request. Typically, Body data is al
     "name": "Add your name in the body"
 }
 
+
 Step 4: Update the variable
 Variables enable you to store and reuse values in Postman. We have created a variable called base_url with the sample request https://postman-api-learner.glitch.me. Replace it with your API endpoint to customize this collection.
+
+
+
+### Testing Results
+
+These images showcase the successful results of comprehensive API testing on our AWS EC2 server. Each visual representation reflects the robust performance, reliability, and scalability of our APIs in action. These tests validate our commitment to delivering seamless and efficient solutions for our users, backed by the power of Amazon Web Services.
+
+| Get Doctor Profile  | Get Post Comments | Add Comment To Post |
+| ---| ---| ---|
+| ![ Get Doctor Profile ](./readme/demo/GetDoctorProfile_test.PNG) | ![ Get Post Comments ](./readme/demo/GetPostComments.PNG) | ![ Add Comment To Post ](./readme/demo/AddCommentToPost.PNG) |
+|  Pet Owner Update Profile | Pet Owner Login | Add Review |
+| ![ Pet Owner Update Profile ](./readme/demo/PetOwnerUpdateProfile.PNG) | ![ Pet Owner Login ](./readme/demo/PetOwnerLogin.PNG) | ![ Add Review ](./readme/demo/AddReview.PNG) |
+
+
+
+
 
 <br><br>
 <!-- How to run -->
