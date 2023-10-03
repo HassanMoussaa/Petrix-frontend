@@ -85,9 +85,13 @@ As a Doctor, I want to:
 | Login  | Sign up - 1 | Sign up - 2 |
 | ---| ---| ---|
 | ![Login](./readme/demo/Login.png) | ![ Sign up - 1](./readme/demo/Sign_up_1.png) | ![ Sign up - 2](./readme/demo/Sing_up_2.png) |
+
 | AI Classification | AI Assistant | Doctors near you |
+| ---| ---| ---|
 | ![AI Classification](./readme/demo/AI_Classification.png) | ![AI Assistant](./readme/demo/AI_Assistant.png) | ![Doctors near you](./readme/demo/Doctors_Near_Me.png) |
+
 | Book Appointment | Handle Appointments | Doctor profile |
+| ---| ---| ---|
 | ![Book Appointment](./readme/demo/Booking.png) | ![Handle Appointments](./readme/demo/Handle_Appointment.png) | ![Doctor profile](./readme/demo/Doctor_Profile.png) |
 
 <br><br>
@@ -101,7 +105,9 @@ As a Doctor, I want to:
 | AI Classification |  AI Assistant |
 | ---| ---|
 | ![Register](./readme/demo/ai_classifcation.gif) | ![fsdaf](./readme/demo/ai_assistant.gif) |
+
 | Doctors Near You  |  Book Appointment |
+| ---| ---|
 | ![Register](./readme/demo/doctors_near_you.gif) | ![fsdaf](./readme/demo/book_appointments.gif) |
 
 
@@ -110,7 +116,9 @@ As a Doctor, I want to:
 | Register  | Handle Bookings |  
 | ---| ---| 
 | ![Register](./readme/demo/signin.gif) | ![fsdaf](./readme/demo/handle_bookings.gif) | 
+
 | Create Blog | Edit Profile
+| ---| ---|
 | ![fsdaf](./readme/demo/create_blog.gif) | ![fsdaf](./readme/demo/Doctor_Edit_Profile.gif) |
 
 <br><br>
@@ -155,7 +163,9 @@ These images showcase the successful results of comprehensive API testing on our
 | Get Doctor Profile  | Get Post Comments | Add Comment To Post |
 | ---| ---| ---|
 | ![ Get Doctor Profile ](./readme/demo/GetDoctorProfile_test.PNG) | ![ Get Post Comments ](./readme/demo/GetPostComments.PNG) | ![ Add Comment To Post ](./readme/demo/AddCommentToPost.PNG) |
+
 |  Pet Owner Update Profile | Pet Owner Login | Add Review |
+| ---| ---| ---|
 | ![ Pet Owner Update Profile ](./readme/demo/PetOwnerUpdateProfile.PNG) | ![ Pet Owner Login ](./readme/demo/PetOwnerLogin.PNG) | ![ Add Review ](./readme/demo/AddReview.PNG) |
 
 
