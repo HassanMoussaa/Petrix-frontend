@@ -8,9 +8,10 @@
 
 - [Project Description](#project-description)
 - [User Types](#user-types)
+- [Features of the App](#features-of-the-app)
+- [Tech Stack](#tech-stack)
 - [Prototyping](#prototyping)
 - [Demo](#Demo)
-- [Tech Stack](#tech-stack)
 - [Performance](#Performance)
 - [How to Run](#how-to-run)
   - [Prerequisites](#prerequisites)
@@ -35,6 +36,7 @@
 1. Pet owners 
 2. Doctors
 
+<a name="features-of-the-app"></a>
 ### Features of the App 
 
 As a Pet Owner, I want: 
@@ -50,6 +52,30 @@ As a Doctor, I want to:
 - Review the comments and ratings of clients, so I can have a better assessment of the care we are providing.
 
 <br><br> 
+
+
+
+<!-- Tech stack -->
+<img src="./readme/title5.svg"/>
+<a name="tech-stack" ></a>
+
+###  PETRIX is built using the following technologies:
+
+- This project uses the [React Library](https://react.dev/) for the frontend development.
+- [Express.js Framework](https://expressjs.com/) on [Node.js](https://nodejs.org/en) runtime environment for the backend server.
+- [MySQL](https://www.mysql.com/) for the database. It is an open-source relational database management system.
+- For the pet classificaiton, the app uses [Hugging Face Image Classification](https://huggingface.co/tasks/image-classification).
+- [OpenAI](https://platform.openai.com/docs/libraries) was used to implement the AI Assistant.
+- Google maps API was used for maps and clinic locations.
+- To send local push notifications, the app uses the [Firebase cloud messaging](https://firebase.google.com/docs/cloud-messaging) which is a cross-platform cloud service for messages and notifications for Android, iOS, and web applications,
+
+<br><br>
+
+
+
+
+
+
 <!-- Prototyping -->
 <img src="./readme/title3.svg"/>
 <a name="prototyping"></a>
@@ -59,7 +85,7 @@ As a Doctor, I want to:
 | Login  | Sign up - 1 | Sign up - 2 |
 | ---| ---| ---|
 | ![Login](./readme/demo/Login.png) | ![ Sign up - 1](./readme/demo/Sign_up_1.png) | ![ Sign up - 2](./readme/demo/Sing_up_2.png) |
-|  AI Classification | AI Assistant | Doctors near you |
+| AI Classification | AI Assistant | Doctors near you |
 | ![AI Classification](./readme/demo/AI_Classification.png) | ![AI Assistant](./readme/demo/AI_Assistant.png) | ![Doctors near you](./readme/demo/Doctors_Near_Me.png) |
 | Book Appointment | Handle Appointments | Doctor profile |
 | ![Book Appointment](./readme/demo/Booking.png) | ![Handle Appointments](./readme/demo/Handle_Appointment.png) | ![Doctor profile](./readme/demo/Doctor_Profile.png) |
@@ -89,21 +115,7 @@ As a Doctor, I want to:
 
 <br><br>
 
-<!-- Tech stack -->
-<img src="./readme/title5.svg"/>
-<a name="tech-stack" ></a>
 
-###  PETRIX is built using the following technologies:
-
-- This project uses the [React Library](https://react.dev/) for the frontend development.
-- [Express.js Framework](https://expressjs.com/) on [Node.js](https://nodejs.org/en) runtime environment for the backend server.
-- [MySQL](https://www.mysql.com/) for the database. It is an open-source relational database management system.
-- For the pet classificaiton, the app uses [Hugging Face Image Classification](https://huggingface.co/tasks/image-classification).
-- [OpenAI](https://platform.openai.com/docs/libraries) was used to implement the AI Assistant.
-- Google maps API was used for maps and clinic locations.
-- To send local push notifications, the app uses the [Firebase cloud messaging](https://firebase.google.com/docs/cloud-messaging) which is a cross-platform cloud service for messages and notifications for Android, iOS, and web applications,
-
-<br><br>
 
 
 <!-- Preformance -->
