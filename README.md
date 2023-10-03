@@ -6,9 +6,9 @@
 <img src="./readme/title7.svg"/> 
 
 
-- [Project philosophy](#project-philosophy)
-- [User Types](#user-types)
-- [Features of the App](#features-of-the-app)
+- [Project Philosophy](#project-philosophy)
+   - [User Types](#user-types)
+   - [Features of the App](#features-of-the-app)
 - [Tech Stack](#tech-stack)
 - [Prototyping](#prototyping)
 - [Demo](#Demo)
