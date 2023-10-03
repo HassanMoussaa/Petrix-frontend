@@ -6,7 +6,7 @@
 <img src="./readme/title7.svg"/> 
 
 
-- [Project Description](#project-description)
+- [Project philosophy](#project-philosophy)
 - [User Types](#user-types)
 - [Features of the App](#features-of-the-app)
 - [Tech Stack](#tech-stack)
@@ -24,7 +24,7 @@
 
 <!-- project philosophy -->
 <img src="./readme/title2.svg"/>
-<a name="project-description"></a>
+<a name="project-philosophy"></a>
 > Welcome to Petrix, your go-to AI assistant for all things related to your beloved pets.
 
 > With Petrix, we go beyond simple image classification to offer a comprehensive pet care solution. Whether you're an experienced pet owner or a novice, Petrix has you covered.
