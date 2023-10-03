@@ -8,7 +8,7 @@
 
 - [Project Philosophy](#project-philosophy)
    - [User Types](#user-types)
-   - [Features of the App](#features-of-the-app)
+   - [User Stories](#user-stories)
 - [Tech Stack](#tech-stack)
 - [Prototyping](#prototyping)
 - [Demo](#Demo)
@@ -36,8 +36,8 @@
 1. Pet owners 
 2. Doctors
 
-<a name="features-of-the-app"></a>
-### Features of the App 
+<a name="user-stories"></a>
+### User Stories 
 
 As a Pet Owner, I want: 
 
